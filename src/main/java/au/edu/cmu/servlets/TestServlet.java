@@ -34,6 +34,9 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("dashboard.jsp");
+		request.setAttribute("latitude", request.getParameter("latitude"));
+		request.setAttribute("longitude", request.getParameter("longitude"));
+		request.setAttribute("speed", request.getParameter("speed"));
 		requestDispatcher.forward(request, response);
 	}
 
