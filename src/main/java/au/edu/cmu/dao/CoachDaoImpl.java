@@ -6,6 +6,7 @@ package au.edu.cmu.dao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import au.edu.cmu.model.Coach;
 
@@ -15,8 +16,7 @@ import au.edu.cmu.model.Coach;
  */
 @Repository
 public class CoachDaoImpl implements CoachDao {
-
-	@Autowired
+	
 	private SessionFactory sessionFactory;
 	/* (non-Javadoc)
 	 * @see au.edu.cmu.dao.CoachDao#getCoachByUsername(java.lang.String)
@@ -31,6 +31,7 @@ public class CoachDaoImpl implements CoachDao {
 	 * @see au.edu.cmu.dao.CoachDao#saveCoach(au.edu.cmu.model.Coach)
 	 */
 	@Override
+	@Transactional
 	public void saveCoach(Coach coach) {
 		this.sessionFactory.getCurrentSession().save(coach);
 	}
@@ -52,4 +53,13 @@ public class CoachDaoImpl implements CoachDao {
 
 	}
 
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	
 }
