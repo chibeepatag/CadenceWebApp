@@ -5,9 +5,8 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
+  	<display-name>TestServlet</display-name>      	
   	<servlet-name>TestServlet</servlet-name>
-  	<display-name>TestServlet</display-name>
-  	<description></description>
   	<servlet-class>au.edu.cmu.servlets.TestServlet</servlet-class>
   </servlet>
   <servlet-mapping>

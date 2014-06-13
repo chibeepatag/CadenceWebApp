@@ -11,5 +11,11 @@ import au.edu.cmu.model.Coach;
  */
 public interface CoachDao {
 
-	Coach getCoach(String username);
+	Coach getCoachByUsername(String username);
+	
+	void saveCoach(Coach coach);
+	
+	void updateCoach(Coach coach);
+	
+	void deleteCoach(Coach coach);
 }

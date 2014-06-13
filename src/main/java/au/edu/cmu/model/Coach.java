@@ -4,6 +4,7 @@
 package au.edu.cmu.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 public class Coach {
 
 	@Id
+	@GeneratedValue
 	private int coach_id;
 	
 	private String username;
