@@ -5,6 +5,7 @@ package au.edu.cmu.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -15,7 +16,7 @@ import javax.persistence.Id;
 public class Coach {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int coach_id;
 	
 	private String username;

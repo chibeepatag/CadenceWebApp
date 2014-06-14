@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * @author ChibeePatag
  *
  */
-@Entity
+//@Entity
 public class Message {
 	
 	@Id
