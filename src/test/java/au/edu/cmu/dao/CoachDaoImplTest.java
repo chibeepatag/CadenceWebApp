@@ -1,5 +1,9 @@
 package au.edu.cmu.dao;
 
+import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +20,26 @@ public class CoachDaoImplTest {
 	CoachDao coachDao;
 
 	@Test
-	public void testSaveCoach() {
+	public void testCreateCoach() {
 		Coach coach = new Coach();
 		coach.setUsername("Celine");
 		coach.setPassword("Patag");
 		coach.setPhone("+61490144588");
-		coachDao.saveCoach(coach);
+		coachDao.create(coach);
+	}
+	
+	@Test
+	public void testEditCoach(){
+		
+	}
+	
+	@Test
+	public void testFindAllCoach(){
+		List<Coach> coaches = coachDao.findAll();
+		for(Coach coach : coaches){
+			System.out.println(coach.getUsername());
+		}
+		assertEquals(5, coaches.size());
 	}
 
 }

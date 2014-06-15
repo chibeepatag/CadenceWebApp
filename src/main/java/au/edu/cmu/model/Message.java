@@ -7,24 +7,36 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author ChibeePatag
- *
+ * 
  */
-//@Entity
+@Entity
 public class Message {
-	
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int message_id;
-	
+
 	private String message;
-	
-	private int coach_id;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "coach_id", nullable = false)
+	private Coach coach;
+
 	private Date message_ts;
-	
+
+	@ManyToMany
+	@JoinTable(name = "message_recipient", joinColumns = @JoinColumn(name = "Message_ID"), inverseJoinColumns = @JoinColumn(name = "Rider_ID"))
 	private List<Rider> recipients;
 
 	public int getMessage_id() {
@@ -43,12 +55,12 @@ public class Message {
 		this.message = message;
 	}
 
-	public int getCoach_id() {
-		return coach_id;
+	public Coach getCoach() {
+		return coach;
 	}
 
-	public void setCoach_id(int coach_id) {
-		this.coach_id = coach_id;
+	public void setCoach(Coach coach) {
+		this.coach = coach;
 	}
 
 	public Date getMessage_ts() {
@@ -65,6 +77,6 @@ public class Message {
 
 	public void setRecipients(List<Rider> recipients) {
 		this.recipients = recipients;
-	}		
-
+	}
+		
 }

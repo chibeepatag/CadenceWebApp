@@ -3,18 +3,15 @@
  */
 package au.edu.cmu.dao;
 
-import java.util.Date;
-import java.util.List;
-
 import au.edu.cmu.model.Statistic;
 
 /**
  * @author ChibeePatag
  *
  */
-public interface StatisticDao {
+public class StatisticDao extends BaseDao<Statistic> {
 
-	Statistic getLatestRiderStatistic(int rider_id, Date timestamp);
-	
-	List<Statistic> getLatestStatistics(Date timestamp);
+	public StatisticDao(){
+		super(Statistic.class);
+	}
 }

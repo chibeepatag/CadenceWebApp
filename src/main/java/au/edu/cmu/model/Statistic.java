@@ -6,7 +6,11 @@ package au.edu.cmu.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * @author ChibeePatag
@@ -16,9 +20,12 @@ import javax.persistence.Id;
 public class Statistic {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int stat_id;
 	
-	private int rider_id;
+	@ManyToOne
+	@JoinColumn(name="Rider_ID")
+	private Rider rider;
 	
 	private int heart_rate;
 	
@@ -45,13 +52,13 @@ public class Statistic {
 	public void setStat_id(int stat_id) {
 		this.stat_id = stat_id;
 	}
-
-	public int getRider_id() {
-		return rider_id;
+	
+	public Rider getRider() {
+		return rider;
 	}
 
-	public void setRider_id(int rider_id) {
-		this.rider_id = rider_id;
+	public void setRider(Rider rider) {
+		this.rider = rider;
 	}
 
 	public int getHeart_rate() {

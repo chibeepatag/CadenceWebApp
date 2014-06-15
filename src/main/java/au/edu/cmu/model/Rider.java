@@ -4,6 +4,8 @@
 package au.edu.cmu.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -14,6 +16,7 @@ import javax.persistence.Id;
 public class Rider {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int rider_id;
 	
 	private String first_Name;

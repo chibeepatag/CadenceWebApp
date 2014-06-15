@@ -17,7 +17,7 @@ public class Coach {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int coach_id;
+	private long coach_id;
 	
 	private String username;
 	
@@ -25,11 +25,11 @@ public class Coach {
 	
 	private String phone;
 		
-	public int getCoach_id() {
+	public Long getCoach_id() {
 		return coach_id;
 	}
 	
-	public void setCoach_id(int coach_id) {
+	public void setCoach_id(Long coach_id) {
 		this.coach_id = coach_id;
 	}
 	

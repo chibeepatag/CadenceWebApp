@@ -3,19 +3,20 @@
  */
 package au.edu.cmu.dao;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import au.edu.cmu.model.Coach;
 
 /**
  * @author ChibeePatag
  *
  */
-public interface CoachDao {
-
-	Coach getCoachByUsername(String username);
+@Repository
+public class CoachDao extends BaseDao<Coach> {
+		
+	public CoachDao(){
+		super(Coach.class);
+	}
 	
-	void saveCoach(Coach coach);
-	
-	void updateCoach(Coach coach);
-	
-	void deleteCoach(Coach coach);
 }
