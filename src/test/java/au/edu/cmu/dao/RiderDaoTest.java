@@ -10,15 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import au.edu.cmu.model.Message;
+import au.edu.cmu.model.Rider;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-dao-config.xml")
-public class MessageDaoTest {
-
-	@Autowired
-	MessageDao messageDao;
+public class RiderDaoTest {
 	
+	@Autowired
+	RiderDao riderDao;
+
 	@Test
 	public void testCreate() {
 		fail("Not yet implemented");
@@ -41,9 +41,9 @@ public class MessageDaoTest {
 
 	@Test
 	public void testFindAll() {
-		List<Message> messages = messageDao.findAll();
-		for(Message message : messages){
-			System.out.println(message.getMessage());
+		List<Rider> riders = riderDao.findAll();
+		for (Rider rider : riders) {
+			System.out.println(rider.getNickname());
 		}
 	}
 
