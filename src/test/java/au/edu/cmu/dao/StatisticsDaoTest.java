@@ -1,6 +1,6 @@
 package au.edu.cmu.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class StatisticsDaoTest {
 	
 	@Autowired
-	StatisticDao statisticDao;
+	StatisticsDao statisticDao;
 
 	@Test
 	public void testCreate() {

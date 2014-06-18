@@ -1,6 +1,9 @@
 package au.edu.cmu.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -26,7 +29,7 @@ public class CoachDaoImplTest {
 	@Rollback(true)
 	public void testCreateCoach() {
 		Coach coach = new Coach();
-		coach.setUsername("Celine");
+		coach.setUsername("Chibee");
 		coach.setPassword("Patag");
 		coach.setPhone("+61490144588");
 		coachDao.create(coach);
@@ -35,12 +38,12 @@ public class CoachDaoImplTest {
 	@Test
 	@Rollback(true)
 	public void testEditCoach(){
-		Coach coach = coachDao.find(1L);
+		Coach coach = coachDao.findById(1L);
 		assertEquals("Chris", coach.getUsername());
 		coach.setUsername("Christopher");
 		coachDao.edit(coach);
 		
-		Coach coach2 = coachDao.find(1L);
+		Coach coach2 = coachDao.findById(1L);
 		assertEquals("Christopher", coach2.getUsername());
 	}
 	
@@ -65,7 +68,7 @@ public class CoachDaoImplTest {
 		
 		coachDao.remove(coach);
 		
-		Coach coach2 = coachDao.find(coach.getCoach_id());
+		Coach coach2 = coachDao.findById(coach.getCoach_id());
 		assertNull(coach2);
 	}
 	
@@ -83,7 +86,7 @@ public class CoachDaoImplTest {
 	
 	@Test 
 	public void testFind(){
-		Coach coach = coachDao.find(1L);
+		Coach coach = coachDao.findById(1L);
 		assertNotNull(coach);
 	}
 

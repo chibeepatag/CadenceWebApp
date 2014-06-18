@@ -9,7 +9,8 @@ CREATE TABLE coach
  Username VARCHAR2(255),
  Password VARCHAR2(255),
  Phone VARCHAR2(30),
- CONSTRAINT coach_coach_id_PK PRIMARY KEY (Coach_id)
+ CONSTRAINT coach_coach_id_PK PRIMARY KEY (Coach_id),
+ CONSTRAINT coach_username_CK unique (username)
 );
 
 CREATE TABLE rider
