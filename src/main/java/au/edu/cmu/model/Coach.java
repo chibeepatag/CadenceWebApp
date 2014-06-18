@@ -7,12 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * @author Celine Patag
  * 
  */
 @Entity
+@NamedQuery(name="findCoachByUsername", query="Select c from Coach c where c.username = :username")
 public class Coach {
 
 	@Id

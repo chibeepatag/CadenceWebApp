@@ -12,12 +12,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
+@Transactional(propagation = Propagation.REQUIRED)
 public abstract class BaseDao<T> {
 
-    @PersistenceContext(unitName = "entityManager")
-    private EntityManager entityManager;
+    @PersistenceContext(unitName = "entityManager")    
+    EntityManager entityManager;
 
     private Class<T> entityClass;
 
@@ -32,8 +36,11 @@ public abstract class BaseDao<T> {
         return this.entityManager;
     }
 
-    public void create(T entity) {
+    public T create(T entity) {
         this.entityManager.persist(entity);
+        this.entityManager.flush();
+        this.entityManager.refresh(entity);
+        return entity;
     }
 
     public void edit(T entity) {
