@@ -121,12 +121,8 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+			<version>1.2.17</version> </dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -149,6 +145,15 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
+				<configuration>
+					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+						<filename>target/yyyy_mm_dd.request.log</filename>
+						<retainDays>90</retainDays>
+						<append>true</append>
+						<extended>false</extended>
+						<logTimeZone>GMT</logTimeZone>
+					</requestLog>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
