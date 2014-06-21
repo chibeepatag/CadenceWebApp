@@ -10,7 +10,7 @@
 	<h2>Race Name: </h2><input type="text"/>
 	<div th:unless="${#lists.isEmpty(riders)}">
 	<h2>Select Riders</h2>
-	<table>
+	<table class="riderTable">
 		<tr>
 			<th>First Name</th>
 			<th>Last Name</th>			
@@ -20,14 +20,15 @@
 			<th>Delete</th>			
 		</tr>
 		<tr th:each="rider: ${riders}" class="riderRow">
-			<td th:text="${rider.first_Name}"></td>
-			<td th:text="${rider.last_name}"></td>
-			<td th:text="${rider.nickname}"></td>
-			<td th:text="${rider.phone}"></td>
-			<td th:text="${rider.jersey_no}"></td>
-			<td><input type="checkbox" name="deleteRider"/><span class="hiddenField" th:text="${rider.rider_id}"></span></td>
+			<td th:text="${rider.first_Name}" class="riderFirstName"></td>
+			<td th:text="${rider.last_name}" class="riderLastName"></td>
+			<td th:text="${rider.nickname}" class="riderNickname"></td>
+			<td th:text="${rider.phone}" class="riderPhone"></td>
+			<td th:text="${rider.jersey_no}" class="riderJersey"></td>
+			<td><input type="checkbox" name="deleteRider"/><span class="hiddenField rider_id" th:text="${rider.rider_id}"></span></td>
 		</tr>
 	</table>
+	<button id="deleteRiders">Delete Riders</button>
 	</div>
 	
 	<h2>Add New Rider</h2>

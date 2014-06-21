@@ -17,7 +17,7 @@ public class Rider {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int rider_id;
+	private long rider_id;
 	
 	private String first_Name;
 	
@@ -29,11 +29,11 @@ public class Rider {
 	
 	private String phone;
 
-	public int getRider_id() {
+	public long getRider_id() {
 		return rider_id;
 	}
 
-	public void setRider_id(int rider_id) {
+	public void setRider_id(long rider_id) {
 		this.rider_id = rider_id;
 	}
 
