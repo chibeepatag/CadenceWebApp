@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$(".riderRow").click(selectRow);
 	$("#addRider").click(addRider);
 	$("#deleteRiders").click(deleteRiders);
+	$("#createRace").click(createRace);
 });
 
 function selectRow(){
@@ -36,16 +37,40 @@ function appendNewRider(data){
 }
 
 function deleteRiders(){
-	var ids = $( "input:checked" ).parent().find("span").map(function(){return $(this).text()})
+	var deleteRows = $( "input:checked" ).parent().parent();
+	var ids = $( "input:checked" ).parent().find("span").map(function(){return $(this).text()}).get();
+
 	$.ajax({
 		url: "deleteRiders",
-		data: {"ids":ids},
+		data: {"ids":ids.join(",")},
 		dataType: "json",
-		type: "POST",
-		success: removeRidersFromTable
-	});
+		type: "POST",		
+	});	
+	$(deleteRows).remove();
+		
 }
 
 function removeRidersFromTable(){
 	console.log("deleted");
+}
+
+function createRace(){
+	var raceName = $("#raceName").val();
+	var selectedRows = $(".selectedRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");
+	
+	$.ajax({
+		url: "createRace", 
+		data: {"raceName":raceName, "ids":selectedRows},
+		dataType: "json",
+		type: "POST",
+		success: displayNewRace			
+	});
+}
+
+function displayNewRace(data){
+	$("#raceCreatedName").text(data.race_name);
+	for(var i = 0; i < data.riders.length; i++){
+		var riderLi = "<li>" + data.riders[i].nickname +"</li>";
+		$("#raceCreatedRiders").append(riderLi);
+	}
 }

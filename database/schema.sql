@@ -1,8 +1,11 @@
+DROP TABLE race_team purge;
+DROP TABLE race purge;
 DROP TABLE statistics purge;
 DROP TABLE message_recipient;
+DROP TABLE rider purge;
 DROP TABLE message purge;
 DROP TABLE coach purge;
-DROP TABLE rider purge;
+
 
 CREATE TABLE coach
 (Coach_ID NUMBER(9),
@@ -54,5 +57,22 @@ CREATE TABLE message_recipient
  CONSTRAINT merecepit_msg_rider_id_PK PRIMARY KEY (Message_ID, Rider_ID),
  CONSTRAINT merecepit_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID),
  CONSTRAINT merecepit_message_id_FK FOREIGN KEY (Message_ID) REFERENCES message (Message_ID)
+);
+
+CREATE TABLE race
+(Race_ID NUMBER(9), 
+ Race_Name VARCHAR2(255),
+ Race_Date DATE, 
+ CONSTRAINT race_id_PK PRIMARY KEY (race_ID),
+ CONSTRAINT race_name_CK unique (race_name)
+);
+
+CREATE TABLE race_team
+(Race_ID NUMBER(9), 
+ Rider_ID NUMBER(9),
+ Jersey_ID NUMBER(9),
+ CONSTRAINT race_team_race_rider_id_PK PRIMARY KEY (Race_ID, Rider_ID),
+ CONSTRAINT race_team_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID),
+ CONSTRAINT race_team_race_id_FK  FOREIGN KEY (Race_ID)  REFERENCES race (Race_ID)
 );
 
