@@ -3,13 +3,17 @@
  */
 package au.edu.cmu.service;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.CoachDao;
+import au.edu.cmu.dao.RiderDao;
 import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.Rider;
 
 /**
  * @author ChibeePatag
@@ -20,6 +24,9 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Autowired
 	CoachDao coachDao;
+	
+	@Autowired
+	RiderDao riderDao;
 	
 	@Override
 	public boolean login(Coach coach) {
@@ -35,5 +42,8 @@ public class LoginServiceImpl implements LoginService{
 		return result;		
 	}
 
-	
+	@Override
+	public List<Rider> getAllRiders() {
+		return riderDao.findAll();		
+	}
 }

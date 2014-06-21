@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
+
 /**
  * @author Celine Patag
  * 
@@ -20,9 +21,9 @@ public class Coach {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long coach_id;
-	
+		
 	private String username;
-	
+		
 	private String password;
 	
 	private String phone;

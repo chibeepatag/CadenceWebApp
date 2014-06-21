@@ -25,3 +25,7 @@ html,body,#map-canvas {
 
   padding: 5px;
 }
+
+.error{
+	color: red;
+}

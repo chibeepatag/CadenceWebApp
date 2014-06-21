@@ -17,6 +17,7 @@
   <!-- **************************************************************** -->
   <mvc:resources location="/images/" mapping="/images/**" />
   <mvc:resources location="/css/" mapping="/css/**" />
+  <mvc:resources location="/javascript/" mapping="/javascript/**" />
   
   <import resource="classpath:spring-dao-config.xml" />  
 
@@ -50,7 +51,7 @@
    
   <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
     <property name="templateEngine" ref="templateEngine" />
-  </bean>    
+  </bean>   
    
     
 </beans>
