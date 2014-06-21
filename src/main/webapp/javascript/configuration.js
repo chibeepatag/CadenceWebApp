@@ -73,4 +73,6 @@ function displayNewRace(data){
 		var riderLi = "<li>" + data.riders[i].nickname +"</li>";
 		$("#raceCreatedRiders").append(riderLi);
 	}
+	
+	$("#raceCreated").removeClass("hiddenField");
 }
