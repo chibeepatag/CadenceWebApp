@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$("#addRider").click(addRider);
 	$("#deleteRiders").click(deleteRiders);
 	$("#createRace").click(createRace);
+	$("#dashboard").click(goToDashboard);
 });
 
 function selectRow(){
@@ -75,4 +76,8 @@ function displayNewRace(data){
 	}
 	
 	$("#raceCreated").removeClass("hiddenField");
+}
+
+function goToDashboard(){
+	console.log("go to dashboard");
 }

@@ -45,4 +45,10 @@ public class ConfigurationController {
 		System.out.println("creating new race");
 		return configService.createRace(raceName, ids);
 	}
+	
+	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
+	public String goToDashboard(){
+		System.out.println("go to dashboard");
+		return "dashboard";
+	}
 }
