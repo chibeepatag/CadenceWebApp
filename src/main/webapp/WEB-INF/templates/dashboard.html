@@ -1,8 +1,149 @@
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-<title>Insert title here</title>
+<meta charset="ISO-8859-1" />
+<title>Dashboard</title>
+
+<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
+<script language="JavaScript" type="text/javascript"
+	src="javascript/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="javascript/dashboard.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script type="text/javascript" src="http://voap.weather.com/weather/oap/ASXX0001?template=GENXV&amp;par=3000000007&amp;unit=1&amp;key=twciweatherwidget"></script>
+<script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 </head>
-<body>Hello World!!!!
+<body>
+	<div class="titleBar">
+		<span>Race Management System</span> <img src="images/logout.png"
+			id="logoutButton" />
+	</div>
+	<div id="map-canvas"></div>
+	<div class="weatherAndRiders">
+		<div class="weather">						
+			<a
+				href="http://www.accuweather.com/en/us/new-york-ny/10007/weather-forecast/349727"
+				class="aw-widget-legal"> </a>
+			<div id="awcc1402584087032" class="aw-widget-current"
+				data-locationkey="" data-unit="c" data-language="en-us"
+				data-useip="true" data-uid="awcc1402584087032"></div>		
+			<img src="images/download.png" width="10%" height="10%" />
+		</div>
+		<div>
+			<div class="riders">
+				<table>
+					<thead>
+						<tr>
+							<td width="5%"><input type="checkbox" id="checkAll" /></td>
+							<td class="header">Rider</td>
+							<td>Speed</td>
+							<td>Cadence</td>
+							<td>Power</td>
+							<td>Heart Rate</td>
+							<td>Altitude</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 1 Prince Harry</td>
+							<td>50</td>
+							<td>32</td>
+							<td>152</td>
+							<td>198</td>
+							<td>22</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 2 Lance Armstrong</td>
+							<td>26</td>
+							<td>69</td>
+							<td>168</td>
+							<td>175</td>
+							<td>36</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 3 Joseph Brent</td>
+							<td>65</td>
+							<td>39</td>
+							<td>175</td>
+							<td>114</td>
+							<td>35</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 4 Carlos Agnetha</td>
+							<td>65</td>
+							<td>39</td>
+							<td>175</td>
+							<td>114</td>
+							<td>35</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 5 Miguel Garcia</td>
+							<td>65</td>
+							<td>39</td>
+							<td>175</td>
+							<td>114</td>
+							<td>35</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 6 Titus Marquez</td>
+							<td>65</td>
+							<td>39</td>
+							<td>175</td>
+							<td>114</td>
+							<td>35</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 7 Elijah Mendoza</td>
+							<td>91</td>
+							<td>78</td>
+							<td>340</td>
+							<td>101</td>
+							<td>68</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 8 Edan Toole</td>
+							<td>92</td>
+							<td>41</td>
+							<td>688</td>
+							<td>135</td>
+							<td>45</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 9 Sean Waite</td>
+							<td>45</td>
+							<td>36</td>
+							<td>196</td>
+							<td>184</td>
+							<td>12</td>
+						</tr>
+						<tr class="riderRow">
+							<td><input type="checkbox" class="riderCheck" /></td>
+							<td># 10 Howard Windon</td>
+							<td>25</td>
+							<td>94</td>
+							<td>165</td>
+							<td>127</td>
+							<td>37</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="messageContainer">
+				<span class="messageLbl">Message: &nbsp;</span>
+				<textarea rows="5" cols="45"></textarea>
+				<button class="sendBtn">Send</button>
+			</div>
+		</div>
+	</div>
+
+
 </body>
 </html>
