@@ -54,10 +54,11 @@ public class ConfigurationController {
 	
 	@RequestMapping(value="/TestServlet", method=RequestMethod.GET)
 	@ResponseBody
-	public String testServlet(@RequestParam("longitude")String longitude, @RequestParam("latitude")String latitude, @RequestParam("speed")String speed){
+	public String testServlet(@RequestParam("longitude")String longitude, @RequestParam("latitude")String latitude, @RequestParam("speed")String speed, @RequestParam("rider")String rider){
 		System.out.println(longitude);
 		System.out.println(latitude);
 		System.out.println(speed);
+		System.out.println(rider);
 		return "Success";
 	}
 }
