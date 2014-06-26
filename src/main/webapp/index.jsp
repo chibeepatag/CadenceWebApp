@@ -12,7 +12,7 @@
 	data-useip="true" data-uid="awcc1402584087032"></div>
 <script type="text/javascript"
 	src="http://oap.accuweather.com/launch.js"></script>
-<form action="TestServlet" method="post">
+<form action="TestServlet" method="get">
 	Longitude: <input type="text" name="longitude" /> Latitude: <input
 		type="text" name="latitude" /> Speed: <input type="text" name="speed" />
 	<input type="submit" value="Submit" />

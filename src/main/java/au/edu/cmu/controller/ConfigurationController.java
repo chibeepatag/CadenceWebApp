@@ -51,4 +51,13 @@ public class ConfigurationController {
 		System.out.println("go to dashboard");
 		return "dashboard";
 	}
+	
+	@RequestMapping(value="/TestServlet", method=RequestMethod.GET)
+	@ResponseBody
+	public String testServlet(@RequestParam("longitude")String longitude, @RequestParam("latitude")String latitude, @RequestParam("speed")String speed){
+		System.out.println(longitude);
+		System.out.println(latitude);
+		System.out.println(speed);
+		return "Success";
+	}
 }
