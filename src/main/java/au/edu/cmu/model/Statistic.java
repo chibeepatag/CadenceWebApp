@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author ChibeePatag
@@ -43,7 +45,29 @@ public class Statistic {
 	
 	private double power;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date stat_ts;
+	
+	public Statistic(){
+		
+	}		
+
+	public Statistic(int heart_rate, double speed, double latitude,
+			double longitude, double elevation, double distance,
+			double cadence, double power, Date stat_ts) {
+		super();
+		this.heart_rate = heart_rate;
+		this.speed = speed;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.elevation = elevation;
+		this.distance = distance;
+		this.cadence = cadence;
+		this.power = power;
+		this.stat_ts = stat_ts;
+	}
+
+
 
 	public int getStat_id() {
 		return stat_id;
@@ -131,6 +155,28 @@ public class Statistic {
 
 	public void setStat_ts(Date stat_ts) {
 		this.stat_ts = stat_ts;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();		
+		buffer.append("Heart Rate: ");
+		buffer.append(this.getHeart_rate());
+		buffer.append(" Speed: ");
+		buffer.append(this.getHeart_rate());
+		buffer.append(" Location: ");
+		buffer.append(this.getLatitude());
+		buffer.append(", ");
+		buffer.append(this.getLongitude());
+		buffer.append(", ");
+		buffer.append(this.getElevation());
+		buffer.append(" Distance: ");
+		buffer.append(this.getDistance());
+		buffer.append(" Cadence: ");
+		buffer.append(this.getCadence());
+		buffer.append(" Power: ");
+		buffer.append(this.getPower());
+		return super.toString();
 	}
 		
 }

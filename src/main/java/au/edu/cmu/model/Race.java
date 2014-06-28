@@ -5,6 +5,7 @@ package au.edu.cmu.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKey;
+
+import org.hibernate.annotations.Type;
 
 /**
  * @author ChibeePatag
@@ -30,9 +34,13 @@ public class Race {
 	
 	private Date race_date;
 	
+	@Type(type="yes_no")
+	private Boolean isOngoing;
+	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "race_team", joinColumns = @JoinColumn(name = "RACE_ID"), inverseJoinColumns = @JoinColumn(name = "Rider_ID"))
-	private List<Rider> riders;
+	@MapKey(name = "nickname")
+	private Map<String, Rider> riders;
 
 	public long getRace_id() {
 		return race_id;
@@ -58,12 +66,20 @@ public class Race {
 		this.race_date = race_date;
 	}
 
-	public List<Rider> getRiders() {
+	public Map<String, Rider> getRiders() {
 		return riders;
 	}
 
-	public void setRiders(List<Rider> riders) {
+	public void setRiders(Map<String, Rider> riders) {
 		this.riders = riders;
 	}
+
+	public boolean isOngoing() {
+		return isOngoing;
+	}
+
+	public void setOngoing(boolean isOngoing) {
+		this.isOngoing = isOngoing;
+	}		
 	
 }

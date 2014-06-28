@@ -5,6 +5,7 @@ package au.edu.cmu.service;
 
 import java.util.List;
 
+import au.edu.cmu.exceptions.OnGoingRaceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
@@ -18,5 +19,5 @@ public interface ConfigurationService {
 	
 	void deleteRiders(List<Long> id);
 	
-	Race createRace(String raceName, List<Long> ids);
+	Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException;
 }

@@ -1,6 +1,6 @@
 DROP TABLE race_team purge;
 DROP TABLE race purge;
-DROP TABLE statistics purge;
+DROP TABLE statistic purge;
 DROP TABLE message_recipient;
 DROP TABLE rider purge;
 DROP TABLE message purge;
@@ -26,17 +26,17 @@ CREATE TABLE rider
  CONSTRAINT rider_rider_id_PK PRIMARY KEY (Rider_ID)
 );
 
-CREATE TABLE statistics
+CREATE TABLE statistic
 (Stat_ID NUMBER(9),
  Rider_ID NUMBER(9),
  Heart_Rate NUMBER(9),
  Speed NUMBER(9,2),
- Latitude NUMBER(9,9),
- Longitude NUMBER(9,9),
- Elevation NUMBER(9,9),
- Distance NUMBER(9,9),
- Cadence NUMBER(9,9),
- Power NUMBER(9,9),
+ Latitude NUMBER(9,5),
+ Longitude NUMBER(9,5),
+ Elevation NUMBER(9,5),
+ Distance NUMBER(9,2),
+ Cadence NUMBER(9,2),
+ Power NUMBER(9,5),
  STAT_TS DATE,
  CONSTRAINT statistics_stat_id_PK PRIMARY KEY (Stat_ID),
  CONSTRAINT statistics_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID)
@@ -63,7 +63,7 @@ CREATE TABLE race
 (Race_ID NUMBER(9), 
  Race_Name VARCHAR2(255),
  Race_Date DATE,
- Ongoing char(1),
+ ISONGOING char(1),
  CONSTRAINT race_id_PK PRIMARY KEY (race_ID),
  CONSTRAINT race_name_CK unique (race_name)
 );

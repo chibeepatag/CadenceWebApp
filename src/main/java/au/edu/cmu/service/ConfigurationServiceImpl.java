@@ -5,13 +5,19 @@ package au.edu.cmu.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.NoResultException;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
+import au.edu.cmu.exceptions.OnGoingRaceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
@@ -21,7 +27,8 @@ import au.edu.cmu.model.Rider;
  */
 @Service
 public class ConfigurationServiceImpl implements ConfigurationService {
-
+	
+	static Logger logger = Logger.getLogger(ConfigurationService.class);
 	@Autowired
 	RiderDao riderDao;
 	
@@ -44,16 +51,25 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 	
 	@Override
-	public Race createRace(String raceName, List<Long> ids) {
-		List<Rider> riders = new ArrayList<Rider>();
+	public Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException {
+		Race currentRace;
+		try{
+			currentRace = raceDao.getCurrentRace();
+			throw new OnGoingRaceException();
+		}catch(NoResultException nre){
+			logger.info("No race is in session.");
+		}				
+		
+		Map<String, Rider> riders = new HashMap<String, Rider>();
 		for(Long id : ids){
 			Rider rider = riderDao.findById(id);
-			riders.add(rider);
+			riders.put(rider.getJersey_no(), rider);
 		}
 		Race race = new Race();
 		race.setRace_name(raceName);
 		race.setRace_date(Calendar.getInstance().getTime());
 		race.setRiders(riders);
+		race.setOngoing(true);
 		
 		return raceDao.create(race);
 	}

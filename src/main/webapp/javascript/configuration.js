@@ -64,7 +64,8 @@ function createRace(){
 		data: {"raceName":raceName, "ids":selectedRows},
 		dataType: "json",
 		type: "POST",
-		success: displayNewRace			
+		success: displayNewRace,
+		error: failedToCreateRace
 	});
 }
 
@@ -80,4 +81,9 @@ function displayNewRace(data){
 
 function goToDashboard(){
 	console.log("go to dashboard");
+}
+
+function failedToCreateRace(jqXHR, textStatus, errorThrown){
+	$("raceCreated").html(textStatus + " " + errorThrown);
+	$("#raceCreated").removeClass("hiddenField");
 }
