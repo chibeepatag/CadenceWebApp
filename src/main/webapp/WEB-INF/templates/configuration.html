@@ -2,35 +2,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Configuration</title>
-<script language="JavaScript" type="text/javascript"
-	src="javascript/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" language="javascript"
-	src="javascript/configuration.js"></script>
-<link rel="stylesheet" type="text/css" href="css/configuration.css" />
+  
+ <script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script> 
+ <script type="text/javascript" language="javascript" src="javascript/configuration.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/configuration.css" />
 </head>
 <body>
-	<div id="raceName">
-	<span>Race Name:</span>
-	<input type="text" name="raceName" id="raceName" />
+	<div id="raceNameDiv">
+		<span>Race Name:</span> <input type="text" name="raceName"
+			id="raceName" />
 	</div>
 	<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
 		<h2>Select Riders</h2>
 		<form id="deleteRiderForm">
-			<table class="riderTable">
-				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Nickname</th>
-					<th>Mobile Number</th>
-					<th>Jersey Number</th>
-				</tr>
+			<table 
+				class="riderTable">
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Nickname</th>
+						<th>Mobile Number</th>
+						<th>Jersey Number</th>
+					</tr>
+				</thead>
+				<tbody>
 				<tr th:each="rider: ${riders}" class="riderRow">
 					<td th:text="${rider.first_Name}" class="riderFirstName"></td>
 					<td th:text="${rider.last_name}" class="riderLastName"></td>
 					<td th:text="${rider.nickname}" class="riderNickname"></td>
 					<td th:text="${rider.phone}" class="riderPhone"></td>
 					<td th:text="${rider.jersey_no}" class="riderJersey"></td>
+					<td><span class="hiddenField rider_id" th:text="${rider.rider_id}"></span></td>
 				</tr>
+				</tbody>
 			</table>
 		</form>
 		<button id="deleteRiders">Delete Riders</button>
@@ -38,36 +43,36 @@
 	</div>
 
 	<div id="newRiderDiv">
-	<h2>Add New Rider</h2>
-	<form th:action="@{/addRider}" th:object="${rider}" method="post"
-		id="newRiderForm">
-		<table>
-			<tr>
-				<td>First Name</td>
-				<td><input type="text" th:field="*{first_Name}" /></td>
-			</tr>
-			<tr>
-				<td>Last Name</td>
-				<td><input type="text" th:field="*{last_name}" /></td>
-			</tr>
-			<tr>
-				<td>Nickname</td>
-				<td><input type="text" th:field="*{nickname}" /></td>
-			</tr>
-			<tr>
-				<td>Mobile Number</td>
-				<td><input type="text" th:field="*{phone}" /></td>
-			</tr>
-			<tr>
-				<td>Jersey Number</td>
-				<td><input type="text" th:field="*{jersey_no}" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button type="button" id="addRider">Add Rider</button></td>
-			</tr>
-		</table>
-	</form>
+		<h2>Add New Rider</h2>
+		<form th:action="@{/addRider}" th:object="${rider}" method="post"
+			id="newRiderForm">
+			<table>
+				<tr>
+					<td>First Name</td>
+					<td><input type="text" th:field="*{first_Name}" /></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text" th:field="*{last_name}" /></td>
+				</tr>
+				<tr>
+					<td>Nickname</td>
+					<td><input type="text" th:field="*{nickname}" /></td>
+				</tr>
+				<tr>
+					<td>Mobile Number</td>
+					<td><input type="text" th:field="*{phone}" /></td>
+				</tr>
+				<tr>
+					<td>Jersey Number</td>
+					<td><input type="text" th:field="*{jersey_no}" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><button type="button" id="addRider">Add Rider</button></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 	<div id="raceCreated" class="hiddenField">
 		Race <span id="raceCreatedName"></span> created with the following

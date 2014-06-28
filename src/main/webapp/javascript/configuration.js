@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	attachEventHandlers();
+	
+		                
 });
 
 function attachEventHandlers(){
@@ -64,7 +66,7 @@ function removeRidersFromTable(){
 function createRace(){
 	var raceName = $("#raceName").val();
 	var selectedRows = $(".selectedRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");
-	
+
 	$.ajax({
 		url: "createRace", 
 		data: {"raceName":raceName, "ids":selectedRows},
@@ -84,6 +86,7 @@ function displayNewRace(data){
 	}
 			
 	$("#raceCreated").removeClass("hiddenField");
+	
 }
 
 function goToDashboard(){
