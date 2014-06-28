@@ -9,9 +9,11 @@
 <link rel="stylesheet" type="text/css" href="css/configuration.css" />
 </head>
 <body>
-	<h2>Race Name:</h2>
+	<div id="raceName">
+	<span>Race Name:</span>
 	<input type="text" name="raceName" id="raceName" />
-	<div th:unless="${#lists.isEmpty(riders)}">
+	</div>
+	<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
 		<h2>Select Riders</h2>
 		<form id="deleteRiderForm">
 			<table class="riderTable">
@@ -21,7 +23,6 @@
 					<th>Nickname</th>
 					<th>Mobile Number</th>
 					<th>Jersey Number</th>
-					<th>Delete</th>
 				</tr>
 				<tr th:each="rider: ${riders}" class="riderRow">
 					<td th:text="${rider.first_Name}" class="riderFirstName"></td>
@@ -29,8 +30,6 @@
 					<td th:text="${rider.nickname}" class="riderNickname"></td>
 					<td th:text="${rider.phone}" class="riderPhone"></td>
 					<td th:text="${rider.jersey_no}" class="riderJersey"></td>
-					<td><input type="checkbox" name="id" /> <span
-						class="hiddenField rider_id" th:text="${rider.rider_id}"></span></td>
 				</tr>
 			</table>
 		</form>
@@ -38,6 +37,7 @@
 		<button id="createRace">Create Race</button>
 	</div>
 
+	<div id="newRiderDiv">
 	<h2>Add New Rider</h2>
 	<form th:action="@{/addRider}" th:object="${rider}" method="post"
 		id="newRiderForm">
@@ -68,7 +68,7 @@
 			</tr>
 		</table>
 	</form>
-
+	</div>
 	<div id="raceCreated" class="hiddenField">
 		Race <span id="raceCreatedName"></span> created with the following
 		riders:

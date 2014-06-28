@@ -5,3 +5,12 @@
 .hiddenField{
 	display: none;
 }
+
+#ridersDiv{
+	float: left;
+	margin: 10px;
+}
+
+#newRiderDiv{
+	margin: 10px;
+}

@@ -3,20 +3,22 @@
  */
 package au.edu.cmu.service;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
+import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.exceptions.OnGoingRaceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
@@ -51,7 +53,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 	
 	@Override
-	public Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException {
+	public Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException, PersistenceException {
 		Race currentRace;
 		try{
 			currentRace = raceDao.getCurrentRace();
@@ -71,7 +73,19 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		race.setRiders(riders);
 		race.setOngoing(true);
 		
-		return raceDao.create(race);
+		Race createdRace = null;
+		try{
+			createdRace = raceDao.create(race);
+		}catch(PersistenceException pe){			
+			if (pe.getCause() instanceof ConstraintViolationException){
+				throw new CadencePersistenceException(pe, "Race name exists.");				
+			}else{
+				throw pe;
+			}
+		}
+		
+		
+		return createdRace;
 	}
 
 }

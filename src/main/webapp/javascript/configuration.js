@@ -1,10 +1,14 @@
 $(document).ready(function(){
+	attachEventHandlers();
+});
+
+function attachEventHandlers(){
 	$(".riderRow").click(selectRow);
 	$("#addRider").click(addRider);
 	$("#deleteRiders").click(deleteRiders);
 	$("#createRace").click(createRace);
 	$("#dashboard").click(goToDashboard);
-});
+}
 
 function selectRow(){
 	var isSelected = $(this).hasClass("selectedRow");	
@@ -35,15 +39,17 @@ function appendNewRider(data){
 	$(lastRowClone).find(".riderJersey").text(data.jersey_no);
 	$(lastRowClone).find(".rider_id").text(data.rider_id);
 	$(".riderTable").append(lastRowClone);
+	$(lastRowClone).removeClass("selectedRow");
+	$(lastRowClone).click(selectRow);
 }
 
 function deleteRiders(){
-	var deleteRows = $( "input:checked" ).parent().parent();
-	var ids = $( "input:checked" ).parent().find("span").map(function(){return $(this).text()}).get();
+	var deleteRows = $(".selectedRow");
+	var ids = $(deleteRows).find(".rider_id").map(function(){return $(this).text()}).get().join(",");
 
 	$.ajax({
 		url: "deleteRiders",
-		data: {"ids":ids.join(",")},
+		data: {"ids":ids},
 		dataType: "json",
 		type: "POST",		
 	});	
@@ -71,11 +77,12 @@ function createRace(){
 
 function displayNewRace(data){
 	$("#raceCreatedName").text(data.race_name);
-	for(var i = 0; i < data.riders.length; i++){
-		var riderLi = "<li>" + data.riders[i].nickname +"</li>";
-		$("#raceCreatedRiders").append(riderLi);
+				
+	for (var rider in data.riders){
+		var riderLi = "<li>" + data.riders[rider].nickname +"</li>";
+		$("#raceCreatedRiders").append(riderLi);			
 	}
-	
+			
 	$("#raceCreated").removeClass("hiddenField");
 }
 

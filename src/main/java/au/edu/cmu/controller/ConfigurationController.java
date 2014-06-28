@@ -5,6 +5,10 @@ package au.edu.cmu.controller;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,6 +30,8 @@ import au.edu.cmu.service.ConfigurationService;
 @Controller
 public class ConfigurationController {
 
+	static Logger logger = Logger.getLogger(ConfigurationController.class);
+	
 	@Autowired
 	ConfigurationService configService;
 	
@@ -44,16 +50,16 @@ public class ConfigurationController {
 	
 	@RequestMapping(value="/createRace", method=RequestMethod.POST)
 	@ResponseBody
-	public Race createRace(@RequestParam("ids")List<Long> ids, @RequestParam("raceName")String raceName){
+	public Race createRace(@RequestParam("ids")List<Long> ids, @RequestParam("raceName")String raceName, HttpServletResponse response){
 		Race race = null;
 		try{
 			race = configService.createRace(raceName, ids);
 			
 		}catch (OnGoingRaceException onGoingRaceException){
-			//bindingResult.addError(new ObjectError("Race is on going", onGoingRaceException.getMessage()));
-			System.out.println(onGoingRaceException.getMessage());
-		}catch(Exception e){
-			e.printStackTrace();
+			logger.info(onGoingRaceException.getMessage());
+		}catch(PersistenceException e){
+			logger.info(e.getMessage());
+//			response.sendError(500, e.getMessage());
 		} 
 		return race;
 	}
@@ -64,13 +70,4 @@ public class ConfigurationController {
 		return "dashboard";
 	}
 	
-	@RequestMapping(value="/TestServlet", method=RequestMethod.GET)
-	@ResponseBody
-	public String testServlet(@RequestParam("longitude")String longitude, @RequestParam("latitude")String latitude, @RequestParam("speed")String speed, @RequestParam("rider")String rider){
-		System.out.println(longitude);
-		System.out.println(latitude);
-		System.out.println(speed);
-		System.out.println(rider);
-		return "Success";
-	}
 }
