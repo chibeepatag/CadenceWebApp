@@ -62,7 +62,8 @@ CREATE TABLE message_recipient
 CREATE TABLE race
 (Race_ID NUMBER(9), 
  Race_Name VARCHAR2(255),
- Race_Date DATE, 
+ Race_Date DATE,
+ Ongoing char(1),
  CONSTRAINT race_id_PK PRIMARY KEY (race_ID),
  CONSTRAINT race_name_CK unique (race_name)
 );
