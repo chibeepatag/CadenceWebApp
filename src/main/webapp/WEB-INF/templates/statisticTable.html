@@ -1,0 +1,28 @@
+			<div class="statisticTable" th:fragment="statTable">
+				<table>
+					<thead>
+						<tr>							
+							<th>Rider</th>
+							<th>Speed</th>
+							<th>Cadence</th>
+							<th>Power</th>
+							<th>Heart Rate</th>
+							<th>Latitude</th>
+							<th>Longitude</th>
+							<th>Elevation</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="stat: ${statistics}" class="riderRow">							
+							<td th:text="${stat.rider.nickname}">Prince Harry</td>
+							<td th:text="${stat.speed}">50</td>
+							<td th:text="${stat.cadence}">50</td>
+							<td th:text="${stat.power}">50</td>
+							<td th:text="${stat.heart_rate}">50</td>
+							<td th:text="${stat.latitude}">50</td>
+							<td th:text="${stat.longitude}">50</td>
+							<td th:text="${stat.elevation}">50</td>
+						</tr>						
+					</tbody>
+				</table>
+			</div>

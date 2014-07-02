@@ -33,5 +33,12 @@ public class DashboardController {
 		model.addAttribute("statistics", statistics);
 		return "dashboard";
 	}
+	
+	@RequestMapping(value="/refreshStat", method=RequestMethod.GET)
+	public String refreshDashboard(Model model){
+		List<Statistic> statistics = dashboardService.buildStatisticTable();
+		model.addAttribute("statistics", statistics);
+		return "statisticTable";
+	}
 
 }

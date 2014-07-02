@@ -7,6 +7,8 @@
 <link rel="stylesheet" type="text/css" href="css/dashboard.css" />
 <script language="JavaScript" type="text/javascript"
 	src="javascript/jquery-2.1.1.min.js"></script>
+<script language="JavaScript" type="text/javascript"
+	src="javascript/dashboard.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 </head>
 <body>
@@ -21,34 +23,7 @@
 			<img src="images/download.png" width="10%" height="10%" />
 		</div>
 		<div>
-			<div class="riders">
-				<table>
-					<thead>
-						<tr>							
-							<th>Rider</th>
-							<th>Speed</th>
-							<th>Cadence</th>
-							<th>Power</th>
-							<th>Heart Rate</th>
-							<th>Latitude</th>
-							<th>Longitude</th>
-							<th>Elevation</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="stat: ${statistics}" class="riderRow">							
-							<td th:text="${stat.rider.nickname}">Prince Harry</td>
-							<td th:text="${stat.speed}">50</td>
-							<td th:text="${stat.cadence}">50</td>
-							<td th:text="${stat.power}">50</td>
-							<td th:text="${stat.heart_rate}">50</td>
-							<td th:text="${stat.latitude}">50</td>
-							<td th:text="${stat.longitude}">50</td>
-							<td th:text="${stat.elevation}">50</td>
-						</tr>						
-					</tbody>
-				</table>
-			</div>
+			<div class="statisticTable" th:replace="statisticTable :: statTable"></div>
 			<div class="messageContainer">
 				<span class="messageLbl">Message: &nbsp;</span>
 				<textarea rows="5" cols="45"></textarea>

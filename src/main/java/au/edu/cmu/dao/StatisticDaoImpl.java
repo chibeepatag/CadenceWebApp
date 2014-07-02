@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -84,8 +85,14 @@ public class StatisticDaoImpl implements StatisticsDao {
 		Predicate riderPred2 = cb.equal(statisticRoot.get(Statistic_.rider), rider);
 		Predicate and = cb.and(whereMaxTS, riderPred2);
 		cq.select(statisticRoot).where(and);
-				
-		return this.entityManager.createQuery(cq).getSingleResult();
+		
+		Statistic statistic = null;
+		try{
+			statistic = this.entityManager.createQuery(cq).getSingleResult();
+		}catch(NoResultException nre){
+			System.out.println("No result for " + rider.getRider_id());
+		}
+		return statistic;
 	}
 
 }

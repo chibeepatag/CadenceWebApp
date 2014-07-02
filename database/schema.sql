@@ -39,7 +39,8 @@ CREATE TABLE statistic
  Power NUMBER(9,5),
  STAT_TS TIMESTAMP,
  CONSTRAINT statistics_stat_id_PK PRIMARY KEY (Stat_ID),
- CONSTRAINT statistics_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID)
+ CONSTRAINT statistics_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID),
+ CONSTRAINT statistics_stat_ts_UQ UNIQUE (Rider_ID, STAT_TS)
 );
 
 CREATE TABLE message
