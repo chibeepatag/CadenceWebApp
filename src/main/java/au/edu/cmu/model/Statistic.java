@@ -176,7 +176,7 @@ public class Statistic {
 		buffer.append(this.getCadence());
 		buffer.append(" Power: ");
 		buffer.append(this.getPower());
-		return super.toString();
+		return buffer.toString();
 	}
 		
 }

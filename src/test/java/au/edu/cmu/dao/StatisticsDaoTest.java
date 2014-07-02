@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,4 +55,12 @@ public class StatisticsDaoTest {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testgetRiderLatestStatistic(){
+		Rider rider = riderDao.findById(1L);
+		Statistic stat = statisticDao.getRiderLatestStatistic(rider);
+		System.out.println(stat.toString());
+		System.out.println(stat.getStat_ts());
+		assertNotNull(stat);
+	}
 }

@@ -64,10 +64,4 @@ public class ConfigurationController {
 		return race;
 	}
 	
-	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
-	public String goToDashboard(){
-		System.out.println("go to dashboard");
-		return "dashboard";
-	}
-	
 }
