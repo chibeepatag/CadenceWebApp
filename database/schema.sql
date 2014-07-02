@@ -37,7 +37,7 @@ CREATE TABLE statistic
  Distance NUMBER(9,2),
  Cadence NUMBER(9,2),
  Power NUMBER(9,5),
- STAT_TS DATE,
+ STAT_TS TIMESTAMP,
  CONSTRAINT statistics_stat_id_PK PRIMARY KEY (Stat_ID),
  CONSTRAINT statistics_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID)
 );
