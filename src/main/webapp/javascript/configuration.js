@@ -75,7 +75,7 @@ function appendNewRider(data){
 
 function updateEditedRider(data){
 	var riderid = data.rider_id;
-	var row = $(".riderTable").find(".riderRow").find(".rider_id:contains(1)").filter(function() { return $(this).text() === riderid.toString() }).parent().parent();
+	var row = $(".riderTable").find(".riderRow").find(".rider_id").filter(function() { return $(this).text() === riderid.toString() }).parent().parent();
 	$(row).find(".riderFirstName").text(data.first_Name);
 	$(row).find(".riderLastName").text(data.last_name);
 	$(row).find(".riderNickname").text(data.nickname);
