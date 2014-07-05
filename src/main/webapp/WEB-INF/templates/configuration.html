@@ -14,6 +14,7 @@
 	</div>
 	<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
 		<h2>Select Riders</h2>
+		<span>Double click on row to edit.</span>
 		<form id="deleteRiderForm">
 			<table 
 				class="riderTable">
@@ -49,29 +50,30 @@
 			<table>
 				<tr>
 					<td>First Name</td>
-					<td><input type="text" th:field="*{first_Name}" /></td>
+					<td><input type="text" th:field="*{first_Name}" id="firstNameInput"/></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
-					<td><input type="text" th:field="*{last_name}" /></td>
+					<td><input type="text" th:field="*{last_name}" id="lastNameInput"/></td>
 				</tr>
 				<tr>
 					<td>Nickname</td>
-					<td><input type="text" th:field="*{nickname}" /></td>
+					<td><input type="text" th:field="*{nickname}" id="nicknameInput"/></td>
 				</tr>
 				<tr>
 					<td>Mobile Number</td>
-					<td><input type="text" th:field="*{phone}" /></td>
+					<td><input type="text" th:field="*{phone}" id="phoneInput" /></td>
 				</tr>
 				<tr>
 					<td>Jersey Number</td>
-					<td><input type="text" th:field="*{jersey_no}" /></td>
+					<td><input type="text" th:field="*{jersey_no}" id="jerseyNoInput"/></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td><button type="button" id="addRider">Add Rider</button></td>
-				</tr>
+					<td><input type="reset" value="Reset"/></td>
+					<td><button type="button" id="addRider">Add/Edit Rider</button></td>
+				</tr>				
 			</table>
+			<input type="text" th:field="*{rider_id}" id="riderIdInput" class="hiddenField"/>
 		</form>
 	</div>
 	<div id="raceCreated" class="hiddenField">

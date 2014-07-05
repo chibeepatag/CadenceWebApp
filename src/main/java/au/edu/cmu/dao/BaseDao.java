@@ -12,7 +12,7 @@ import java.util.List;
 public interface BaseDao<T> {
 	T create(T entity);
 	
-	void edit(T entity);
+	T edit(T entity);
 	
 	void remove(T entity);
 	

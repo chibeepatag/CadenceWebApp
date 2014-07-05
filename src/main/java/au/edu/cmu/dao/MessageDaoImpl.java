@@ -33,8 +33,8 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
-	public void edit(Message entity) {
-		this.entityManager.merge(entity);		
+	public Message edit(Message entity) {
+		return this.entityManager.merge(entity);		
 	}
 
 	@Override

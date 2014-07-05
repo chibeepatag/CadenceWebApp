@@ -45,6 +45,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 	
 	@Override
+	public Rider editRider(Rider rider) {		
+		return riderDao.edit(rider);
+	}
+	
+	@Override
 	public void deleteRiders(List<Long> ids) {
 		for(Long id: ids){
 			Rider rider = riderDao.findById(id);

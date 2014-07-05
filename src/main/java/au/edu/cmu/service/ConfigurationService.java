@@ -17,6 +17,8 @@ public interface ConfigurationService {
 
 	Rider addRider(Rider rider);
 	
+	Rider editRider(Rider rider);
+	
 	void deleteRiders(List<Long> id);
 	
 	Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException;

@@ -48,8 +48,8 @@ public class RaceDaoImpl implements RaceDao {
 	 * @see au.edu.cmu.dao.BaseDao#edit(java.lang.Object)
 	 */
 	@Override
-	public void edit(Race entity) {
-		this.entityManager.merge(entity);
+	public Race edit(Race entity) {
+		return this.entityManager.merge(entity);
 	}
 
 	/* (non-Javadoc)

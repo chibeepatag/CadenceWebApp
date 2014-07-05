@@ -47,8 +47,8 @@ public class CoachDaoImpl implements CoachDao {
 	}
 
 	@Override
-	public void edit(Coach coach) {
-		 this.entityManager.merge(coach);
+	public Coach edit(Coach coach) {
+		 return this.entityManager.merge(coach);
 	}
 
 	@Override

@@ -42,6 +42,13 @@ public class ConfigurationController {
 		return riderManaged;
 	}
 	
+	@RequestMapping(value="/editRider", method=RequestMethod.POST)
+	@ResponseBody
+	public Rider editRider(Rider rider){
+		Rider riderManaged = configService.editRider(rider);		
+		return riderManaged;
+	}
+	
 	@RequestMapping(value="/deleteRiders", method=RequestMethod.POST)
 	@ResponseBody
 	public void deleteRiders(@RequestParam("ids")List<Long> ids){

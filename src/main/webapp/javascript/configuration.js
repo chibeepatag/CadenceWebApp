@@ -6,6 +6,7 @@ $(document).ready(function(){
 
 function attachEventHandlers(){
 	$(".riderRow").click(selectRow);
+	$(".riderRow").dblclick(selectEditRider);
 	$("#addRider").click(addRider);
 	$("#deleteRiders").click(deleteRiders);
 	$("#createRace").click(createRace);
@@ -23,16 +24,43 @@ function selectRow(){
 }
 
 function addRider(){	
-	$.ajax({
-		url: "addRider",
-		data: $("#newRiderForm").serialize(),
-		dataType: "json",
-		type: "POST",
-		success: appendNewRider
-	});
+	var riderId = $("#riderIdInput").val();
+	if(riderId > 0){		
+		$.ajax({
+			url: "editRider",
+			data: $("#newRiderForm").serialize(),
+			dataType: "json",
+			type: "POST",
+			success: updateEditedRider
+		});
+	}else{
+		$.ajax({
+			url: "addRider",
+			data: $("#newRiderForm").serialize(),
+			dataType: "json",
+			type: "POST",
+			success: appendNewRider
+		});
+	}	
 }
 
-function appendNewRider(data){
+function selectEditRider(){
+	var firstName = $(this).find(".riderFirstName").text();
+	var lastName = $(this).find(".riderLastName").text();
+	var nickname = $(this).find(".riderNickname").text();
+	var phone = $(this).find(".riderPhone").text();
+	var jersey = $(this).find(".riderJersey").text();
+	var rider_id = $(this).find(".rider_id").text();
+		
+	$("#firstNameInput").val(firstName);
+	$("#lastNameInput").val(lastName);
+	$("#nicknameInput").val(nickname);
+	$("#phoneInput").val(phone);
+	$("#jerseyNoInput").val(jersey);
+	$("#riderIdInput").val(rider_id);	
+}
+
+function appendNewRider(data){	
 	var lastRowClone = $(".riderTable").find("tr:last" ).clone();
 	$(lastRowClone).find(".riderFirstName").text(data.first_Name);
 	$(lastRowClone).find(".riderLastName").text(data.last_name);
@@ -43,6 +71,17 @@ function appendNewRider(data){
 	$(".riderTable").append(lastRowClone);
 	$(lastRowClone).removeClass("selectedRow");
 	$(lastRowClone).click(selectRow);
+}
+
+function updateEditedRider(data){
+	var riderid = data.rider_id;
+	var row = $(".riderTable").find(".riderRow").find(".rider_id:contains(1)").filter(function() { return $(this).text() === riderid.toString() }).parent().parent();
+	$(row).find(".riderFirstName").text(data.first_Name);
+	$(row).find(".riderLastName").text(data.last_name);
+	$(row).find(".riderNickname").text(data.nickname);
+	$(row).find(".riderPhone").text(data.phone);
+	$(row).find(".riderJersey").text(data.jersey_no);
+	$(row).find(".rider_id").text(data.rider_id);	
 }
 
 function deleteRiders(){

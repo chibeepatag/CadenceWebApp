@@ -37,8 +37,8 @@ public class RiderDaoImpl implements RiderDao {
 	}
 
 	@Override
-	public void edit(Rider entity) {
-		this.entityManager.merge(entity);
+	public Rider edit(Rider entity) {
+		return this.entityManager.merge(entity);
 	}
 
 	@Override

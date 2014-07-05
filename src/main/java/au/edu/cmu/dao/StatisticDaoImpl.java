@@ -46,8 +46,8 @@ public class StatisticDaoImpl implements StatisticsDao {
 	}
 
 	@Override
-	public void edit(Statistic entity) {
-		this.entityManager.merge(entity);
+	public Statistic edit(Statistic entity) {
+		return this.entityManager.merge(entity);
 
 	}
 
