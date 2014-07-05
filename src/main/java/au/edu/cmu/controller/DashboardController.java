@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.service.DashboardService;
@@ -39,6 +40,12 @@ public class DashboardController {
 		List<Statistic> statistics = dashboardService.buildStatisticTable();
 		model.addAttribute("statistics", statistics);
 		return "statisticTable";
+	}
+	
+	@RequestMapping(value="/endRace", method=RequestMethod.GET)
+	public void endRace(Model model){
+		Race raceEnded = dashboardService.endRace();
+		model.addAttribute("raceEnded", raceEnded);
 	}
 
 }

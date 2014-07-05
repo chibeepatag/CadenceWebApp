@@ -12,4 +12,6 @@ import au.edu.cmu.model.Race;
 public interface RaceDao extends BaseDao<Race> {
 
 	Race getCurrentRace();
+	
+	Race endRace();
 }

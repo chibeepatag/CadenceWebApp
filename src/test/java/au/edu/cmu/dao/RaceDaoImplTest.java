@@ -2,6 +2,8 @@ package au.edu.cmu.dao;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import java.util.Map;
 
@@ -11,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-dao-config.xml")
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class RaceDaoImplTest {
 
 	@Autowired
@@ -55,6 +59,16 @@ public class RaceDaoImplTest {
 		Map<String, Rider> riders = race.getRiders();
 		assertNotNull(riders.get("Nelson"));
 		assertNotNull(race);
+	}
+	
+	@Test
+	@Rollback(true)
+	public void testEndRace(){
+		Race race = raceDao.getCurrentRace();
+		assertTrue(race.isOngoing());
+		
+		race = raceDao.endRace();
+		assertFalse(race.isOngoing());
 	}
 
 }

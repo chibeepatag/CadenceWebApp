@@ -50,7 +50,6 @@ public class RaceDaoImpl implements RaceDao {
 	@Override
 	public void edit(Race entity) {
 		this.entityManager.merge(entity);
-
 	}
 
 	/* (non-Javadoc)
@@ -89,6 +88,15 @@ public class RaceDaoImpl implements RaceDao {
 		cq.select(raceRoot).where(ongoingCriteria);
 		Race race = this.entityManager.createQuery(cq).getSingleResult();
 		return race;
+	}
+	
+	@Override
+	public Race endRace() {
+		Race currentRace = getCurrentRace();
+		currentRace.setOngoing(false);
+		edit(currentRace);
+		this.entityManager.flush();
+		return currentRace;
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.StatisticsDao;
+import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 
@@ -46,6 +47,11 @@ public class DashboardServiceImpl implements DashboardService {
 	@Override
 	public Statistic getLatestStatistic(Rider rider){		
 		return statisticsDao.getRiderLatestStatistic(rider);
+	}
+	
+	@Override
+	public Race endRace() {		
+		return raceDao.endRace();
 	}
 
 }
