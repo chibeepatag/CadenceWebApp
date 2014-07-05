@@ -59,16 +59,6 @@ public class RaceDaoImplTest {
 		Map<String, Rider> riders = race.getRiders();
 		assertNotNull(riders.get("Nelson"));
 		assertNotNull(race);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void testEndRace(){
-		Race race = raceDao.getCurrentRace();
-		assertTrue(race.isOngoing());
-		
-		race = raceDao.endRace();
-		assertFalse(race.isOngoing());
-	}
+	}	
 
 }

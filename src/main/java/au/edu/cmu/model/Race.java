@@ -32,7 +32,9 @@ public class Race {
 	
 	private String race_name;
 	
-	private Date race_date;
+	private Date race_start;
+	
+	private Date race_end;
 	
 	@Type(type="yes_no")
 	private Boolean isOngoing;
@@ -56,14 +58,14 @@ public class Race {
 
 	public void setRace_name(String race_name) {
 		this.race_name = race_name;
+	}	
+
+	public Date getRace_start() {
+		return race_start;
 	}
 
-	public Date getRace_date() {
-		return race_date;
-	}
-
-	public void setRace_date(Date race_date) {
-		this.race_date = race_date;
+	public void setRace_start(Date race_start) {
+		this.race_start = race_start;
 	}
 
 	public Map<String, Rider> getRiders() {
@@ -74,12 +76,20 @@ public class Race {
 		this.riders = riders;
 	}
 
-	public boolean isOngoing() {
+	public Date getRace_end() {
+		return race_end;
+	}
+
+	public void setRace_end(Date race_end) {
+		this.race_end = race_end;
+	}
+
+	public Boolean getIsOngoing() {
 		return isOngoing;
 	}
 
-	public void setOngoing(boolean isOngoing) {
+	public void setIsOngoing(Boolean isOngoing) {
 		this.isOngoing = isOngoing;
-	}		
+	}	
 	
 }

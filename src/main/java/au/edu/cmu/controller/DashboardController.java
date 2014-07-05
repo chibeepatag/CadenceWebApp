@@ -32,6 +32,9 @@ public class DashboardController {
 	public String goToDashboard(Model model){
 		List<Statistic> statistics = dashboardService.buildStatisticTable();
 		model.addAttribute("statistics", statistics);
+		
+		Race currentRace = dashboardService.getCurrentRace();
+		model.addAttribute("currentRace", currentRace);
 		return "dashboard";
 	}
 	
@@ -43,9 +46,10 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/endRace", method=RequestMethod.GET)
-	public void endRace(Model model){
+	public String endRace(Model model){
 		Race raceEnded = dashboardService.endRace();
 		model.addAttribute("raceEnded", raceEnded);
+		return "endedRace";
 	}
 
 }

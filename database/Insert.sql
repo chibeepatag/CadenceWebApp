@@ -24,7 +24,7 @@ INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '7
 INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '8');
 INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '9');
 
-insert into race values (1, 'Tour Down Under', TO_DATE('2014/05/03', 'yyyy/mm/dd'), 'Y');
+insert into race (Race_ID, Race_Name, Race_Start, Race_End, ISONGOING) values (1, 'Tour Down Under', TO_DATE('2014/05/03', 'yyyy/mm/dd'), null, 'Y');
 insert into race_team values (1, 1, 1 );
 insert into race_team values (1, 2, 2 );
 insert into race_team values (1, 3, 3 );

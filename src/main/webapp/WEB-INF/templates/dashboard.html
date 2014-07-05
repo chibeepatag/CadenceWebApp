@@ -5,10 +5,19 @@
 <title>Dashboard</title>
 
 <link rel="stylesheet" type="text/css" href="css/dashboard.css" />
-<script language="JavaScript" type="text/javascript"
-	src="javascript/jquery-2.1.1.min.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="javascript/dashboard.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.external-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-svg-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="css/themes/themeRoller.min.css" />
+
+<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>	
+<script language="JavaScript" type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>				
+<script language="JavaScript" type="text/javascript" src="javascript/dashboard.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 </head>
 <body>
@@ -17,6 +26,10 @@
 			id="logoutButton" />
 	</div>
 	<div id="map-canvas"></div>
+	<div id="raceDetails">		
+		Event: <span th:text="${currentRace.race_name}" id = "raceName"></span><br/>
+		Start Time: <span th:text="${currentRace.race_start}"></span>
+	</div>
 	<div class="weatherAndRiders">
 		<div class="weather">						
 			<div style="width: 210px;"><iframe style="display: block;" src="http://cdn1.willyweather.com.au/widget/loadView.html?id=12540" width="210" height="62" frameborder="0" scrolling="no"></iframe><a style="text-indent: -9999em;margin: -20px 0 0 0;position: relative;z-index: 1;display: block;height: 20px" href="http://www.willyweather.com.au/sa/adelaide/adelaide.html">WillyWeather</a></div>			
@@ -31,8 +44,19 @@
 			</div>
 		</div>
 	</div>
-	<div><button id="endRaceBtn">End Race</button></div>
-	<div id="endRaceDiv"></div>
-
+	<div id="endRaceContainer">
+	<div><a href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">End Race</a></div>		
+	<div data-role="popup" id="endRaceDiv" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+	    <div data-role="header" data-theme="a">
+	    <h1>End Race</h1>
+	    </div>
+	    <div role="main" class="ui-content">
+	        <h3 class="ui-title">Are you sure you want to end this race?</h3>
+	    <p>This action cannot be undone.</p>
+	        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+	        <a href="#" id="endRaceBtn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">End</a>
+	    </div>
+	</div>
+	</div>
 </body>
 </html>

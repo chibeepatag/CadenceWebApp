@@ -19,5 +19,7 @@ public interface DashboardService {
 	
 	Statistic getLatestStatistic(Rider rider);
 	
+	Race getCurrentRace();
+	
 	Race endRace();
 }

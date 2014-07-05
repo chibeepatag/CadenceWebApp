@@ -4,6 +4,7 @@
 package au.edu.cmu.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,11 @@ public class DashboardServiceImpl implements DashboardService {
 	
 	@Autowired
 	StatisticsDao statisticsDao;
+	
+	@Override
+	public Race getCurrentRace() {		
+		return raceDao.getCurrentRace();
+	}
 	/* (non-Javadoc)
 	 * @see au.edu.cmu.service.DashboardService#getCurrentRiders()
 	 */
@@ -50,8 +56,12 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 	
 	@Override
-	public Race endRace() {		
-		return raceDao.endRace();
+	public Race endRace() {	
+		Race race = getCurrentRace();
+		race.setIsOngoing(false);
+		race.setRace_end(Calendar.getInstance().getTime());
+		raceDao.edit(race);
+		return race;
 	}
 
 }

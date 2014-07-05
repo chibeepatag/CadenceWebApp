@@ -69,9 +69,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		}
 		Race race = new Race();
 		race.setRace_name(raceName);
-		race.setRace_date(Calendar.getInstance().getTime());
+		race.setRace_start(Calendar.getInstance().getTime());
 		race.setRiders(riders);
-		race.setOngoing(true);
+		race.setIsOngoing(true);		
 		
 		Race createdRace = null;
 		try{

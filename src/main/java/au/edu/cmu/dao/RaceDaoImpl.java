@@ -89,14 +89,5 @@ public class RaceDaoImpl implements RaceDao {
 		Race race = this.entityManager.createQuery(cq).getSingleResult();
 		return race;
 	}
-	
-	@Override
-	public Race endRace() {
-		Race currentRace = getCurrentRace();
-		currentRace.setOngoing(false);
-		edit(currentRace);
-		this.entityManager.flush();
-		return currentRace;
-	}
 
 }

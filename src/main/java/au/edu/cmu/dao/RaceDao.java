@@ -13,5 +13,4 @@ public interface RaceDao extends BaseDao<Race> {
 
 	Race getCurrentRace();
 	
-	Race endRace();
 }

@@ -1,5 +1,5 @@
 var interval;
-$(document).ready(function(){
+$(document).ready(function(){		
 	interval = setInterval(refreshDashboard,5000);
 	$("#endRaceBtn").click(endRace);
 });
@@ -21,8 +21,9 @@ function endRace(){
 		type: "GET",
 		accepts: "html",
 		success: function(data){
-			$("#endRaceDiv").html(data);
-			clearInterval(interval); 
+			clearInterval(interval);
+			$("#raceDetails").html(data);
+			$("#endRaceContainer").remove();
 		}
 	});	
 }
