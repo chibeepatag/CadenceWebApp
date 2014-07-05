@@ -104,16 +104,21 @@ function removeRidersFromTable(){
 
 function createRace(){
 	var raceName = $("#raceName").val();
-	var selectedRows = $(".selectedRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");
-
-	$.ajax({
-		url: "createRace", 
-		data: {"raceName":raceName, "ids":selectedRows},
-		dataType: "json",
-		type: "POST",
-		success: displayNewRace,
-		error: failedToCreateRace
-	});
+		
+	if(raceName){
+		var selectedRows = $(".selectedRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");		
+		$.ajax({
+			url: "createRace", 
+			data: {"raceName":raceName, "ids":selectedRows},
+			dataType: "json",
+			type: "POST",
+			success: displayNewRace,
+			error: failedToCreateRace
+		});		
+	}else{
+		$(".errorPopup").text("You must enter a race name");
+		$("#errorButton").click();
+	}
 }
 
 function displayNewRace(data){
