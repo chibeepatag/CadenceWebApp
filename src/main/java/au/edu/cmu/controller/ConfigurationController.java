@@ -66,6 +66,7 @@ public class ConfigurationController {
 			logger.info(onGoingRaceException.getMessage());
 		}catch(PersistenceException e){
 			logger.info(e.getMessage());
+			System.out.println("Errrrrroooorrrr");
 //			response.sendError(500, e.getMessage());
 		} 
 		return race;

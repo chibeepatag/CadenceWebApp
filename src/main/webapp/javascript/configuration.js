@@ -106,6 +106,7 @@ function createRace(){
 	var raceName = $("#raceName").val();
 		
 	if(raceName){
+		console.log("creating race");
 		var selectedRows = $(".selectedRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");		
 		$.ajax({
 			url: "createRace", 
@@ -122,15 +123,15 @@ function createRace(){
 }
 
 function displayNewRace(data){
+	console.log("displayNewRace");
 	$("#raceCreatedName").text(data.race_name);
 				
 	for (var rider in data.riders){
 		var riderLi = "<li>" + data.riders[rider].nickname +"</li>";
 		$("#raceCreatedRiders").append(riderLi);			
 	}
-			
-	$("#raceCreated").removeClass("hiddenField");
 	
+	$("#raceCreatedBtn").click();		
 }
 
 function goToDashboard(){

@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div id="raceNameDiv">
-		<span>Race Name:</span> <input type="text" name="raceName"
+		<h2>Race Name:</h2> <input type="text" name="raceName"
 			id="raceName" />
 	</div>
 	<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
@@ -88,13 +88,17 @@
 			</div>
 		</form>
 	</div>
-	<div id="raceCreated" class="hiddenField">
-		Race <span id="raceCreatedName"></span> created with the following
-		riders:
-		<ul id="raceCreatedRiders">
+	
+	<a href="#raceCreated" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline hiddenField" data-transition="pop" id="raceCreatedBtn">Race created btn</a>
+	<div data-role="popup" id="raceCreated" class="ui-content">	 
+		<div id="raceCreated">
+			Race <span id="raceCreatedName"></span> created with the following
+			riders:
+			<ul id="raceCreatedRiders">
 
-		</ul>
-		<a href="dashboard"><button id="dashboard">Go to dashboard</button></a>
+			</ul>
+			<a href="dashboard"><button id="dashboard">Go to dashboard</button></a>
+		</div>
 	</div>
 	
 	<a href="#errorPopup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline hiddenField" data-transition="pop" id="errorButton">Basic Popup</a>

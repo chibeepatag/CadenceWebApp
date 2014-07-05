@@ -61,7 +61,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException, PersistenceException {
 		Race currentRace;
 		try{
-			currentRace = raceDao.getCurrentRace();
+			currentRace = raceDao.getCurrentRace();			
 			throw new OnGoingRaceException();
 		}catch(NoResultException nre){
 			logger.info("No race is in session.");
