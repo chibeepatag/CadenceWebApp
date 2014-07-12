@@ -28,28 +28,28 @@ public class DashboardController {
 	@Autowired
 	DashboardService dashboardService;
 	
-	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
+	@RequestMapping(value="/shared/dashboard", method=RequestMethod.GET)
 	public String goToDashboard(Model model){
 		List<Statistic> statistics = dashboardService.buildStatisticTable();
 		model.addAttribute("statistics", statistics);
 		
 		Race currentRace = dashboardService.getCurrentRace();
 		model.addAttribute("currentRace", currentRace);
-		return "dashboard";
+		return "shared/dashboard";
 	}
 	
-	@RequestMapping(value="/refreshStat", method=RequestMethod.GET)
+	@RequestMapping(value="/shared/refreshStat", method=RequestMethod.GET)
 	public String refreshDashboard(Model model){
 		List<Statistic> statistics = dashboardService.buildStatisticTable();
 		model.addAttribute("statistics", statistics);
-		return "statisticTable";
+		return "shared/statisticTable";
 	}
 	
-	@RequestMapping(value="/endRace", method=RequestMethod.GET)
+	@RequestMapping(value="/shared/endRace", method=RequestMethod.GET)
 	public String endRace(Model model){
 		Race raceEnded = dashboardService.endRace();
 		model.addAttribute("raceEnded", raceEnded);
-		return "endedRace";
+		return "shared/endedRace";
 	}
 
 }

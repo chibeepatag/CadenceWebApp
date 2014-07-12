@@ -4,6 +4,9 @@
 package au.edu.cmu.controller;
 
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,50 +23,52 @@ import au.edu.cmu.service.LoginService;
 
 /**
  * @author ChibeePatag
- *
+ * 
  */
 @Controller
 public class LoginController {
 
 	@Autowired
 	LoginService loginService;
-	
+
 	@ModelAttribute("coach")
-	public User getCoach(){
+	public User getCoach() {
 		return new User();
 	}
 	
-	@ModelAttribute("rider")
-	public Rider getRider(){
-		return new Rider();
-	}
-	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login(){		
+    @RequestMapping("/")
+    public String root(Locale locale) {
+        return "redirect:/login";
+    }
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
 		return "login";
 	}
-	
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(){		
+
+	@RequestMapping("/login-error.html")
+	public String loginError(Model model) {
+		model.addAttribute("loginError", true);
+		return "login";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout() {
 		return "logout";
 	}
-	
-	@RequestMapping(value="/configuration", method=RequestMethod.POST)
-	public String configuration(User coach, Model model, BindingResult bindingResult){
-		boolean result = loginService.login(coach);
-		if(result){
-			
-			boolean isRaceOngoing = loginService.isThereAnOngoingRace();
-			if(isRaceOngoing){
-				return "redirect:dashboard";
-			}						
-			
-			List<Rider> allRiders = loginService.getAllRiders();
-			model.addAttribute("riders", allRiders);
-			return "configuration";			
-		}else{		
-			bindingResult.addError(new ObjectError("invalid login", "Invalid username and password"));
-			return "login";
+
+	@RequestMapping("/error.html")
+	public String error(HttpServletRequest request, Model model) {
+		model.addAttribute("errorCode",
+				request.getAttribute("javax.servlet.error.status_code"));
+		Throwable throwable = (Throwable) request
+				.getAttribute("javax.servlet.error.exception");
+		String errorMessage = null;
+		if (throwable != null) {
+			errorMessage = throwable.getMessage();
 		}
+		model.addAttribute("errorMessage", errorMessage.toString());
+		return "error.html";
 	}
+
 }

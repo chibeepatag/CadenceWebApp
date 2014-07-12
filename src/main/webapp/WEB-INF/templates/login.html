@@ -1,38 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1"/>
+<meta charset="ISO-8859-1" />
 <title>Race Management System</title>
 
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.external-png-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-png-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-svg-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/themes/themeRoller.min.css" />
-<script language="JavaScript" type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile.external-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile.icons-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile.inline-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile.inline-svg-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile.structure-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile.theme-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/themes/themeRoller.min.css" />
 
- <link rel="stylesheet" type="text/css" href="css/login.css"/>
+<script language="JavaScript" type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/login.css" />
 </head>
 <body>
 	<div class="loginContent">
-	<div>Race Management System</div>
-	<div id="loginForm">		
-		<form th:action="@{/configuration}" th:object="${coach}" method="post">
-			<div>
-				Username: <input type="text" th:field="*{username}"/>
-			</div>
-			<div>
-				Password: <input type="password"  th:field="*{password}"/>
-			</div>
-			<div th:if="${#fields.hasAnyErrors()}" class="error">
-				Invalid username and password.
-			</div>
-			<button id="reset" class="button">Reset</button><input type="submit" value="Login" class="button"/>
+		<div>Race Management System</div>
+		<div id="loginForm">
+			<form th:action="@{/admin/configuration}" th:object="${coach}"
+				method="post">
+				<div>
+					Username: <input type="text" th:field="*{username}" />
+				</div>
+				<div>
+					Password: <input type="password" th:field="*{password}" />
+				</div>
+				<div th:if="${#fields.hasAnyErrors()}" class="error">Invalid
+					username and password.</div>
+				<button id="reset" class="button">Reset</button>
+				<input type="submit" value="Login" class="button" />
+			</form>
+		</div>
+	</div>
+
+
+	New Login form:
+	<p th:if="${loginError}">Wrong user or password</p>
+	<form th:action="@{/j_spring_security_check}" method="post">
+		<label for="j_username">Username</label>: <input type="text"
+			id="j_username" name="j_username" /> <br /> <label for="j_password">Password</label>:
+		<input type="password" id="j_password" name="j_password" /> <br /> <input
+			type="submit" value="Log in" />
 	</form>
-	</div>
-	</div>
 </body>
 </html>

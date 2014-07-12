@@ -14,9 +14,6 @@ import au.edu.cmu.model.Rider;
  */
 public interface LoginService {
 
-	boolean login(User user);
-	
-	List<Rider> getAllRiders();
-	
-	boolean isThereAnOngoingRace();
+	boolean login(User user);	
+
 }

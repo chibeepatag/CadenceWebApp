@@ -28,11 +28,6 @@ public class DataReceiverController {
 	@Autowired
 	StatisticService statisticService;
 	
-	@RequestMapping(value="/dataSender", method=RequestMethod.GET)
-	public String dataSender(){
-		return "dataSender";
-	}
-	
 	@RequestMapping(value="/riderData", method=RequestMethod.POST)
 	@ResponseBody
 	public String receiveData(String nickname, int heart_rate, double speed, double latitude, double longitude, double elevation, double distance, double cadence, double power){

@@ -29,9 +29,6 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	RiderDao riderDao;
 	
-	@Autowired
-	RaceDao raceDao;
-	
 	@Override
 	public boolean login(User user) {
 		boolean result = false;
@@ -45,14 +42,5 @@ public class LoginServiceImpl implements LoginService{
 		}
 		return result;		
 	}
-
-	@Override
-	public List<Rider> getAllRiders() {
-		return riderDao.findAll();		
-	}
 	
-	@Override
-	public boolean isThereAnOngoingRace() {
-		return raceDao.isRaceOngoing();		
-	}
 }

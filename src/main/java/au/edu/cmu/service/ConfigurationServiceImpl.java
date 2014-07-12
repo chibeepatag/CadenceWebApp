@@ -92,5 +92,15 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		
 		return createdRace;
 	}
+	
+	@Override
+	public boolean isThereAnOngoingRace() {
+		return raceDao.isRaceOngoing();		
+	}
+	
+	@Override
+	public List<Rider> getAllRiders() {
+		return riderDao.findAll();		
+	}
 
 }

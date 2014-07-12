@@ -4,25 +4,25 @@
 <meta charset="ISO-8859-1" />
 <title>Dashboard</title>
 
-<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
+<link rel="stylesheet" type="text/css" href="../css/dashboard.css" />
 
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.external-png-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-png-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-svg-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="css/themes/themeRoller.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.external-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.icons-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.inline-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.inline-svg-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.theme-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/themes/themeRoller.min.css" />
 
-<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>	
-<script language="JavaScript" type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>				
-<script language="JavaScript" type="text/javascript" src="javascript/dashboard.js"></script>
+<script language="JavaScript" type="text/javascript" src="../javascript/jquery-2.1.1.min.js"></script>	
+<script language="JavaScript" type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>				
+<script language="JavaScript" type="text/javascript" src="../javascript/dashboard.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 </head>
 <body>
 	<div class="titleBar">
-		<span>Race Management System</span> <img src="images/logout.png"
+		<span>Race Management System</span> <img src="../images/logout.png"
 			id="logoutButton" />
 	</div>
 	<div id="map-canvas"></div>
@@ -33,10 +33,10 @@
 	<div class="weatherAndRiders">
 		<div class="weather">						
 			<div style="width: 210px;"><iframe style="display: block;" src="http://cdn1.willyweather.com.au/widget/loadView.html?id=12540" width="210" height="62" frameborder="0" scrolling="no"></iframe><a style="text-indent: -9999em;margin: -20px 0 0 0;position: relative;z-index: 1;display: block;height: 20px" href="http://www.willyweather.com.au/sa/adelaide/adelaide.html">WillyWeather</a></div>			
-			<img src="images/download.png" width="10%" height="10%" />
+			<img src="../images/download.png" width="10%" height="10%" />
 		</div>
 		<div>
-			<div class="statisticTable" th:replace="statisticTable :: statTable"></div>
+			<div class="statisticTable" th:replace="shared/statisticTable :: statTable"></div>
 			<div class="messageContainer">
 				<span class="messageLbl">Message: &nbsp;</span>
 				<textarea rows="5" cols="45"></textarea>

@@ -22,4 +22,10 @@ public interface ConfigurationService {
 	void deleteRiders(List<Long> id);
 	
 	Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException;
+	
+	boolean isThereAnOngoingRace();
+	
+	public List<Rider> getAllRiders();
 }
+
+
