@@ -2,7 +2,7 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="entityManager" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>au.edu.cmu.model.Coach</class>
+        <class>au.edu.cmu.model.User</class>
         <class>au.edu.cmu.model.Message</class>
         <class>au.edu.cmu.model.Rider</class>
         <class>au.edu.cmu.model.Statistic</class>

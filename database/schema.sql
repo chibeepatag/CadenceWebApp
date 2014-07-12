@@ -13,16 +13,24 @@ DROP TABLE statistic purge;
 DROP TABLE message_recipient;
 DROP TABLE rider purge;
 DROP TABLE message purge;
-DROP TABLE coach purge;
+DROP TABLE user_role purge;
+DROP TABLE cadence_user purge;
 
 
-CREATE TABLE coach
-(Coach_ID NUMBER(9),
+CREATE TABLE cadence_user
+(User_ID NUMBER(9),
  Username VARCHAR2(255),
  Password VARCHAR2(255),
  Phone VARCHAR2(30),
- CONSTRAINT coach_coach_id_PK PRIMARY KEY (Coach_id),
- CONSTRAINT coach_username_CK unique (username)
+ CONSTRAINT cadenceuser_user_id_PK PRIMARY KEY (User_id),
+ CONSTRAINT cadenceuser_username_CK unique (username)
+);
+
+CREATE TABLE user_role
+( username VARCHAR2(255),
+  role VARCHAR2(45),
+  CONSTRAINT user_role_id_PK PRIMARY KEY (username, role),
+  CONSTRAINT user_username_FK FOREIGN KEY (username) REFERENCES cadence_user (Username)
 );
 
 CREATE TABLE rider
@@ -55,10 +63,10 @@ CREATE TABLE statistic
 CREATE TABLE message
 (Message_ID NUMBER(9), 
  Message VARCHAR2(255),
- Coach_ID NUMBER(9),
+ User_ID NUMBER(9),
  Message_TS DATE,
  CONSTRAINT message_msg_rider_id_PK PRIMARY KEY (Message_ID),
- CONSTRAINT message_coach_id_FK FOREIGN KEY (Coach_ID) REFERENCES coach (Coach_ID)
+ CONSTRAINT message_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID)
 );
 
 CREATE TABLE message_recipient
@@ -75,8 +83,10 @@ CREATE TABLE race
  Race_Start TIMESTAMP,
  Race_End TIMESTAMP,
  ISONGOING char(1),
+ Coach_ID NUMBER(9),
  CONSTRAINT race_id_PK PRIMARY KEY (race_ID),
- CONSTRAINT race_name_CK unique (race_name)
+ CONSTRAINT race_name_CK unique (race_name),
+ CONSTRAINT race_coach_FK FOREIGN KEY (Coach_ID) REFERENCES cadence_user(User_ID)
 );
 
 CREATE TABLE race_team

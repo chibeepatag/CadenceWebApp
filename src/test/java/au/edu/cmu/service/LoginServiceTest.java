@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-dao-config.xml")
@@ -21,7 +21,7 @@ public class LoginServiceTest {
 	public void testLogin() {
 		String username = "Christopher";
 		String password = "Chris";
-		Coach coach = new Coach();
+		User coach = new User();
 		coach.setUsername(username);
 		coach.setPassword(password);
 		boolean result = loginService.login(coach);

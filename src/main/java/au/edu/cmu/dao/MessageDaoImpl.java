@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.springframework.stereotype.Repository;
 
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 import au.edu.cmu.model.Message;
 
 /**

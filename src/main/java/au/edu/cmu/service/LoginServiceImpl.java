@@ -10,10 +10,10 @@ import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import au.edu.cmu.dao.CoachDao;
+import au.edu.cmu.dao.UserDao;
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 import au.edu.cmu.model.Rider;
 
 /**
@@ -24,7 +24,7 @@ import au.edu.cmu.model.Rider;
 public class LoginServiceImpl implements LoginService{
 	
 	@Autowired
-	CoachDao coachDao;
+	UserDao coachDao;
 	
 	@Autowired
 	RiderDao riderDao;
@@ -33,11 +33,11 @@ public class LoginServiceImpl implements LoginService{
 	RaceDao raceDao;
 	
 	@Override
-	public boolean login(Coach coach) {
+	public boolean login(User user) {
 		boolean result = false;
 		try{
-			Coach coach2 = coachDao.findByUsername(coach.getUsername());
-			if(coach2.getPassword().equals(coach.getPassword())){
+			User user2 = coachDao.findByUsername(user.getUsername());
+			if(user2.getPassword().equals(user.getPassword())){
 				result = true;
 			}			
 		}catch (NoResultException nre){

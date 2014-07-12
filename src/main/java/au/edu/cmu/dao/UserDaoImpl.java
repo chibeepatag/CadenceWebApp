@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 
 /**
  * @author ChibeePatag
@@ -23,23 +23,23 @@ import au.edu.cmu.model.Coach;
  */
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
-public class CoachDaoImpl implements CoachDao {
+public class UserDaoImpl implements UserDao {
 
 	@PersistenceContext(unitName = "entityManager")
 	EntityManager entityManager;
 
 	@Override
-	public Coach findByUsername(String username) throws NoResultException {
-		TypedQuery<Coach> query = this.entityManager.createNamedQuery(
-				"findCoachByUsername", Coach.class);
+	public User findByUsername(String username) throws NoResultException {
+		TypedQuery<User> query = this.entityManager.createNamedQuery(
+				"findCoachByUsername", User.class);
 		query.setParameter("username", username);
 
-		Coach coach = query.getSingleResult();
+		User coach = query.getSingleResult();
 		return coach;
 	}
 
 	@Override
-	public Coach create(Coach coach) {
+	public User create(User coach) {
 		this.entityManager.persist(coach);
         this.entityManager.flush();
         this.entityManager.refresh(coach);
@@ -47,25 +47,25 @@ public class CoachDaoImpl implements CoachDao {
 	}
 
 	@Override
-	public Coach edit(Coach coach) {
+	public User edit(User coach) {
 		 return this.entityManager.merge(coach);
 	}
 
 	@Override
-	public void remove(Coach coach) {
+	public void remove(User coach) {
 		this.entityManager.remove(this.entityManager.merge(coach));
 
 	}
 
 	@Override
-	public Coach findById(Long id) {
-		return this.entityManager.find(Coach.class, id);
+	public User findById(Long id) {
+		return this.entityManager.find(User.class, id);
 	}
 
 	@Override
-	public List<Coach> findAll() {
-		CriteriaQuery<Coach> cq = this.entityManager.getCriteriaBuilder().createQuery(Coach.class);
-        cq.select(cq.from(Coach.class));
+	public List<User> findAll() {
+		CriteriaQuery<User> cq = this.entityManager.getCriteriaBuilder().createQuery(User.class);
+        cq.select(cq.from(User.class));
         return this.entityManager.createQuery(cq).getResultList();
 	}
 }

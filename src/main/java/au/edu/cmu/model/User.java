@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -15,27 +16,28 @@ import javax.persistence.NamedQuery;
  * 
  */
 @Entity
-@NamedQuery(name="findCoachByUsername", query="Select c from Coach c where c.username = :username")
-public class Coach {
+@NamedQuery(name="findCoachByUsername", query="Select c from User c where c.username = :username")
+@Table(name="Cadence_User")
+public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long coach_id;
+	private long user_id;
 		
 	private String username;
 		
 	private String password;
 	
-	private String phone;
-		
-	public Long getCoach_id() {
-		return coach_id;
-	}
+	private String phone;			
 	
-	public void setCoach_id(Long coach_id) {
-		this.coach_id = coach_id;
+	public long getUser_id() {
+		return user_id;
 	}
-	
+
+	public void setUser_id(long user_id) {
+		this.user_id = user_id;
+	}
+
 	public String getUsername() {
 		return username;
 	}

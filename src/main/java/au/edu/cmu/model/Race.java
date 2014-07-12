@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 
 import org.hibernate.annotations.Type;
@@ -38,6 +39,10 @@ public class Race {
 	
 	@Type(type="yes_no")
 	private Boolean isOngoing;
+	
+	@ManyToOne
+	@JoinColumn(name="Coach_ID")
+	private User coach;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "race_team", joinColumns = @JoinColumn(name = "RACE_ID"), inverseJoinColumns = @JoinColumn(name = "Rider_ID"))
@@ -90,6 +95,14 @@ public class Race {
 
 	public void setIsOngoing(Boolean isOngoing) {
 		this.isOngoing = isOngoing;
+	}
+
+	public User getCoach() {
+		return coach;
+	}
+
+	public void setCoach(User coach) {
+		this.coach = coach;
 	}	
 	
 }

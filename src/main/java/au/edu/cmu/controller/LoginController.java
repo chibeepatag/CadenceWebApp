@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.service.LoginService;
 
@@ -29,8 +29,8 @@ public class LoginController {
 	LoginService loginService;
 	
 	@ModelAttribute("coach")
-	public Coach getCoach(){
-		return new Coach();
+	public User getCoach(){
+		return new User();
 	}
 	
 	@ModelAttribute("rider")
@@ -49,7 +49,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/configuration", method=RequestMethod.POST)
-	public String configuration(Coach coach, Model model, BindingResult bindingResult){
+	public String configuration(User coach, Model model, BindingResult bindingResult){
 		boolean result = loginService.login(coach);
 		if(result){
 			

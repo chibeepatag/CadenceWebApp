@@ -5,7 +5,7 @@ package au.edu.cmu.service;
 
 import java.util.List;
 
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 import au.edu.cmu.model.Rider;
 
 /**
@@ -14,7 +14,7 @@ import au.edu.cmu.model.Rider;
  */
 public interface LoginService {
 
-	boolean login(Coach coach);
+	boolean login(User user);
 	
 	List<Rider> getAllRiders();
 	

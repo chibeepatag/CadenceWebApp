@@ -16,41 +16,29 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-dao-config.xml")
-public class CoachDaoImplTest {
+public class UserDaoImplTest {
 	
 	@Autowired
-	CoachDao coachDao;
+	UserDao userDao;
 
 	@Test
 	@Rollback(true)
 	public void testCreateCoach() {
-		Coach coach = new Coach();
+		User coach = new User();
 		coach.setUsername("Chibee");
 		coach.setPassword("Patag");
 		coach.setPhone("+61490144588");
-		coachDao.create(coach);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void testEditCoach(){
-		Coach coach = coachDao.findById(1L);
-		assertEquals("Chris", coach.getUsername());
-		coach.setUsername("Christopher");
-		coachDao.edit(coach);
-		
-		Coach coach2 = coachDao.findById(1L);
-		assertEquals("Christopher", coach2.getUsername());
+		userDao.create(coach);
 	}
 	
 	@Test
 	public void testFindAllCoach(){
-		List<Coach> coaches = coachDao.findAll();
-		for(Coach coach : coaches){
+		List<User> coaches = userDao.findAll();
+		for(User coach : coaches){
 			System.out.println(coach.getUsername());
 		}
 		assertEquals(2, coaches.size());
@@ -59,16 +47,16 @@ public class CoachDaoImplTest {
 	@Test
 	@Rollback(true)
 	public void testRemoveCoach(){
-		Coach coach = new Coach();
+		User coach = new User();
 		coach.setUsername("Celine");
 		coach.setPassword("Patag");
 		coach.setPhone("+61490144588");
-		coach = coachDao.create(coach);
+		coach = userDao.create(coach);
 		assertNotNull(coach);
 		
-		coachDao.remove(coach);
+		userDao.remove(coach);
 		
-		Coach coach2 = coachDao.findById(coach.getCoach_id());
+		User coach2 = userDao.findById(coach.getUser_id());
 		assertNull(coach2);
 	}
 	
@@ -76,7 +64,7 @@ public class CoachDaoImplTest {
 	public void testFindByUsername(){
 		String username = "Chris";
 		try{
-			Coach coach = coachDao.findByUsername(username);
+			User coach = userDao.findByUsername(username);
 			assertEquals("Chris", coach.getUsername());
 			assertEquals("+61490114575", coach.getPhone());
 		}catch (NoResultException nre){
@@ -86,7 +74,7 @@ public class CoachDaoImplTest {
 	
 	@Test 
 	public void testFind(){
-		Coach coach = coachDao.findById(1L);
+		User coach = userDao.findById(1L);
 		assertNotNull(coach);
 	}
 

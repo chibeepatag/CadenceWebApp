@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import au.edu.cmu.model.Coach;
+import au.edu.cmu.model.User;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;

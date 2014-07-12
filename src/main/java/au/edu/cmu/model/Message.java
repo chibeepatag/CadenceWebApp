@@ -30,8 +30,8 @@ public class Message {
 	private String message;
 
 	@ManyToOne
-	@JoinColumn(name = "coach_id", nullable = false)
-	private Coach coach;
+	@JoinColumn(name = "user_id", nullable = false)
+	private User coach;
 
 	private Date message_ts;
 
@@ -55,11 +55,11 @@ public class Message {
 		this.message = message;
 	}
 
-	public Coach getCoach() {
+	public User getCoach() {
 		return coach;
 	}
 
-	public void setCoach(Coach coach) {
+	public void setCoach(User coach) {
 		this.coach = coach;
 	}
 
