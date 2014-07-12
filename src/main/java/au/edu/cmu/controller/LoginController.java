@@ -43,10 +43,21 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(){		
+		return "logout";
+	}
+	
 	@RequestMapping(value="/configuration", method=RequestMethod.POST)
 	public String configuration(Coach coach, Model model, BindingResult bindingResult){
 		boolean result = loginService.login(coach);
 		if(result){
+			
+			boolean isRaceOngoing = loginService.isThereAnOngoingRace();
+			if(isRaceOngoing){
+				return "redirect:dashboard";
+			}						
+			
 			List<Rider> allRiders = loginService.getAllRiders();
 			model.addAttribute("riders", allRiders);
 			return "configuration";			

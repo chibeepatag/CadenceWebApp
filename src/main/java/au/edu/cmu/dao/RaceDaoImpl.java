@@ -3,22 +3,21 @@
  */
 package au.edu.cmu.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Subquery;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import au.edu.cmu.model.Coach;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Race_;
 
@@ -29,6 +28,8 @@ import au.edu.cmu.model.Race_;
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
 public class RaceDaoImpl implements RaceDao {
+	
+	Logger logger = Logger.getLogger(RaceDaoImpl.class);
 	
 	@PersistenceContext(unitName = "entityManager")
 	EntityManager entityManager;
@@ -78,7 +79,7 @@ public class RaceDaoImpl implements RaceDao {
         return this.entityManager.createQuery(cq).getResultList();
 	}
 	
-	@Override//Select race from race where race.date = (select max(date) from race)
+	@Override
 	public Race getCurrentRace() {
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<Race> cq = cb.createQuery(Race.class);
@@ -88,6 +89,19 @@ public class RaceDaoImpl implements RaceDao {
 		cq.select(raceRoot).where(ongoingCriteria);
 		Race race = this.entityManager.createQuery(cq).getSingleResult();
 		return race;
+	}
+	
+	@Override
+	public boolean isRaceOngoing() {
+		boolean result = false;
+		
+		try {
+			getCurrentRace();
+			result = true;
+		} catch (NoResultException e) {
+			logger.info("No race is on going.");
+		}
+		return result;
 	}
 
 }

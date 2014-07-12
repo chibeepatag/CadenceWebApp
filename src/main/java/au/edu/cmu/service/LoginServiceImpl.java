@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.CoachDao;
+import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
 import au.edu.cmu.model.Coach;
 import au.edu.cmu.model.Rider;
@@ -27,6 +28,9 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Autowired
 	RiderDao riderDao;
+	
+	@Autowired
+	RaceDao raceDao;
 	
 	@Override
 	public boolean login(Coach coach) {
@@ -45,5 +49,10 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public List<Rider> getAllRiders() {
 		return riderDao.findAll();		
+	}
+	
+	@Override
+	public boolean isThereAnOngoingRace() {
+		return raceDao.isRaceOngoing();		
 	}
 }

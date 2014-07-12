@@ -17,4 +17,6 @@ public interface LoginService {
 	boolean login(Coach coach);
 	
 	List<Rider> getAllRiders();
+	
+	boolean isThereAnOngoingRace();
 }
