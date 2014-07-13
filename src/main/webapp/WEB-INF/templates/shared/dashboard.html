@@ -13,12 +13,18 @@
 <link rel="stylesheet" type="text/css" href="../css/themes/themeRoller.min.css" />
 	
 <script language="JavaScript" type="text/javascript" src="../javascript/jquery-2.1.1.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>				
-<script language="JavaScript" type="text/javascript" src="../javascript/dashboard.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/dashboard.css" />
+<script type="text/javascript">
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+});
+</script>
+<script type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>				
+<script type="text/javascript" th:src="@{/javascript/dashboard.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/dashboard.css}" />
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 </head>
 <body>
+<div data-role="page">
 	<div class="titleBar">
 		<span>Race Management System</span> <img src="../images/logout.png"
 			id="logoutButton" />
@@ -56,5 +62,6 @@
 	    </div>
 	</div>
 	</div>
+</div>
 </body>
 </html>
