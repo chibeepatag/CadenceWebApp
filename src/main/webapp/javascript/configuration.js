@@ -107,15 +107,23 @@ function createRace(){
 		
 	if(raceName){
 		console.log("creating race");
-		var selectedRows = $(".selectedRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");		
-		$.ajax({
-			url: "createRace", 
-			data: {"raceName":raceName, "ids":selectedRows},
-			dataType: "json",
-			type: "POST",
-			success: displayNewRace,
-			error: failedToCreateRace
-		});		
+		var riderIds = $(".selectedRow").find(".rider_id");		
+		if(riderIds.length > 0){
+			var selectedRows = $(riderIds).map(function(){return $(this).text()}).get().join(",");
+			
+			$.ajax({
+				url: "createRace", 
+				data: {"raceName":raceName, "ids":selectedRows},
+				dataType: "json",
+				type: "POST",
+				success: displayNewRace,
+				error: failedToCreateRace
+			});
+		}else{
+			$(".errorPopup").text("You must select at least one rider.");
+			$("#errorButton").click();
+		}
+				
 	}else{
 		$(".errorPopup").text("You must enter a race name");
 		$("#errorButton").click();
