@@ -41,16 +41,8 @@ html,body,#map-canvas {
 	text-align: center;
 }
 
-.messageContainer{
-	float: right;
-}
-
-.oddRowBlue{
-    background-color: #BDD8DA;
-}
-
-.evenRowBlue{
-     background-color: #DFEFF0;
+.msgAndNotes{
+	display: inline-block;	
 }
 
 #raceDetails{	

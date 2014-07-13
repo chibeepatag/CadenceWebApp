@@ -70,8 +70,6 @@ public class ConfigurationController {
 		}catch(PersistenceException e){
 			logger.info(e.getMessage());
 			e.printStackTrace();
-			System.out.println("Errrrrroooorrrr");
-//			response.sendError(500, e.getMessage());
 		} 
 		return race;
 	}
