@@ -20,39 +20,31 @@
 	href="css/jquery.mobile.theme-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="css/themes/themeRoller.min.css" />
-
-<script language="JavaScript" type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+});
+</script>
+<script language="JavaScript" type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/login.css" />
 </head>
 <body>
 	<div class="loginContent">
 		<div>Race Management System</div>
-		<div id="loginForm">
-			<form th:action="@{/admin/configuration}" th:object="${coach}"
-				method="post">
-				<div>
-					Username: <input type="text" th:field="*{username}" />
-				</div>
-				<div>
-					Password: <input type="password" th:field="*{password}" />
-				</div>
-				<div th:if="${#fields.hasAnyErrors()}" class="error">Invalid
-					username and password.</div>
-				<button id="reset" class="button">Reset</button>
-				<input type="submit" value="Login" class="button" />
-			</form>
-		</div>
+		<p th:if="${loginError}">Wrong user or password</p>
+		<form th:action="@{/j_spring_security_check}" method="post">
+			<label for="j_username">Username</label>: <input type="text"
+				id="j_username" name="j_username" /> <br /> <label
+				for="j_password">Password</label>: <input type="password"
+				id="j_password" name="j_password" /> <br /> <input type="submit"
+				value="Log in" />
+		</form>
+
 	</div>
 
 
-	New Login form:
-	<p th:if="${loginError}">Wrong user or password</p>
-	<form th:action="@{/j_spring_security_check}" method="post">
-		<label for="j_username">Username</label>: <input type="text"
-			id="j_username" name="j_username" /> <br /> <label for="j_password">Password</label>:
-		<input type="password" id="j_password" name="j_password" /> <br /> <input
-			type="submit" value="Log in" />
-	</form>
+
+
 </body>
 </html>

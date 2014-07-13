@@ -2,9 +2,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Configuration</title>
- 
- 
- <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
+  
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/jquery.mobile.external-png-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/jquery.mobile.icons-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/jquery.mobile.inline-png-1.4.2.min.css" />
@@ -12,12 +11,20 @@
 <link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/jquery.mobile.theme-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/themes/themeRoller.min.css" />
+<script language="JavaScript" type="text/javascript" src="../javascript/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript">
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+});
+</script>
+<script type="text/javascript" language="javascript" th:src="@{/javascript/configuration.js}"></script> 
 <script language="JavaScript" type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="../javascript/jquery-2.1.1.min.js"></script>  
- <script type="text/javascript" language="javascript" src="../javascript/configuration.js"></script>
- <link rel="stylesheet" type="text/css" href="../css/configuration.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/configuration.css}" />
+
 </head>
 <body>
+<div data-role="page">
+
 	<div id="raceNameDiv">
 		<h2>Race Name:</h2> <input type="text" name="raceName"
 			id="raceName" />
@@ -105,5 +112,6 @@
 	<div data-role="popup" id="errorPopup" class="ui-content"> <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 		<div class="errorPopup"></div>
 	</div>
+</div>
 </body>
 </html>
