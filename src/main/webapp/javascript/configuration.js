@@ -10,7 +10,6 @@ function attachEventHandlers(){
 	$("#addRider").click(addRider);
 	$("#deleteRiders").click(deleteRiders);
 	$("#createRace").click(createRace);
-	$("#dashboard").click(goToDashboard);
 }
 
 function selectRow(){
@@ -142,9 +141,6 @@ function displayNewRace(data){
 	$("#raceCreatedBtn").click();		
 }
 
-function goToDashboard(){
-	console.log("go to dashboard");
-}
 
 function failedToCreateRace(jqXHR, textStatus, errorThrown){
 	$("raceCreated").html(textStatus + " " + errorThrown);

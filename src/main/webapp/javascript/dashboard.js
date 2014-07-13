@@ -1,6 +1,7 @@
 var interval;
 $(document).ready(function(){		
 	interval = setInterval(refreshDashboard,5000);
+	$("#sendMsg").click(sendMsg);
 	$("#endRaceBtn").click(endRace);
 });
 
@@ -26,4 +27,18 @@ function endRace(){
 			$("#endRaceContainer").remove();
 		}
 	});	
+}
+
+function sendMsg(){
+	var messageTxt = $("#messageTxt").val();
+	console.log(messageTxt);
+	$.ajax({
+		url: "saveMsg",
+		type: "POST",	
+		data: {"message": messageTxt, "recipientIds":"1" },
+		success: function(data){
+			console.log(data);
+		}
+	});
+	
 }

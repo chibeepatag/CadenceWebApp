@@ -3,20 +3,30 @@
  */
 package au.edu.cmu.service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import au.edu.cmu.dao.MessageDao;
 import au.edu.cmu.dao.RaceDao;
+import au.edu.cmu.dao.RiderDao;
 import au.edu.cmu.dao.StatisticsDao;
+import au.edu.cmu.dao.UserDao;
 import au.edu.cmu.exceptions.CadencePersistenceException;
+import au.edu.cmu.model.Message;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
+import au.edu.cmu.model.User;
 
 /**
  * @author ChibeePatag
@@ -30,6 +40,15 @@ public class DashboardServiceImpl implements DashboardService {
 	
 	@Autowired
 	StatisticsDao statisticsDao;
+	
+	@Autowired
+	MessageDao messageDao;
+	
+	@Autowired
+	RiderDao riderDao;
+	
+	@Autowired
+	UserDao userDao;
 	
 	@Override
 	public Race getCurrentRace() {		
@@ -69,6 +88,28 @@ public class DashboardServiceImpl implements DashboardService {
 		race.setRace_end(Calendar.getInstance().getTime());
 		raceDao.edit(race);
 		return race;
+	}
+	
+	@Override
+	public void saveMessage(String msgContent, List<Long> recipientIds, Principal user) {
+		List<Rider> riderRecipients = new ArrayList<Rider>();
+		for(Long id : recipientIds){
+			Rider rider = riderDao.findById(id);
+			riderRecipients.add(rider);
+		}
+		UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = principal.getUsername();		
+		
+		System.out.println("user:  " + username);
+		User coach = userDao.findByUsername(username);
+		Message message = new Message();
+		message.setMessage(msgContent);
+		message.setRecipients(riderRecipients);
+		message.setCoach(coach);
+		message.setMessage_ts(Calendar.getInstance().getTime());
+		messageDao.create(message);
+		
+				
 	}
 
 }

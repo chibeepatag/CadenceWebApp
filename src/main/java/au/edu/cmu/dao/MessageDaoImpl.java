@@ -10,6 +10,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import au.edu.cmu.model.User;
 import au.edu.cmu.model.Message;
@@ -19,6 +21,7 @@ import au.edu.cmu.model.Message;
  *
  */
 @Repository
+@Transactional(propagation = Propagation.REQUIRED)
 public class MessageDaoImpl implements MessageDao {
 
 	@PersistenceContext(unitName = "entityManager")
