@@ -20,15 +20,18 @@ $(document).bind("mobileinit", function () {
 </script>
 <script type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>				
 <script type="text/javascript" th:src="@{/javascript/dashboard.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/dashboard.css}" />
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 </head>
 <body>
 <div data-role="page">
 	<div class="titleBar">
-		<span>Race Management System</span> 
-		<a th:href="@{/j_spring_security_logout}"><img src="../images/logout.png"
-			id="logoutButton" /></a>
+		<span class="titleHeader">Race Management System</span> 			
+		<div id="logoutContainer">
+		<a th:href="@{/j_spring_security_logout}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power">Logout
+		</button>
+		</a></div>
 	</div>
 	<div id="map-canvas"></div>
 	<div id="raceDetails">		
@@ -38,7 +41,7 @@ $(document).bind("mobileinit", function () {
 	<div class="weatherAndRiders">
 		<div class="weather">						
 			<div style="width: 210px;"><iframe style="display: block;" src="http://cdn1.willyweather.com.au/widget/loadView.html?id=12540" width="210" height="62" frameborder="0" scrolling="no"></iframe><a style="text-indent: -9999em;margin: -20px 0 0 0;position: relative;z-index: 1;display: block;height: 20px" href="http://www.willyweather.com.au/sa/adelaide/adelaide.html">WillyWeather</a></div>			
-			<img src="../images/download.png" width="10%" height="10%" />
+			<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Download Notes</button>
 		</div>
 		<div>
 			<div class="statisticTable" th:replace="shared/statisticTable :: statTable"></div>

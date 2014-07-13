@@ -19,12 +19,15 @@ $(document).bind("mobileinit", function () {
 </script>
 <script type="text/javascript" language="javascript" th:src="@{/javascript/configuration.js}"></script> 
 <script language="JavaScript" type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/configuration.css}" />
 
 </head>
 <body>
 <div data-role="page">
-	<a th:href="@{/j_spring_security_logout}"><img src="../images/logout.png" th:src="@{/images/logout.png}" id="logoutButton" /></a>
+	<div id="logoutContainer">
+	<a th:href="@{/j_spring_security_logout}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power">Logout</button></a>
+	</div>
 	<div id="raceNameDiv">
 		<h2>Race Name:</h2> <input type="text" name="raceName"
 			id="raceName" />

@@ -63,7 +63,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		try{
 			currentRace = raceDao.getCurrentRace();			
 			throw new OnGoingRaceException();
-		}catch(NoResultException nre){
+		}catch(CadencePersistenceException cpe){
 			logger.info("No race is in session.");
 		}				
 		

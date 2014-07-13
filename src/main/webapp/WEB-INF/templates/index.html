@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1" />
 <title>Race Management System</title>
@@ -20,18 +20,18 @@
 	href="css/jquery.mobile.theme-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="css/themes/themeRoller.min.css" />
-<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 $(document).bind("mobileinit", function () {
     $.mobile.ajaxEnabled = false;
 });
 </script>
-<script language="JavaScript" type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>
+<script type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
 	
-<a th:href="@{/admin/configuration}" class="ui-btn ui-corner-all">Coaches</a>
-<a th:href="@{/shared/dashboard}" class="ui-btn ui-corner-all">Spectators</a>
+	<a th:href="@{/admin/configuration}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear">Coaches</button></a>
+    <a th:href="@{/shared/dashboard}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user">Spectators</button></a>
 
 </body>
 </html>

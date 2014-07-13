@@ -104,7 +104,7 @@ public class RaceDaoImpl implements RaceDao {
 		try {
 			getCurrentRace();
 			result = true;
-		} catch (NoResultException e) {
+		} catch (CadencePersistenceException e) {
 			logger.info("No race is on going.");
 		}
 		return result;

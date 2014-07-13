@@ -3,17 +3,12 @@
 html,body,#map-canvas {
 	height: 80%;
 	margin: 0px;
-	padding: 0px;
-	font-family:"Lucida Console", Times, serif;
+	padding: 0px;	
 	font-size: 12pt;
 }
 
-.titleBar{
+.titleHeader{
 	font-size: 30pt;
-}
-
-#logoutButton{
-	float: right;
 }
 
 .weatherAndRiders{
