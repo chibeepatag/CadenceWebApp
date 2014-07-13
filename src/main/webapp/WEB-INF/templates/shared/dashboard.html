@@ -26,8 +26,9 @@ $(document).bind("mobileinit", function () {
 <body>
 <div data-role="page">
 	<div class="titleBar">
-		<span>Race Management System</span> <img src="../images/logout.png"
-			id="logoutButton" />
+		<span>Race Management System</span> 
+		<a th:href="@{/j_spring_security_logout}"><img src="../images/logout.png"
+			id="logoutButton" /></a>
 	</div>
 	<div id="map-canvas"></div>
 	<div id="raceDetails">		

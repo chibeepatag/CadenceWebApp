@@ -24,7 +24,7 @@ $(document).bind("mobileinit", function () {
 </head>
 <body>
 <div data-role="page">
-
+	<a th:href="@{/j_spring_security_logout}"><img src="../images/logout.png" th:src="@{/images/logout.png}" id="logoutButton" /></a>
 	<div id="raceNameDiv">
 		<h2>Race Name:</h2> <input type="text" name="raceName"
 			id="raceName" />
@@ -59,7 +59,7 @@ $(document).bind("mobileinit", function () {
 		<button id="deleteRiders">Delete Riders</button>						
 		<button id="createRace">Create Race</button>
 	</div>
-
+	
 	<div id="newRiderDiv">
 		<h2>Add New Rider</h2>
 		<form th:action="@{/addRider}" th:object="${rider}" method="post"

@@ -38,7 +38,12 @@ public class LoginController {
 	
     @RequestMapping("/")
     public String root(Locale locale) {
-        return "redirect:/login";
+        return "redirect:/index";
+    }
+    
+    @RequestMapping("/index")
+    public String index(Locale locale) {
+        return "index";
     }
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
