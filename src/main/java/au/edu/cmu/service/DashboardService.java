@@ -5,6 +5,7 @@ package au.edu.cmu.service;
 
 import java.util.List;
 
+import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
@@ -15,7 +16,7 @@ import au.edu.cmu.model.Statistic;
  */
 public interface DashboardService {
 
-	List<Statistic> buildStatisticTable();
+	List<Statistic> buildStatisticTable() throws CadencePersistenceException;
 	
 	Statistic getLatestStatistic(Rider rider);
 	

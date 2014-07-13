@@ -1,0 +1,30 @@
+
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>Dashboard</title>
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.external-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.icons-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.inline-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.inline-svg-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.theme-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/themes/themeRoller.min.css" />
+	
+<script language="JavaScript" type="text/javascript" src="../javascript/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+});
+</script>
+<script type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>				
+
+
+</head>
+<body>
+There is no on going race.
+
+<a th:href="@{/j_spring_security_logout}" class="ui-btn ui-corner-all">Logout</a>
+</body>
+</html>

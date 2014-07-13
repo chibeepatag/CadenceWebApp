@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.StatisticsDao;
+import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
@@ -38,16 +39,22 @@ public class DashboardServiceImpl implements DashboardService {
 	 * @see au.edu.cmu.service.DashboardService#getCurrentRiders()
 	 */
 	@Override
-	public List<Statistic> buildStatisticTable() {
-		Map<String, Rider> riderMap  = raceDao.getCurrentRace().getRiders();
-		List<Rider> riders = new ArrayList<Rider>(riderMap.values());
-		List<Statistic> latestStatistics = new ArrayList<Statistic>();
-		for(Rider rider : riders){
-			Statistic statistic = getLatestStatistic(rider);
-			latestStatistics.add(statistic);
+	public List<Statistic> buildStatisticTable() throws CadencePersistenceException {
+		try{
+			Map<String, Rider> riderMap = raceDao.getCurrentRace().getRiders();
+			List<Rider> riders = new ArrayList<Rider>(riderMap.values());
+			List<Statistic> latestStatistics = new ArrayList<Statistic>();
+			for(Rider rider : riders){
+				Statistic statistic = getLatestStatistic(rider);
+				latestStatistics.add(statistic);
+			}
+							
+			return latestStatistics;
+			
+		}catch(CadencePersistenceException cpe){
+			throw cpe;
 		}
-						
-		return latestStatistics;
+		
 	}
 	
 	@Override

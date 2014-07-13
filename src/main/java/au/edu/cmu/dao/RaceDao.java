@@ -3,6 +3,7 @@
  */
 package au.edu.cmu.dao;
 
+import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Race;
 
 /**
@@ -11,7 +12,7 @@ import au.edu.cmu.model.Race;
  */
 public interface RaceDao extends BaseDao<Race> {
 
-	Race getCurrentRace();
+	Race getCurrentRace() throws CadencePersistenceException;
 	
 	boolean isRaceOngoing();
 	

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Race_;
 
@@ -80,15 +81,20 @@ public class RaceDaoImpl implements RaceDao {
 	}
 	
 	@Override
-	public Race getCurrentRace() {
+	public Race getCurrentRace() throws CadencePersistenceException{
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<Race> cq = cb.createQuery(Race.class);
 		Root<Race> raceRoot = cq.from(Race.class);
 		Expression<Boolean> ongoingCriteria = cb.equal(raceRoot.get(Race_.isOngoing), true);
 		
 		cq.select(raceRoot).where(ongoingCriteria);
-		Race race = this.entityManager.createQuery(cq).getSingleResult();
-		return race;
+		try{
+			Race race = this.entityManager.createQuery(cq).getSingleResult();
+			return race;	
+		}catch(NoResultException nre){
+			throw new CadencePersistenceException(nre, "No race is on going.");
+		}
+		
 	}
 	
 	@Override
