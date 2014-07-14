@@ -2,11 +2,12 @@ var interval;
 $(document).ready(function(){		
 	interval = setInterval(refreshDashboard,5000);
 	$("#sendMsg").click(sendMsg);
+	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
 	$(".riderRow").click(selectRow);
 	
 	$("#msgClearBtn").click(clearMessage);
-	$("#notesClearBtn").click(clearNotes);
+	$("#notesClearBtn").click(clearNotes);	
 });
 
 function refreshDashboard(){
@@ -68,8 +69,20 @@ function sendMsg(){
 				$("#messageTxt").val("");
 			}
 		});
-	}
-	
+	}	
+}
+
+function saveNote(){
+	var note = $("#notesTxt").val();
+	$.ajax({
+		url: "saveNote",
+		type: "POST",
+		data: {"note": note},
+		success: function(data){
+			console.log("Note saved.");
+			$("#notesTxt").val("");	
+		}
+	});
 }
 
 function selectRow(){

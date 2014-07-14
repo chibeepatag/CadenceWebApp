@@ -17,12 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.edu.cmu.dao.MessageDao;
+import au.edu.cmu.dao.NoteDao;
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
 import au.edu.cmu.dao.StatisticsDao;
 import au.edu.cmu.dao.UserDao;
 import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Message;
+import au.edu.cmu.model.Note;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
@@ -49,6 +51,9 @@ public class DashboardServiceImpl implements DashboardService {
 	
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	NoteDao noteDao;
 	
 	@Override
 	public Race getCurrentRace() {		
@@ -91,24 +96,36 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 	
 	@Override
-	public void saveMessage(String msgContent, List<Long> recipientIds, Principal user) {
+	public void saveMessage(String msgContent, List<Long> recipientIds) {
 		List<Rider> riderRecipients = new ArrayList<Rider>();
 		for(Long id : recipientIds){
 			Rider rider = riderDao.findById(id);
 			riderRecipients.add(rider);
 		}
-		UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = principal.getUsername();		
-		
-		User coach = userDao.findByUsername(username);
+		User coach = getCoach();
 		Message message = new Message();
 		message.setMessage(msgContent);
 		message.setRecipients(riderRecipients);
 		message.setCoach(coach);
 		message.setMessage_ts(Calendar.getInstance().getTime());
-		messageDao.create(message);
+		messageDao.create(message);					
+	}	
+	
+	@Override
+	public void saveNote(String noteTxt) {		
+		Note note = new Note();
+		note.setNote(noteTxt);
+		note.setCoach(getCoach());
+		note.setNote_ts(Calendar.getInstance().getTime());
+		noteDao.create(note);
+	}
+
+	private User getCoach() {
+		UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = principal.getUsername();		
 		
-				
+		User coach = userDao.findByUsername(username);
+		return coach;
 	}
 
 }

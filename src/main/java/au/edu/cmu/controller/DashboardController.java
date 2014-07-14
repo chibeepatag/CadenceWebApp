@@ -64,9 +64,15 @@ public class DashboardController {
 	
 	@RequestMapping(value="/shared/saveMsg", method=RequestMethod.POST)
 	@ResponseBody
-	public void saveMessage(@RequestParam("message")String message, @RequestParam("recipientIds")List<Long> ids, Principal principal){					
-		dashboardService.saveMessage(message, ids, principal);
+	public void saveMessage(@RequestParam("message")String message, @RequestParam("recipientIds")List<Long> ids){					
+		dashboardService.saveMessage(message, ids);
 		//TODO: send message to rider 		
+	}
+	
+	@RequestMapping(value="/shared/saveNote", method=RequestMethod.POST)
+	@ResponseBody
+	public void saveNote(@RequestParam("note")String note){
+		dashboardService.saveNote(note);
 	}
 
 }

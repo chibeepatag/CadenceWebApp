@@ -6,7 +6,6 @@ CREATE SEQUENCE HIBERNATE_SEQUENCE
       NOCYCLE
       CACHE 10;
 
-
 DROP TABLE race_team purge;
 DROP TABLE race purge;
 DROP TABLE statistic purge;
@@ -14,8 +13,8 @@ DROP TABLE message_recipient;
 DROP TABLE rider purge;
 DROP TABLE message purge;
 DROP TABLE user_role purge;
+DROP TABLE note purge;
 DROP TABLE cadence_user purge;
-
 
 CREATE TABLE cadence_user
 (User_ID NUMBER(9),
@@ -64,7 +63,7 @@ CREATE TABLE message
 (Message_ID NUMBER(9), 
  Message VARCHAR2(255),
  User_ID NUMBER(9),
- Message_TS DATE,
+ Message_TS TIMESTAMP,
  CONSTRAINT message_msg_rider_id_PK PRIMARY KEY (Message_ID),
  CONSTRAINT message_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID)
 );
@@ -96,5 +95,14 @@ CREATE TABLE race_team
  CONSTRAINT race_team_race_rider_id_PK PRIMARY KEY (Race_ID, Rider_ID),
  CONSTRAINT race_team_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID),
  CONSTRAINT race_team_race_id_FK  FOREIGN KEY (Race_ID)  REFERENCES race (Race_ID)
+);
+
+CREATE TABLE note
+(Note_ID NUMBER(9), 
+ Note VARCHAR2(255),
+ User_ID NUMBER(9),
+ Note_TS TIMESTAMP,
+ CONSTRAINT note_note_id_PK PRIMARY KEY (Note_ID),
+ CONSTRAINT note_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID)
 );
 

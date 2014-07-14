@@ -3,7 +3,6 @@
  */
 package au.edu.cmu.service;
 
-import java.security.Principal;
 import java.util.List;
 
 import au.edu.cmu.exceptions.CadencePersistenceException;
@@ -25,5 +24,7 @@ public interface DashboardService {
 	
 	Race endRace();
 	
-	void saveMessage(String msgContent, List<Long> recipientIds, Principal user);
+	void saveMessage(String msgContent, List<Long> recipientIds);
+	
+	void saveNote(String noteTxt);
 }
