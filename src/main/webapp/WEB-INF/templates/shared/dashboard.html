@@ -41,7 +41,7 @@ $(document).bind("mobileinit", function () {
 	<div class="weatherAndRiders">
 		<div class="weather">						
 			<div style="width: 210px;"><iframe style="display: block;" src="http://cdn1.willyweather.com.au/widget/loadView.html?id=12540" width="210" height="62" frameborder="0" scrolling="no"></iframe><a style="text-indent: -9999em;margin: -20px 0 0 0;position: relative;z-index: 1;display: block;height: 20px" href="http://www.willyweather.com.au/sa/adelaide/adelaide.html">WillyWeather</a></div>			
-			<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Download Notes</button>
+			<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Download Messages and Notes</button>
 		</div>
 		
 			<div class="statisticTable" th:replace="shared/statisticTable :: statTable"></div>
@@ -49,12 +49,14 @@ $(document).bind("mobileinit", function () {
 			<div class="messageContainer">
 				<span class="messageLbl">Message: &nbsp;</span>
 				<textarea rows="5" cols="45" id="messageTxt"></textarea>
-				<button class="sendBtn" id="sendMsg">Send</button>
+				<button class="sendSaveClearBtn" id="sendMsg">Send</button>
+				<button  id="msgClearBtn">Reset</button>
 			</div>
 			<div class="notesContainer">
 				<span class="messageLbl">Notes: &nbsp;</span>
-				<textarea rows="5" cols="45"></textarea>
-				<button class="sendBtn">Save</button>
+				<textarea rows="5" cols="45" id="notesTxt"></textarea>
+				<button class="sendSaveClearBtn">Save</button>
+				<button  id="notesClearBtn">Reset</button>
 			</div>
 			</div>
 		

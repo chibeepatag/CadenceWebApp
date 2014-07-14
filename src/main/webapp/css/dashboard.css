@@ -29,7 +29,7 @@ html,body,#map-canvas {
 	vertical-align: top;
 }
 
-.sendBtn{
+.sendSaveClearBtn{
 	width: 60px;
 	height: 60px;	
 	margin-right: 10px;

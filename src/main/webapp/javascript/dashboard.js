@@ -4,6 +4,9 @@ $(document).ready(function(){
 	$("#sendMsg").click(sendMsg);
 	$("#endRaceBtn").click(endRace);
 	$(".riderRow").click(selectRow);
+	
+	$("#msgClearBtn").click(clearMessage);
+	$("#notesClearBtn").click(clearNotes);
 });
 
 function refreshDashboard(){
@@ -62,10 +65,10 @@ function sendMsg(){
 			data: {"message": messageTxt, "recipientIds":selectedRows },
 			success: function(data){
 				console.log("Message sent.");
+				$("#messageTxt").val("");
 			}
 		});
 	}
-
 	
 }
 
@@ -77,4 +80,12 @@ function selectRow(){
 	}else{
 		$(this).addClass("selectedRow");		
 	}
+}
+
+function clearMessage(){
+	$("#messageTxt").val("");
+}
+
+function clearNotes(){
+	$("#notesTxt").val("");	
 }
