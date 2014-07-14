@@ -51,16 +51,21 @@ function endRace(){
 }
 
 function sendMsg(){
+	var riderIds = $(".selectedRow").find(".rider_id");
 	var messageTxt = $("#messageTxt").val();
-	console.log(messageTxt);
-	$.ajax({
-		url: "saveMsg",
-		type: "POST",	
-		data: {"message": messageTxt, "recipientIds":"1" },
-		success: function(data){
-			console.log(data);
-		}
-	});
+	if(riderIds.length > 0 && messageTxt.length > 0){
+		var selectedRows = $(riderIds).map(function(){return $(this).text()}).get().join(",");		
+		
+		$.ajax({
+			url: "saveMsg",
+			type: "POST",	
+			data: {"message": messageTxt, "recipientIds":selectedRows },
+			success: function(data){
+				console.log("Message sent.");
+			}
+		});
+	}
+
 	
 }
 

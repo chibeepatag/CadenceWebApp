@@ -105,7 +105,6 @@ function createRace(){
 	var raceName = $("#raceName").val();
 		
 	if(raceName){
-		console.log("creating race");
 		var riderIds = $(".selectedRow").find(".rider_id");		
 		if(riderIds.length > 0){
 			var selectedRows = $(riderIds).map(function(){return $(this).text()}).get().join(",");
