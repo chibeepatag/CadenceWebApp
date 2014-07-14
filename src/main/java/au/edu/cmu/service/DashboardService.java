@@ -24,7 +24,21 @@ public interface DashboardService {
 	
 	Race endRace();
 	
+	/**
+	 * Saves the message sent to the riders.
+	 * Sets the race to be the latest race 
+	 * so that users can send messages even
+	 * if the race has ended.
+	 * @param msgContent - the message
+	 * @param recipientIds - the ids of the recipients
+	 */
 	void saveMessage(String msgContent, List<Long> recipientIds);
 	
+	/**
+	 * Saves the note to the database.
+	 * Sets the race to be the latest race
+	 * so notes can still be made after ending the race.
+	 * @param noteTxt
+	 */
 	void saveNote(String noteTxt);
 }

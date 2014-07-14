@@ -16,4 +16,6 @@ public interface RaceDao extends BaseDao<Race> {
 	
 	boolean isRaceOngoing();
 	
+	Race getLatestRace() throws CadencePersistenceException;
+	
 }

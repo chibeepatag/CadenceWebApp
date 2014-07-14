@@ -3,15 +3,19 @@
  */
 package au.edu.cmu.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -108,6 +112,20 @@ public class RaceDaoImpl implements RaceDao {
 			logger.info("No race is on going.");
 		}
 		return result;
+	}
+	
+	@Override//Select r from Race r where ts = select max(ts) from race
+	public Race getLatestRace() throws CadencePersistenceException {
+		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Race> cq = cb.createQuery(Race.class);
+		Root<Race> raceRoot = cq.from(Race.class);
+		
+		Order startTimeOrder = cb.desc(raceRoot.get(Race_.race_start));
+		cq.select(raceRoot).orderBy(startTimeOrder);
+		
+		TypedQuery<Race> raceQuery = this.entityManager.createQuery(cq).setMaxResults(1);
+		Race latestRace = raceQuery.getSingleResult();
+		return latestRace;
 	}
 
 }

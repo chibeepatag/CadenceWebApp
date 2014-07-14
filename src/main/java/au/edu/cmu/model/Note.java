@@ -30,6 +30,10 @@ public class Note {
 	private User coach;
 	
 	private Date note_ts;
+	
+	@ManyToOne
+	@JoinColumn(name="race_id", nullable = false)
+	private Race race;
 
 	public long getNote_id() {
 		return note_id;
@@ -61,6 +65,14 @@ public class Note {
 
 	public void setNote_ts(Date note_ts) {
 		this.note_ts = note_ts;
+	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	public void setRace(Race race) {
+		this.race = race;
 	}		
 	
 }

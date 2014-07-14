@@ -71,7 +71,7 @@ INSERT INTO user_role (username, ROLE) VALUES ('ted',   'ROLE_USER');
 INSERT INTO user_role (username, ROLE) VALUES ('bob',   'ROLE_USER');
 INSERT INTO user_role (username, ROLE) VALUES ('jim',   'ROLE_ADMIN');
 
-INSERT INTO note (note_id, note, user_id, note_ts) values (1, '32 minutes into the race', 1, TO_DATE('2014-06-18 06:41:58','YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO note (note_id, note, user_id, note_ts) values (2, 'We are going to win',      1, TO_DATE('2014-06-18 07:41:58','YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO note (note_id, note, user_id, note_ts, race_id) values (1, '32 minutes into the race', 1, TO_DATE('2014-06-18 06:41:58','YYYY-MM-DD HH24:MI:SS'), 1);
+INSERT INTO note (note_id, note, user_id, note_ts, race_id) values (2, 'We are going to win',      1, TO_DATE('2014-06-18 07:41:58','YYYY-MM-DD HH24:MI:SS'), 1);
 
 commit;

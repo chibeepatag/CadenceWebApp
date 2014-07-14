@@ -6,14 +6,14 @@ CREATE SEQUENCE HIBERNATE_SEQUENCE
       NOCYCLE
       CACHE 10;
 
+DROP TABLE message_recipient;
+DROP TABLE message purge;
+DROP TABLE note purge;
 DROP TABLE race_team purge;
 DROP TABLE race purge;
 DROP TABLE statistic purge;
-DROP TABLE message_recipient;
 DROP TABLE rider purge;
-DROP TABLE message purge;
 DROP TABLE user_role purge;
-DROP TABLE note purge;
 DROP TABLE cadence_user purge;
 
 CREATE TABLE cadence_user
@@ -59,23 +59,6 @@ CREATE TABLE statistic
  CONSTRAINT statistics_stat_ts_UQ UNIQUE (Rider_ID, STAT_TS)
 );
 
-CREATE TABLE message
-(Message_ID NUMBER(9), 
- Message VARCHAR2(255),
- User_ID NUMBER(9),
- Message_TS TIMESTAMP,
- CONSTRAINT message_msg_rider_id_PK PRIMARY KEY (Message_ID),
- CONSTRAINT message_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID)
-);
-
-CREATE TABLE message_recipient
-(Message_ID NUMBER(9), 
- Rider_ID NUMBER(9),
- CONSTRAINT merecepit_msg_rider_id_PK PRIMARY KEY (Message_ID, Rider_ID),
- CONSTRAINT merecepit_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID),
- CONSTRAINT merecepit_message_id_FK FOREIGN KEY (Message_ID) REFERENCES message (Message_ID)
-);
-
 CREATE TABLE race
 (Race_ID NUMBER(9), 
  Race_Name VARCHAR2(255),
@@ -97,12 +80,33 @@ CREATE TABLE race_team
  CONSTRAINT race_team_race_id_FK  FOREIGN KEY (Race_ID)  REFERENCES race (Race_ID)
 );
 
+CREATE TABLE message
+(Message_ID NUMBER(9), 
+ Message VARCHAR2(255),
+ User_ID NUMBER(9),
+ Message_TS TIMESTAMP,
+ Race_ID NUMBER(9),
+ CONSTRAINT message_msg_rider_id_PK PRIMARY KEY (Message_ID),
+ CONSTRAINT message_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID),
+ CONSTRAINT message_race_id_FK FOREIGN KEY (Race_ID) REFERENCES Race (Race_ID)
+);
+
+CREATE TABLE message_recipient
+(Message_ID NUMBER(9), 
+ Rider_ID NUMBER(9),
+ CONSTRAINT merecepit_msg_rider_id_PK PRIMARY KEY (Message_ID, Rider_ID),
+ CONSTRAINT merecepit_rider_id_FK FOREIGN KEY (Rider_ID) REFERENCES rider (Rider_ID),
+ CONSTRAINT merecepit_message_id_FK FOREIGN KEY (Message_ID) REFERENCES message (Message_ID)
+);
+
 CREATE TABLE note
 (Note_ID NUMBER(9), 
  Note VARCHAR2(255),
  User_ID NUMBER(9),
  Note_TS TIMESTAMP,
+ Race_id NUMBER(9),
  CONSTRAINT note_note_id_PK PRIMARY KEY (Note_ID),
- CONSTRAINT note_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID)
+ CONSTRAINT note_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID),
+ CONSTRAINT note_race_id_FK FOREIGN KEY (Race_ID) REFERENCES Race (Race_ID)
 );
 

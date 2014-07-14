@@ -95,6 +95,7 @@ public class DashboardServiceImpl implements DashboardService {
 		return race;
 	}
 	
+	
 	@Override
 	public void saveMessage(String msgContent, List<Long> recipientIds) {
 		List<Rider> riderRecipients = new ArrayList<Rider>();
@@ -103,11 +104,15 @@ public class DashboardServiceImpl implements DashboardService {
 			riderRecipients.add(rider);
 		}
 		User coach = getCoach();
+		
+		Race race = raceDao.getLatestRace();
+		
 		Message message = new Message();
 		message.setMessage(msgContent);
 		message.setRecipients(riderRecipients);
 		message.setCoach(coach);
 		message.setMessage_ts(Calendar.getInstance().getTime());
+		message.setRace(race);
 		messageDao.create(message);					
 	}	
 	
@@ -117,6 +122,7 @@ public class DashboardServiceImpl implements DashboardService {
 		note.setNote(noteTxt);
 		note.setCoach(getCoach());
 		note.setNote_ts(Calendar.getInstance().getTime());
+		note.setRace(raceDao.getLatestRace());
 		noteDao.create(note);
 	}
 

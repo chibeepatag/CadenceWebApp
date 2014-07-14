@@ -38,6 +38,10 @@ public class Message {
 	@ManyToMany
 	@JoinTable(name = "message_recipient", joinColumns = @JoinColumn(name = "Message_ID"), inverseJoinColumns = @JoinColumn(name = "Rider_ID"))
 	private List<Rider> recipients;
+	
+	@ManyToOne
+	@JoinColumn(name="race_id")
+	private Race race;
 
 	public int getMessage_id() {
 		return message_id;
@@ -78,5 +82,13 @@ public class Message {
 	public void setRecipients(List<Rider> recipients) {
 		this.recipients = recipients;
 	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	public void setRace(Race race) {
+		this.race = race;
+	}		
 		
 }
