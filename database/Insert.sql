@@ -1,4 +1,7 @@
 Insert into CADENCE_USER (USER_ID, Username, Password, Phone) values (1, 'Chris', 'Chris', '+61490114575');
+Insert into CADENCE_USER (USER_ID, Username, Password, Phone) values (2, 'ted',   'demo',  '+61490114576');
+Insert into CADENCE_USER (USER_ID, Username, Password, Phone) values (3, 'bob',   'demo',  '+61490114577');
+Insert into CADENCE_USER (USER_ID, Username, Password, Phone) values (4, 'jim',   'demo',  '+61490114578');
 INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY_NO, PHONE) VALUES ('1', 'Nelson', 'Oliviera', 'Nelson', '12', '+65356559554265');
 INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY_NO, PHONE) VALUES ('2', 'Matthew', 'Busch', 'Matt', '9', '+619178340654');
 INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY_NO, PHONE) VALUES ('3', 'Philip', 'Deignan', 'Irish', '33', '+676986542645');
@@ -63,4 +66,8 @@ Insert into Statistic (STAT_ID,RIDER_ID,HEART_RATE,SPEED,LATITUDE,LONGITUDE,ELEV
 Insert into Statistic (STAT_ID,RIDER_ID,HEART_RATE,SPEED,LATITUDE,LONGITUDE,ELEVATION,DISTANCE,CADENCE,POWER,STAT_TS) VALUES (30,10,88,50.264,43.900744,12.572162,340.3999939,84.388,18.645,20.294,TO_DATE('2014-06-18 06:42:27','YYYY-MM-DD HH24:MI:SS'));
 
 INSERT INTO user_role (username, ROLE) VALUES ('Chris', 'ROLE_ADMIN');
+INSERT INTO user_role (username, ROLE) VALUES ('ted',   'ROLE_ADMIN');
+INSERT INTO user_role (username, ROLE) VALUES ('ted',   'ROLE_USER');
+INSERT INTO user_role (username, ROLE) VALUES ('bob',   'ROLE_USER');
+INSERT INTO user_role (username, ROLE) VALUES ('jim',   'ROLE_ADMIN');
 commit;
