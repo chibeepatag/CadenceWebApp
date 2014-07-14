@@ -3,17 +3,38 @@ $(document).ready(function(){
 	interval = setInterval(refreshDashboard,5000);
 	$("#sendMsg").click(sendMsg);
 	$("#endRaceBtn").click(endRace);
+	$(".riderRow").click(selectRow);
 });
 
 function refreshDashboard(){
 	$.ajax({
 		url: "refreshStat",
 		type: "GET",
-		accepts: "html",
-		success: function(data){
-			$(".statisticTable").html(data);					
-		}
+		dataType: "json",
+		success: updateStatistics
 	});
+}
+
+function updateStatistics(data){
+	for(var i = 0; i < data.length; i++){
+		var stat = data[i];
+		var riderId = stat.rider.rider_id;
+		var speed = stat.speed;		
+		var cadence = stat.cadence;
+		var power = stat.power;
+		var heartRate = stat.heart_rate;
+		var longitude = stat.logitude;
+		var latitude = stat.latitude;
+		var elevation = stat.elevation;
+		var row = $("#statTable").find(".riderRow").find(".rider_id").filter(function() { return $(this).text() === riderId.toString() }).parent().parent();
+		$(row).find(".speed").text(speed);
+		$(row).find(".cadence").text(cadence);
+		$(row).find(".power").text(power);
+		$(row).find(".hearRate").text(heartRate);
+		$(row).find(".longitude").text(longitude);
+		$(row).find(".latitude").text(latitude);
+		$(row).find(".elevation").text(elevation);			
+	}
 }
 
 function endRace(){
@@ -41,4 +62,14 @@ function sendMsg(){
 		}
 	});
 	
+}
+
+function selectRow(){
+	var isSelected = $(this).hasClass("selectedRow");	
+	
+	if(isSelected){
+		$(this).removeClass("selectedRow");
+	}else{
+		$(this).addClass("selectedRow");		
+	}
 }

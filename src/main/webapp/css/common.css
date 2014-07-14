@@ -1,3 +1,11 @@
 #logoutContainer{
 	float: right;	
 }
+
+.hiddenField{
+	display: none;
+}
+
+.selectedRow{
+	background-color: #A8AEEF;
+}

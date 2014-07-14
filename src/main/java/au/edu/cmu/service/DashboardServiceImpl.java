@@ -100,7 +100,6 @@ public class DashboardServiceImpl implements DashboardService {
 		UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = principal.getUsername();		
 		
-		System.out.println("user:  " + username);
 		User coach = userDao.findByUsername(username);
 		Message message = new Message();
 		message.setMessage(msgContent);

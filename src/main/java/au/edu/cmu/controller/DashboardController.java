@@ -49,10 +49,10 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/shared/refreshStat", method=RequestMethod.GET)
-	public String refreshDashboard(Model model){
-		List<Statistic> statistics = dashboardService.buildStatisticTable();
-		model.addAttribute("statistics", statistics);
-		return "shared/statisticTable";
+	@ResponseBody
+	public List<Statistic> refreshDashboard(){
+		List<Statistic> statistics = dashboardService.buildStatisticTable();		
+		return statistics;
 	}
 	
 	@RequestMapping(value="/shared/endRace", method=RequestMethod.GET)

@@ -1,11 +1,3 @@
-.selectedRow{
-	background-color: A8AEEF;
-}
-
-.hiddenField{
-	display: none;
-}
-
 #ridersDiv{
 	float: left;
 	margin: 10px;

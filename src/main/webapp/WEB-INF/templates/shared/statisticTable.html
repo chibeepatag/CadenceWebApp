@@ -1,7 +1,8 @@
-			<div class="statisticTable" th:fragment="statTable">
-				<table>
+				<div class="statisticTable" th:fragment="statTable">
+				<table id="statTable">
 					<thead>
-						<tr>							
+						<tr>	
+							<th></th>						
 							<th>Rider</th>
 							<th>Speed</th>
 							<th>Cadence</th>
@@ -13,15 +14,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="stat: ${statistics}" class="riderRow">							
+						<tr th:each="stat: ${statistics}" class="riderRow">
+							<td th:if="${stat} != null"><span  class="hiddenField rider_id" th:text="${stat?.rider.rider_id}"></span></td>							
 							<td th:if="${stat} != null" th:text="${stat?.rider.nickname}">Prince Harry</td>
-							<td th:if="${stat} != null" th:text="${stat?.speed}">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.cadence}">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.power}">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.heart_rate}">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.latitude}">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.longitude}">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.elevation}">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.speed}" class="speed">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.cadence}" class="cadence">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.power}" class="power">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.heart_rate}" class="heartRate">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.latitude}" class="latitude">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.longitude}" class="longitude">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.elevation}" class="elevation">50</td>
 						</tr>						
 					</tbody>
 				</table>

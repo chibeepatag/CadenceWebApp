@@ -14,14 +14,18 @@ import javax.persistence.PersistenceException;
 import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
+import au.edu.cmu.dao.UserDao;
 import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.exceptions.OnGoingRaceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
+import au.edu.cmu.model.User;
 
 /**
  * @author ChibeePatag
@@ -36,6 +40,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	@Autowired
 	RaceDao raceDao;
+	
+	@Autowired
+	UserDao userDao;
 	/* (non-Javadoc)
 	 * @see au.edu.cmu.service.ConfigurationService#addRider(au.edu.cmu.model.Rider)
 	 */
@@ -77,7 +84,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		race.setRace_start(Calendar.getInstance().getTime());
 		race.setRiders(riders);
 		race.setIsOngoing(true);		
+		UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = principal.getUsername();		
 		
+		User coach = userDao.findByUsername(username);
+		race.setCoach(coach);
 		Race createdRace = null;
 		try{
 			createdRace = raceDao.create(race);
