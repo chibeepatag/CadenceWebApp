@@ -21,3 +21,20 @@
 #raceDetails {
 	font-weight: bold;
 }
+
+.endRaceContainer{
+	float: left;
+	display: inline;
+}
+
+.statisticTable{
+	float: left;
+	display: inline;
+	
+}
+
+.endAndNotes{
+	padding-left: 40px;
+	display: inline;
+	float: left;
+}
