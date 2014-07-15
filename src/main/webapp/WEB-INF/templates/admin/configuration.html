@@ -2,119 +2,146 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Configuration</title>
-  
-<link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.external-png-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.icons-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.inline-png-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.inline-svg-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.theme-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/themes/themeRoller.min.css" />
-<script language="JavaScript" type="text/javascript" src="../javascript/jquery-2.1.1.min.js"></script> 
+
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile.external-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile.icons-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile.inline-png-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile.inline-svg-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile.structure-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.mobile.theme-1.4.2.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/themes/themeRoller.min.css" />
+<script language="JavaScript" type="text/javascript"
+	src="../javascript/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
-$(document).bind("mobileinit", function () {
-    $.mobile.ajaxEnabled = false;
-});
+	$(document).bind("mobileinit", function() {
+		$.mobile.ajaxEnabled = false;
+	});
 </script>
-<script type="text/javascript" language="javascript" th:src="@{/javascript/configuration.js}"></script> 
-<script language="JavaScript" type="text/javascript" src="../javascript/jquery.mobile-1.4.2.min.js"></script>
+<script type="text/javascript" language="javascript"
+	th:src="@{/javascript/configuration.js}"></script>
+<script language="JavaScript" type="text/javascript"
+	src="../javascript/jquery.mobile-1.4.2.min.js"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/configuration.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/configuration.css}" />
 
 </head>
 <body>
-<div data-role="page">
-	<div id="logoutContainer">
-	<a th:href="@{/j_spring_security_logout}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power">Logout</button></a>
-	</div>
-	<div id="raceNameDiv">
-		<h2>Race Name:</h2> <input type="text" name="raceName"
-			id="raceName" />
-	</div>
-	<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
-		<h2>Select Riders</h2>
-		<span>Double click on row to edit.</span>
-		<form id="deleteRiderForm">
-			<table 
-				class="riderTable">
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Nickname</th>
-						<th>Mobile Number</th>
-						<th>Jersey Number</th>
-					</tr>
-				</thead>
-				<tbody>
-				<tr th:each="rider: ${riders}" class="riderRow">
-					<td th:text="${rider.first_Name}" class="riderFirstName"></td>
-					<td th:text="${rider.last_name}" class="riderLastName"></td>
-					<td th:text="${rider.nickname}" class="riderNickname"></td>
-					<td th:text="${rider.phone}" class="riderPhone"></td>
-					<td th:text="${rider.jersey_no}" class="riderJersey"></td>
-					<td><span class="hiddenField rider_id" th:text="${rider.rider_id}"></span></td>
-				</tr>
-				</tbody>
-			</table>
-		</form>
-		<button id="deleteRiders">Delete Riders</button>						
-		<button id="createRace">Create Race</button>
-	</div>
-	
-	<div id="newRiderDiv">
-		<h2>Add New Rider</h2>
-		<form th:action="@{/addRider}" th:object="${rider}" method="post"
-			id="newRiderForm">
-			<table>
-				<tr>
-					<td>First Name</td>
-					<td><input type="text" th:field="*{first_Name}" id="firstNameInput"/></td>
-				</tr>
-				<tr>
-					<td>Last Name</td>
-					<td><input type="text" th:field="*{last_name}" id="lastNameInput"/></td>
-				</tr>
-				<tr>
-					<td>Nickname</td>
-					<td><input type="text" th:field="*{nickname}" id="nicknameInput"/></td>
-				</tr>
-				<tr>
-					<td>Mobile Number</td>
-					<td><input type="text" th:field="*{phone}" id="phoneInput" /></td>
-				</tr>
-				<tr>
-					<td>Jersey Number</td>
-					<td><input type="text" th:field="*{jersey_no}" id="jerseyNoInput"/></td>
-				</tr>
-				<tr>
-					<td><input type="reset" value="Reset"/></td>
-					<td><button type="button" id="addRider">Add/Edit Rider</button></td>
-				</tr>				
-			</table>
-			<div class="hiddenField">
-				<input type="text" th:field="*{rider_id}" id="riderIdInput" />
-			</div>
-		</form>
-	</div>
-	
-	<a href="#raceCreated" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline hiddenField" data-transition="pop" id="raceCreatedBtn">Race created btn</a>
-	<div data-role="popup" data-dismissible="false" id="raceCreated" class="ui-content">	 
-		<div id="raceCreated">
-			Race <span id="raceCreatedName"></span> created with the following
-			riders:
-			<ul id="raceCreatedRiders">
+	<div data-role="page">
+		
+		<div data-role="header" data-theme="a">
+			<h1>Race Configuration</h1>			
+			<a th:href="@{/j_spring_security_logout}" data-icon="power" class="ui-btn-right">Logout</a>		
+		</div>
+		<div id="raceNameDiv">
+			<h2>Race Name:</h2>
+			<input type="text" name="raceName" id="raceName" />
+		</div>
+		<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
+			<h2>Select Riders</h2>
+			<span>Double click on row to edit.</span>
+			<form id="deleteRiderForm">
+				<table class="riderTable">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Nickname</th>
+							<th>Mobile Number</th>
+							<th>Jersey Number</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="rider: ${riders}" class="riderRow">
+							<td th:text="${rider.first_Name}" class="riderFirstName"></td>
+							<td th:text="${rider.last_name}" class="riderLastName"></td>
+							<td th:text="${rider.nickname}" class="riderNickname"></td>
+							<td th:text="${rider.phone}" class="riderPhone"></td>
+							<td th:text="${rider.jersey_no}" class="riderJersey"></td>
+							<td><span class="hiddenField rider_id"
+								th:text="${rider.rider_id}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			<button id="deleteRiders">Delete Riders</button>
+			<button id="createRace">Create Race</button>
+		</div>
 
-			</ul>
-			<a href="../shared/dashboard"><button id="dashboard">Go to dashboard</button></a>
+		<div id="newRiderDiv">
+			<h2>Add New Rider</h2>
+			<form th:action="@{/addRider}" th:object="${rider}" method="post"
+				id="newRiderForm">
+				<table>
+					<tr>
+						<td>First Name</td>
+						<td><input type="text" th:field="*{first_Name}"
+							id="firstNameInput" /></td>
+					</tr>
+					<tr>
+						<td>Last Name</td>
+						<td><input type="text" th:field="*{last_name}"
+							id="lastNameInput" /></td>
+					</tr>
+					<tr>
+						<td>Nickname</td>
+						<td><input type="text" th:field="*{nickname}"
+							id="nicknameInput" /></td>
+					</tr>
+					<tr>
+						<td>Mobile Number</td>
+						<td><input type="text" th:field="*{phone}" id="phoneInput" /></td>
+					</tr>
+					<tr>
+						<td>Jersey Number</td>
+						<td><input type="text" th:field="*{jersey_no}"
+							id="jerseyNoInput" /></td>
+					</tr>
+					<tr>
+						<td><input type="reset" value="Reset" /></td>
+						<td><button type="button" id="addRider">Add/Edit
+								Rider</button></td>
+					</tr>
+				</table>
+				<div class="hiddenField">
+					<input type="text" th:field="*{rider_id}" id="riderIdInput" />
+				</div>
+			</form>
+		</div>
+
+		<a href="#raceCreated" data-rel="popup"
+			class="ui-btn ui-corner-all ui-shadow ui-btn-inline hiddenField"
+			data-transition="pop" id="raceCreatedBtn">Race created btn</a>
+		<div data-role="popup" data-dismissible="false" id="raceCreated"
+			class="ui-content">
+			<div id="raceCreated">
+				Race <span id="raceCreatedName"></span> created with the following
+				riders:
+				<ul id="raceCreatedRiders">
+
+				</ul>
+				<a href="../shared/dashboard"><button id="dashboard">Go
+						to dashboard</button></a>
+			</div>
+		</div>
+
+		<a href="#errorPopup" data-rel="popup"
+			class="ui-btn ui-corner-all ui-shadow ui-btn-inline hiddenField"
+			data-transition="pop" id="errorButton">Basic Popup</a>
+		<div data-role="popup" id="errorPopup" class="ui-content">
+			<a href="#" data-rel="back"
+				class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<div class="errorPopup"></div>
 		</div>
 	</div>
-	
-	<a href="#errorPopup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline hiddenField" data-transition="pop" id="errorButton">Basic Popup</a>
-	<div data-role="popup" id="errorPopup" class="ui-content"> <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-		<div class="errorPopup"></div>
-	</div>
-</div>
 </body>
 </html>

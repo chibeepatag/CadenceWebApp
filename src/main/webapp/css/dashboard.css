@@ -1,50 +1,21 @@
 @CHARSET "ISO-8859-1";
 
-html,body,#map-canvas {
-	height: 80%;
-	margin: 0px;
-	padding: 0px;	
-	font-size: 12pt;
+#map-page, #map-canvas { width: 100%; height: 100%; padding: 0; }
+
+
+.weather {
+	float: left;	
+	width: 350px;
 }
 
-.titleHeader{
-	font-size: 30pt;
-}
-
-.weatherAndRiders{
-	top: 400px;	
-}
-
-.weather{
-	float: left;
-	height: 400px;
-	width: 400px;
-}
-
-.riders{	
-	float: right;
-}
-
-.messageLbl{
-	vertical-align: top;
-}
-
-.sendSaveClearBtn{
-	width: 60px;
-	height: 60px;	
-	margin-right: 10px;
-	margin-top: 12px;
-	vertical-align: top;
-}
-
-.header{
+.header {
 	text-align: center;
 }
 
-.msgAndNotes{
-	display: inline-block;	
+.msgAndNotes {
+	display: inline-block;
 }
 
-#raceDetails{	
+#raceDetails {
 	font-weight: bold;
 }
