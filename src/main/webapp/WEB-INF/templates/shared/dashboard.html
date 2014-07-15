@@ -32,12 +32,12 @@
 <script type="text/javascript" th:src="@{/javascript/dashboard.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/dashboard.css}" />
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript"
 	src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
 </head>
 <body>
-	<div data-role="page">
+	<div data-role="page" id="xyz">
 		<div data-role="header" data-theme="a">
 			<h1>Race Management System</h1>
 			<a th:href="@{/j_spring_security_logout}" data-icon="power"
@@ -45,14 +45,11 @@
 		</div>
 
 		<div data-role="content">
-			<div id="map-page" data-url="map-page">
-				<div data-role="header" data-theme="a">
-					<h1>Maps</h1>
-				</div>
-				<div role="main" class="ui-content" id="map-canvas">
+			
+			<div class="ui-content" id="map-canvas">
 					<!-- map loads here... -->
-				</div>
 			</div>
+			
 			<div id="raceDetails">
 				Event: <span th:text="${currentRace.race_name}" id="raceName"></span><br />
 				Start Time: <span th:text="${currentRace.race_start}"></span>
