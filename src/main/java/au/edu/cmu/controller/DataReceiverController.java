@@ -28,7 +28,7 @@ public class DataReceiverController {
 	@Autowired
 	StatisticService statisticService;
 	
-	@RequestMapping(value="/riderData", method=RequestMethod.POST)
+	@RequestMapping(value="/riderData", method=RequestMethod.GET)
 	@ResponseBody
 	public String receiveData(String nickname, int heart_rate, double speed, double latitude, double longitude, double elevation, double distance, double cadence, double power){
 		Date stat_ts = Calendar.getInstance().getTime();
