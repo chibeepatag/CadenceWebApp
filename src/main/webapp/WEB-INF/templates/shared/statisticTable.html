@@ -3,6 +3,7 @@
 					<thead>
 						<tr>	
 							<th></th>						
+							<th>Jersey</th>
 							<th>Rider</th>
 							<th>Speed</th>
 							<th>Cadence</th>
@@ -16,7 +17,8 @@
 					<tbody>
 						<tr th:each="stat: ${statistics}" class="riderRow">
 							<td th:if="${stat} != null"><span  class="hiddenField rider_id" th:text="${stat?.rider.rider_id}"></span></td>							
-							<td th:if="${stat} != null" th:text="${stat?.rider.nickname}">Prince Harry</td>
+							<td th:if="${stat} != null" th:text="${stat?.rider.jersey_no}" class="jersey">Prince Harry</td>
+							<td th:if="${stat} != null" th:text="${stat?.rider.nickname}" class="name">Prince Harry</td>
 							<td th:if="${stat} != null" th:text="${stat?.speed}" class="speed">50</td>
 							<td th:if="${stat} != null" th:text="${stat?.cadence}" class="cadence">50</td>
 							<td th:if="${stat} != null" th:text="${stat?.power}" class="power">50</td>

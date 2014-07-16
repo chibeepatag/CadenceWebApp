@@ -2,40 +2,59 @@
  * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html
  * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html
  */
-$( document ).on( "pageinit", "#xyz", function() {
-    var defaultLatLng = new google.maps.LatLng(34.0983425, -118.3267434);  // Default to Hollywood, CA when no geolocation support
-    if ( navigator.geolocation ) {
-        function success(pos) {
-            // Location found, show map with these coordinates
-            drawMap(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        }
-        function fail(error) {
-            drawMap(defaultLatLng);  // Failed to find location, show default map
-        }
-        // Find the users current position.  Cache the location for 5 minutes, timeout after 6 seconds
-        navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
-    } else {
-        drawMap(defaultLatLng);  // No geolocation support, show default map
-    }
-    function drawMap(latlng) {
+var markers = [];
+var interval;
+var map;
+
+$( document ).on( "pageinit", "#page", function() {
+    
+    drawMap();
+        
+    function drawMap() {
         var myOptions = {
-            zoom: 10,
-            center: latlng,
+            zoom: 17,            
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-        // Add an overlay to the map of current lat/lng
-        var marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: "Greetings!"
-        });
+        map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);              
     }
+    
+	$("#statTable").find(".riderRow").each(function(){
+		var lat = $(this).find(".latitude").text();
+		var long = $(this).find(".longitude").text();
+		var name = $(this).find(".name").text();
+		var jersey = $(this).find(".jersey").text();		
+		var latlng = new google.maps.LatLng(lat, long);
+		var marker = new MarkerWithLabel({
+			position: latlng,
+			map: map,
+			title: name,
+			labelClass: "labels", // the CSS class for the label
+		    labelInBackground: false,
+		    labelContent: jersey,
+		    draggable: false
+		});
+		markers[markers.length] = marker;
+	});
+	
+	map.setCenter(markers[0].getPosition());
 });
 
-var interval;
+function findCenter(){
+	var sumLat = 0;
+	var sumLong = 0;
+	for(var i = 0; i < markers.length; i++){
+		sumLat +=  markers[i].getPosition().lat();
+		sumLong += markers[i].getPosition().lng();
+	}
+	
+	var averageLat = sumLat / markers.length;
+	var averageLong = sumLong / markers.length;
+	var center = new google.maps.LatLng(lat, long);
+	return center;
+}
+
 $(document).ready(function(){		
-	interval = setInterval(refreshDashboard,5000);
+//	interval = setInterval(refreshDashboard,5000);
 	$("#sendMsg").click(sendMsg);
 	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
