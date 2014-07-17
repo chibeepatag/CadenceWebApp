@@ -2,7 +2,7 @@
  * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html
  * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html
  */
-var markers = [];
+var markers = {};
 var interval;
 var map;
 
@@ -33,28 +33,30 @@ $( document ).on( "pageinit", "#page", function() {
 		    labelContent: jersey,
 		    draggable: false
 		});
-		markers[markers.length] = marker;
+		markers[name] = marker;
 	});
 	
-	map.setCenter(markers[0].getPosition());
+	map.setCenter(findCenter());	
 });
 
 function findCenter(){
 	var sumLat = 0;
 	var sumLong = 0;
-	for(var i = 0; i < markers.length; i++){
+	var count = 0;
+	for(var i in markers){
 		sumLat +=  markers[i].getPosition().lat();
 		sumLong += markers[i].getPosition().lng();
+		count++;
 	}
 	
-	var averageLat = sumLat / markers.length;
-	var averageLong = sumLong / markers.length;
-	var center = new google.maps.LatLng(lat, long);
+	var averageLat = sumLat / count;
+	var averageLong = sumLong / count;
+	var center = new google.maps.LatLng(averageLat, averageLong);
 	return center;
 }
 
 $(document).ready(function(){		
-//	interval = setInterval(refreshDashboard,5000);
+	interval = setInterval(refreshDashboard,5000);
 	$("#sendMsg").click(sendMsg);
 	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
@@ -85,13 +87,16 @@ function updateStatistics(data){
 		var latitude = stat.latitude;
 		var elevation = stat.elevation;
 		var row = $("#statTable").find(".riderRow").find(".rider_id").filter(function() { return $(this).text() === riderId.toString() }).parent().parent();
+		var key = $(row).find(".name").text();
 		$(row).find(".speed").text(speed);
 		$(row).find(".cadence").text(cadence);
 		$(row).find(".power").text(power);
 		$(row).find(".hearRate").text(heartRate);
 		$(row).find(".longitude").text(longitude);
 		$(row).find(".latitude").text(latitude);
-		$(row).find(".elevation").text(elevation);			
+		$(row).find(".elevation").text(elevation);
+		var newPosition = new google.maps.LatLng(latitude, longitude);
+		markers[key].setPosition(newPosition);
 	}
 }
 
