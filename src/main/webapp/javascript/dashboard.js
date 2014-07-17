@@ -56,7 +56,7 @@ function findCenter(){
 }
 
 $(document).ready(function(){		
-	interval = setInterval(refreshDashboard,5000);
+//	interval = setInterval(refreshDashboard,5000);
 	$("#sendMsg").click(sendMsg);
 	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
@@ -98,6 +98,7 @@ function updateStatistics(data){
 		var newPosition = new google.maps.LatLng(latitude, longitude);
 		markers[key].setPosition(newPosition);
 	}
+	map.setCenter(findCenter());
 }
 
 function endRace(){
