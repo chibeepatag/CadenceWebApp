@@ -8,10 +8,8 @@
 							<th>Speed</th>
 							<th>Cadence</th>
 							<th>Power</th>
-							<th>Heart Rate</th>
-							<th>Latitude</th>
-							<th>Longitude</th>
-							<th>Elevation</th>
+							<th>Heart Rate</th>							
+							<th>Message</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -23,9 +21,10 @@
 							<td th:if="${stat} != null" th:text="${stat?.cadence}" class="cadence">50</td>
 							<td th:if="${stat} != null" th:text="${stat?.power}" class="power">50</td>
 							<td th:if="${stat} != null" th:text="${stat?.heart_rate}" class="heartRate">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.latitude}" class="latitude">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.longitude}" class="longitude">50</td>
-							<td th:if="${stat} != null" th:text="${stat?.elevation}" class="elevation">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.latitude}" class="latitude hiddenField">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.longitude}" class="longitude hiddenField">50</td>
+							<td th:if="${stat} != null" th:text="${stat?.elevation}" class="elevation hiddenField">50</td>
+							<td class="message">This is a message.</td>
 						</tr>						
 					</tbody>
 				</table>

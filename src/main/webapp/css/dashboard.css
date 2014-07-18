@@ -48,3 +48,7 @@
 	width: 20px;
 	white-space: nowrap;
 }
+
+.msgTemplate{
+	margin: 5px;
+}
