@@ -100,6 +100,17 @@ CREATE TABLE message_recipient
  CONSTRAINT merecepit_message_id_FK FOREIGN KEY (Message_ID) REFERENCES message (Message_ID)
 );
 
+CREATE TABLE MessageFromRider
+(Msg_rider_id NUMBER(9), 
+ Message VARCHAR2(255),
+ FromRider NUMBER(9),
+ Message_TS TIMESTAMP,
+ Race_ID NUMBER(9),
+ CONSTRAINT MsgFromRider_msg_rider_id_PK PRIMARY KEY (Msg_rider_id),
+ CONSTRAINT MsgFromRider_from_FK FOREIGN KEY (FromRider) REFERENCES Rider (Rider_ID),
+ CONSTRAINT MsgFromRider_race_id_FK FOREIGN KEY (Race_ID) REFERENCES Race (Race_ID)
+);
+
 CREATE TABLE note
 (Note_ID NUMBER(9), 
  Note VARCHAR2(255),

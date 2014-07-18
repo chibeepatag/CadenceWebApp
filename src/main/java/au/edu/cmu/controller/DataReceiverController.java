@@ -39,7 +39,9 @@ public class DataReceiverController {
 		Date stat_ts = Calendar.getInstance().getTime();
 		Statistic statistic = new Statistic(heart_rate, speed, latitude, longitude, elevation, distance, cadence, power, stat_ts);				
 		logStatisticReceived(nickname, statistic);
-		//persist message from Rider
+		
+		messageService.saveMessageFromRider(nickname, message);
+		
 		statisticService.saveStatistic(statistic, nickname);
 		Message messageForRider = messageService.getMessageForRider(nickname);
 		messageService.setMessageAsSent(messageForRider);

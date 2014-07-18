@@ -3,10 +3,13 @@
  */
 package au.edu.cmu.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -21,12 +24,16 @@ public class MessageFromRider {
 	private long msg_rider_id;
 	
 	@ManyToOne
+	@JoinColumn(name="FromRider")
 	private Rider from;
 	
 	private String message;
 	
 	@ManyToOne
+	@JoinColumn(name="race_id")
 	private Race race;
+	
+	private Date message_TS;
 
 	public long getMsg_rider_id() {
 		return msg_rider_id;
@@ -58,6 +65,15 @@ public class MessageFromRider {
 
 	public void setRace(Race race) {
 		this.race = race;
-	}		
+	}
+
+	public Date getMessage_TS() {
+		return message_TS;
+	}
+
+	public void setMessage_TS(Date message_TS) {
+		this.message_TS = message_TS;
+	}
+				
 	
 }
