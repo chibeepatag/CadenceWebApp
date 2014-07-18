@@ -93,7 +93,7 @@ function updateStatistics(data){
 		$(row).find(".speed").text(speed);
 		$(row).find(".cadence").text(cadence);
 		$(row).find(".power").text(power);
-		$(row).find(".hearRate").text(heartRate);
+		$(row).find(".heartRate").text(heartRate);
 		$(row).find(".longitude").text(longitude);
 		$(row).find(".latitude").text(latitude);
 		$(row).find(".elevation").text(elevation);
