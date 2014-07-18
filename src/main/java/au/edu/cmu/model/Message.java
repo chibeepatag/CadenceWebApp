@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
+
 /**
  * @author ChibeePatag
  * 
@@ -41,6 +43,9 @@ public class Message {
 	@ManyToOne
 	@JoinColumn(name="race_id")
 	private Race race;
+	
+	@Type(type="yes_no")
+	private boolean sent;
 
 	public int getMessage_id() {
 		return message_id;
@@ -88,6 +93,14 @@ public class Message {
 
 	public void setRace(Race race) {
 		this.race = race;
+	}
+
+	public boolean isSent() {
+		return sent;
+	}
+
+	public void setSent(boolean sent) {
+		this.sent = sent;
 	}		
 		
 }

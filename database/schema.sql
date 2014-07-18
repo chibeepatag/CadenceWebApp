@@ -86,6 +86,7 @@ CREATE TABLE message
  User_ID NUMBER(9),
  Message_TS TIMESTAMP,
  Race_ID NUMBER(9),
+ Sent char(1),
  CONSTRAINT message_msg_rider_id_PK PRIMARY KEY (Message_ID),
  CONSTRAINT message_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID),
  CONSTRAINT message_race_id_FK FOREIGN KEY (Race_ID) REFERENCES Race (Race_ID)

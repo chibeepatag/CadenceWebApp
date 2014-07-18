@@ -9,7 +9,8 @@ function sendData(){
 		url: "http://localhost:8080/CadenceWebApp/riderData",
 		data: getRandomData(),
 		type: "GET",
-		accepts: "html",
+		accepts: "JSON",
+		dataType: "json",
 		success: function(data){
 			$(".statisticTable").html(data);					
 		}
@@ -34,4 +35,4 @@ function getRandomData(){
 function getRandomNumber(){
 	return Math.floor((Math.random() * 100) + 1);
 }
-
+//http://localhost:8080/CadenceWebApp/riderData?nickname=Matt&message=hello&heart_rate=0&speed=0&latitude=0&longitude=0&cadence=0&power=0&elevation=0&distance=0

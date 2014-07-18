@@ -113,6 +113,7 @@ public class DashboardServiceImpl implements DashboardService {
 		message.setCoach(coach);
 		message.setMessage_ts(Calendar.getInstance().getTime());
 		message.setRace(race);
+		message.setSent(false);
 		messageDao.create(message);					
 	}	
 	

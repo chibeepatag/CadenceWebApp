@@ -4,6 +4,7 @@
 package au.edu.cmu.dao;
 
 import au.edu.cmu.model.Message;
+import au.edu.cmu.model.Rider;
 
 /**
  * @author ChibeePatag
@@ -11,4 +12,5 @@ import au.edu.cmu.model.Message;
  */
 public interface MessageDao extends BaseDao<Message> {
 
+	Message getLatestMessageForRider(Rider rider);
 }

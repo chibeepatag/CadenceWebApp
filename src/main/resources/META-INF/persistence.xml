@@ -8,6 +8,7 @@
         <class>au.edu.cmu.model.Statistic</class>
         <class>au.edu.cmu.model.Race</class>
         <class>au.edu.cmu.model.Note</class>
+        <class>au.edu.cmu.model.MessageFromRider</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <validation-mode>NONE</validation-mode>
         <properties>

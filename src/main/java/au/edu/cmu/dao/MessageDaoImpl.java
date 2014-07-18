@@ -6,13 +6,23 @@ package au.edu.cmu.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Parameter;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import au.edu.cmu.model.Message_;
+import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.User;
 import au.edu.cmu.model.Message;
 
@@ -58,5 +68,22 @@ public class MessageDaoImpl implements MessageDao {
         return this.entityManager.createQuery(cq).getResultList();
 	}
 
+	@Override //select message where (rider in message.recipients) and sent = n;
+	public Message getLatestMessageForRider(Rider rider) {
+		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Message> cq = cb.createQuery(Message.class);
+				
+		Root<Message> messageRoot = cq.from(Message.class);
+		Join<Message, Rider> riderRoot = messageRoot.join(Message_.recipients);
+		
+//		Parameter<Rider> riderRecipientParam = cb.parameter(Rider.class, "rider");			
+		Predicate notSentPred = cb.equal(messageRoot.get(Message_.sent), Boolean.FALSE);
+		Predicate equalRider = cb.equal(riderRoot, rider);
+		Order messageTsOrder = cb.desc(messageRoot.get(Message_.message_ts));
+		cq.select(messageRoot).where(notSentPred, equalRider).orderBy(messageTsOrder);
+		TypedQuery<Message> messageQuery = this.entityManager.createQuery(cq).setMaxResults(1);
+//		messageQuery.setParameter("rider", rider);
+		return messageQuery.getSingleResult();
+	}
 	
 }
