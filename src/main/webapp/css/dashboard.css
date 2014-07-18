@@ -52,3 +52,7 @@
 .msgTemplate{
 	margin: 5px;
 }
+
+.newMessage{
+	color: red;
+}

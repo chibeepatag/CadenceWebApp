@@ -6,14 +6,22 @@ package au.edu.cmu.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.MessageFromRider;
+import au.edu.cmu.model.MessageFromRider_;
 import au.edu.cmu.model.Rider;
 
 /**
@@ -72,4 +80,21 @@ public class MessageFromRiderDaoImpl implements MessageFromRiderDao {
         return this.entityManager.createQuery(cq).getResultList();
 	}
 
+	@Override
+	public MessageFromRider getLatestMessageFromRider(Rider rider) {
+		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<MessageFromRider> cq = cb.createQuery(MessageFromRider.class);
+		Root<MessageFromRider> root = cq.from(MessageFromRider.class);
+		Predicate riderPred = cb.equal(root.get(MessageFromRider_.from), rider);
+		Order order = cb.desc(root.get(MessageFromRider_.message_TS));
+		cq.select(root).where(riderPred).orderBy(order);
+		TypedQuery<MessageFromRider> msgFromRiderQry = this.entityManager.createQuery(cq).setMaxResults(1);
+		try{
+			MessageFromRider msg = msgFromRiderQry.getSingleResult();
+			return msg;
+		}catch(NoResultException nre){
+			CadencePersistenceException cpe = new CadencePersistenceException(nre, "No message for this rider");
+		}
+		return null;
+	}
 }

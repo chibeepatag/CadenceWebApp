@@ -66,6 +66,7 @@ $(document).ready(function(){
 	$("#msgClearBtn").click(clearMessage);
 	$("#notesClearBtn").click(clearNotes);	
 	$(".msgTemplate").click(messageTemplate);
+	$(".newMessage").click(messageSeen);
 });
 
 function refreshDashboard(){
@@ -78,8 +79,10 @@ function refreshDashboard(){
 }
 
 function updateStatistics(data){
+	console.log(data);	
 	for(var i = 0; i < data.length; i++){
-		var stat = data[i];
+		var message = data[i].message
+		var stat = data[i].statistic;
 		var riderId = stat.rider.rider_id;
 		var speed = stat.speed;		
 		var cadence = stat.cadence;
@@ -90,6 +93,7 @@ function updateStatistics(data){
 		var elevation = stat.elevation;
 		var row = $("#statTable").find(".riderRow").find(".rider_id").filter(function() { return $(this).text() === riderId.toString() }).parent().parent();
 		var key = $(row).find(".name").text();
+		var oldMsgId = $(row).find(".msgId").text();
 		$(row).find(".speed").text(speed);
 		$(row).find(".cadence").text(cadence);
 		$(row).find(".power").text(power);
@@ -97,10 +101,19 @@ function updateStatistics(data){
 		$(row).find(".longitude").text(longitude);
 		$(row).find(".latitude").text(latitude);
 		$(row).find(".elevation").text(elevation);
+		if(data[i].messageId>0){
+			$(row).find(".message").find(".msgTxt").text(message);			
+		}
+		$(".message").click(messageSeen);
+		if(message.length > 0 && data[i].messageId!==parseInt(oldMsgId) && data[i].messageId > 0){			
+			$(row).find(".message").addClass("newMessage");		
+			$(row).find(".msgId").text(data[i].messageId);
+		}
 		var newPosition = new google.maps.LatLng(latitude, longitude);
 		markers[key].setPosition(newPosition);
 	}
 //	map.setCenter(findCenter());
+
 }
 
 function endRace(){
@@ -171,5 +184,9 @@ function messageTemplate(){
 	console.log(caller);
 	var messageString = messageTemplateMap[caller];	
 	$("#messageTxt").val(messageString);	
+}
+
+function messageSeen(){
+	$(this).removeClass("newMessage");
 }
 

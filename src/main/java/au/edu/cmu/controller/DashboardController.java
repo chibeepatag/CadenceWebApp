@@ -3,6 +3,7 @@
  */
 package au.edu.cmu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.edu.cmu.exceptions.CadencePersistenceException;
+import au.edu.cmu.model.MessageFromRider;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.service.DashboardService;
+import au.edu.cmu.service.MessageService;
 
 /**
  * @author ChibeePatag
@@ -29,6 +32,9 @@ public class DashboardController {
 	
 	@Autowired
 	DashboardService dashboardService;
+	
+	@Autowired
+	MessageService messageService;
 	
 	@RequestMapping(value="/shared/dashboard", method=RequestMethod.GET)
 	public String goToDashboard(Model model){
@@ -47,9 +53,20 @@ public class DashboardController {
 	
 	@RequestMapping(value="/shared/refreshStat", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Statistic> refreshDashboard(){
-		List<Statistic> statistics = dashboardService.buildStatisticTable();		
-		return statistics;
+	public List<RefreshStatResponse> refreshDashboard(){
+		List<Statistic> statistics = dashboardService.buildStatisticTable();
+		List<RefreshStatResponse> responseList = new ArrayList<RefreshStatResponse>();
+		for(Statistic statistic : statistics){
+			MessageFromRider message = messageService.getMessageFromRider(statistic.getRider());
+			RefreshStatResponse resp;
+			if(null != message){
+				resp = new RefreshStatResponse(statistic, message.getMessage(), message.getMsg_rider_id());				
+			}else{
+				resp = new RefreshStatResponse(statistic, "", 0);			
+			}
+			responseList.add(resp);
+		}
+		return responseList;
 	}
 	
 	@RequestMapping(value="/shared/endRace", method=RequestMethod.GET)
@@ -62,8 +79,7 @@ public class DashboardController {
 	@RequestMapping(value="/shared/saveMsg", method=RequestMethod.POST)
 	@ResponseBody
 	public void saveMessage(@RequestParam("message")String message, @RequestParam("recipientIds")List<Long> ids){					
-		dashboardService.saveMessage(message, ids);
-		//TODO: send message to rider 		
+		dashboardService.saveMessage(message, ids);	
 	}
 	
 	@RequestMapping(value="/shared/saveNote", method=RequestMethod.POST)
@@ -72,4 +88,31 @@ public class DashboardController {
 		dashboardService.saveNote(note);
 	}
 
+}
+
+class RefreshStatResponse{
+	private Statistic statistic;
+	private String message;
+	private long messageId;	
+	
+	public RefreshStatResponse(Statistic statistic,
+			String message, long messageId) {
+		super();
+		this.statistic = statistic;
+		this.message = message;
+		this.messageId = messageId;
+	}
+
+	public Statistic getStatistic() {
+		return statistic;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+	
+	public long getMessageId() {
+		return messageId;
+	}
+	
 }

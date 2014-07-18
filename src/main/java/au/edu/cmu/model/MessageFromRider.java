@@ -34,6 +34,7 @@ public class MessageFromRider {
 	private Race race;
 	
 	private Date message_TS;
+	
 
 	public long getMsg_rider_id() {
 		return msg_rider_id;

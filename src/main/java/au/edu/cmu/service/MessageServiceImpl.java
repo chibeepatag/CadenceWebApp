@@ -63,5 +63,9 @@ public class MessageServiceImpl implements MessageService {
 		
 		messageFromRiderDao.create(msgFromRider);
 	}
-
+	
+	@Override
+	public MessageFromRider getMessageFromRider(Rider rider) {
+		return messageFromRiderDao.getLatestMessageFromRider(rider);
+	}
 }
