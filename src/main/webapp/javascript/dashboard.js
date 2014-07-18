@@ -5,6 +5,7 @@
 var markers = {};
 var interval;
 var map;
+var messageTemplateMap={"left":"Left", "right":"Right", "breakAway":"Break away", "timeGap":"Time Gap", "safety":"Safety"};
 
 $( document ).on( "pageinit", "#page", function() {
     
@@ -56,7 +57,7 @@ function findCenter(){
 }
 
 $(document).ready(function(){		
-//	interval = setInterval(refreshDashboard,5000);
+	interval = setInterval(refreshDashboard,5000);
 	$("#sendMsg").click(sendMsg);
 	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
@@ -64,6 +65,7 @@ $(document).ready(function(){
 	
 	$("#msgClearBtn").click(clearMessage);
 	$("#notesClearBtn").click(clearNotes);	
+	$(".msgTemplate").click(messageTemplate);
 });
 
 function refreshDashboard(){
@@ -98,7 +100,7 @@ function updateStatistics(data){
 		var newPosition = new google.maps.LatLng(latitude, longitude);
 		markers[key].setPosition(newPosition);
 	}
-	map.setCenter(findCenter());
+//	map.setCenter(findCenter());
 }
 
 function endRace(){
@@ -162,3 +164,12 @@ function clearMessage(){
 function clearNotes(){
 	$("#notesTxt").val("");	
 }
+
+function messageTemplate(){
+	console.log("Message Template clicked");
+	var caller = $(this).attr('id');
+	console.log(caller);
+	var messageString = messageTemplateMap[caller];	
+	$("#messageTxt").val(messageString);	
+}
+

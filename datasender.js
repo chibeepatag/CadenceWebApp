@@ -25,7 +25,6 @@ function getRandomData(){
 			  "latitude": lat,
 			  "longitude": long,
 			  "elevation": getRandomNumber(),
-			  "double": getRandomNumber(),
 			  "distance": getRandomNumber(),
 			  "cadence": getRandomNumber(),
 			  "power":getRandomNumber()
