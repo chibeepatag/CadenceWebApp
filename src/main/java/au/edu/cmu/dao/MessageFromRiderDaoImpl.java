@@ -86,7 +86,7 @@ public class MessageFromRiderDaoImpl implements MessageFromRiderDao {
 		CriteriaQuery<MessageFromRider> cq = cb.createQuery(MessageFromRider.class);
 		Root<MessageFromRider> root = cq.from(MessageFromRider.class);
 		Predicate riderPred = cb.equal(root.get(MessageFromRider_.from), rider);
-		Order order = cb.desc(root.get(MessageFromRider_.message_TS));
+		Order order = cb.desc(root.get(MessageFromRider_.message_ts));
 		cq.select(root).where(riderPred).orderBy(order);
 		TypedQuery<MessageFromRider> msgFromRiderQry = this.entityManager.createQuery(cq).setMaxResults(1);
 		try{

@@ -59,7 +59,7 @@ public class MessageServiceImpl implements MessageService {
 		msgFromRider.setRace(race);
 		msgFromRider.setMessage(message);
 		msgFromRider.setFrom(rider);
-		msgFromRider.setMessage_TS(Calendar.getInstance().getTime());
+		msgFromRider.setMessage_ts(Calendar.getInstance().getTime());		
 		
 		messageFromRiderDao.create(msgFromRider);
 	}

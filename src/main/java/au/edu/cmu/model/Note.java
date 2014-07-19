@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
-public class Note {
+public class Note extends Log{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,9 +27,7 @@ public class Note {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private User coach;
-	
-	private Date note_ts;
+	private User coach;	
 	
 	@ManyToOne
 	@JoinColumn(name="race_id", nullable = false)
@@ -57,14 +55,6 @@ public class Note {
 
 	public void setCoach(User coach) {
 		this.coach = coach;
-	}
-
-	public Date getNote_ts() {
-		return note_ts;
-	}
-
-	public void setNote_ts(Date note_ts) {
-		this.note_ts = note_ts;
 	}
 
 	public Race getRace() {

@@ -22,7 +22,7 @@ import org.hibernate.annotations.Type;
  * 
  */
 @Entity
-public class Message {
+public class Message extends Log{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,8 +33,6 @@ public class Message {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User coach;
-
-	private Date message_ts;
 
 	@ManyToMany
 	@JoinTable(name = "message_recipient", joinColumns = @JoinColumn(name = "Message_ID"), inverseJoinColumns = @JoinColumn(name = "Rider_ID"))
@@ -69,14 +67,6 @@ public class Message {
 
 	public void setCoach(User coach) {
 		this.coach = coach;
-	}
-
-	public Date getMessage_ts() {
-		return message_ts;
-	}
-
-	public void setMessage_ts(Date message_ts) {
-		this.message_ts = message_ts;
 	}
 
 	public List<Rider> getRecipients() {

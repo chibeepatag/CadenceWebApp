@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
-public class MessageFromRider {
+public class MessageFromRider extends Log{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,11 +31,8 @@ public class MessageFromRider {
 	
 	@ManyToOne
 	@JoinColumn(name="race_id")
-	private Race race;
+	private Race race;	
 	
-	private Date message_TS;
-	
-
 	public long getMsg_rider_id() {
 		return msg_rider_id;
 	}
@@ -66,15 +63,6 @@ public class MessageFromRider {
 
 	public void setRace(Race race) {
 		this.race = race;
-	}
-
-	public Date getMessage_TS() {
-		return message_TS;
-	}
-
-	public void setMessage_TS(Date message_TS) {
-		this.message_TS = message_TS;
-	}
-				
+	}			
 	
 }

@@ -122,7 +122,7 @@ public class DashboardServiceImpl implements DashboardService {
 		Note note = new Note();
 		note.setNote(noteTxt);
 		note.setCoach(getCoach());
-		note.setNote_ts(Calendar.getInstance().getTime());
+		note.setMessage_ts(Calendar.getInstance().getTime());
 		note.setRace(raceDao.getLatestRace());
 		noteDao.create(note);
 	}

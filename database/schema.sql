@@ -10,6 +10,7 @@ DROP TABLE message_recipient;
 DROP TABLE message purge;
 DROP TABLE note purge;
 DROP TABLE race_team purge;
+DROP TABLE messagefromrider purge;
 DROP TABLE race purge;
 DROP TABLE statistic purge;
 DROP TABLE rider purge;
@@ -115,7 +116,7 @@ CREATE TABLE note
 (Note_ID NUMBER(9), 
  Note VARCHAR2(255),
  User_ID NUMBER(9),
- Note_TS TIMESTAMP,
+ Message_TS TIMESTAMP,
  Race_id NUMBER(9),
  CONSTRAINT note_note_id_PK PRIMARY KEY (Note_ID),
  CONSTRAINT note_user_id_FK FOREIGN KEY (User_ID) REFERENCES cadence_user (User_ID),
