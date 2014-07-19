@@ -132,9 +132,13 @@ function endRace(){
 function sendMsg(){
 	var riderIds = $(".selectedRow").find(".rider_id");
 	var messageTxt = $("#messageTxt").val();
-	if(riderIds.length > 0 && messageTxt.length > 0){
-		var selectedRows = $(riderIds).map(function(){return $(this).text()}).get().join(",");		
-		
+	if(messageTxt.length > 0){
+		var selectedRows;
+		if(riderIds.length > 0){
+			selectedRows = $(riderIds).map(function(){return $(this).text()}).get().join(",");
+		}else{//if no rider is selected, the message is sent to all riders.
+			selectedRows = $(".riderRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");
+		}
 		$.ajax({
 			url: "saveMsg",
 			type: "POST",	
@@ -179,7 +183,6 @@ function clearNotes(){
 }
 
 function messageTemplate(){
-	console.log("Message Template clicked");
 	var caller = $(this).attr('id');
 	console.log(caller);
 	var messageString = messageTemplateMap[caller];	
