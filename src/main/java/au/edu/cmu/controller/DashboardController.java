@@ -69,23 +69,28 @@ public class DashboardController {
 		return responseList;
 	}
 	
-	@RequestMapping(value="/shared/endRace", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/endRace", method=RequestMethod.GET)
 	public String endRace(Model model){
 		Race raceEnded = dashboardService.endRace();
 		model.addAttribute("raceEnded", raceEnded);
 		return "shared/endedRace";
 	}
 	
-	@RequestMapping(value="/shared/saveMsg", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/saveMsg", method=RequestMethod.POST)
 	@ResponseBody
 	public void saveMessage(@RequestParam("message")String message, @RequestParam("recipientIds")List<Long> ids){					
 		dashboardService.saveMessage(message, ids);	
 	}
 	
-	@RequestMapping(value="/shared/saveNote", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/saveNote", method=RequestMethod.POST)
 	@ResponseBody
 	public void saveNote(@RequestParam("note")String note){
 		dashboardService.saveNote(note);
+	}
+	
+	@RequestMapping(value="/admin/downloadLogs", method=RequestMethod.POST)
+	public void downloadLogs(){
+		
 	}
 
 }

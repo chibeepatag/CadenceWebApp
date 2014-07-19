@@ -78,8 +78,7 @@ function refreshDashboard(){
 	});
 }
 
-function updateStatistics(data){
-	console.log(data);	
+function updateStatistics(data){	
 	for(var i = 0; i < data.length; i++){
 		var message = data[i].message
 		var stat = data[i].statistic;
@@ -118,7 +117,7 @@ function updateStatistics(data){
 
 function endRace(){
 	$.ajax({
-		url: "endRace",
+		url: "../admin/endRace",
 		type: "GET",
 		accepts: "html",
 		success: function(data){
@@ -140,11 +139,10 @@ function sendMsg(){
 			selectedRows = $(".riderRow").find(".rider_id").map(function(){return $(this).text()}).get().join(",");
 		}
 		$.ajax({
-			url: "saveMsg",
+			url: "../admin/saveMsg",
 			type: "POST",	
 			data: {"message": messageTxt, "recipientIds":selectedRows },
 			success: function(data){
-				console.log("Message sent.");
 				$("#messageTxt").val("");
 			}
 		});
@@ -154,11 +152,10 @@ function sendMsg(){
 function saveNote(){
 	var note = $("#notesTxt").val();
 	$.ajax({
-		url: "saveNote",
+		url: "../admin/saveNote",
 		type: "POST",
 		data: {"note": note},
 		success: function(data){
-			console.log("Note saved.");
 			$("#notesTxt").val("");	
 		}
 	});
@@ -184,7 +181,6 @@ function clearNotes(){
 
 function messageTemplate(){
 	var caller = $(this).attr('id');
-	console.log(caller);
 	var messageString = messageTemplateMap[caller];	
 	$("#messageTxt").val(messageString);	
 }
