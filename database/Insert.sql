@@ -13,8 +13,15 @@ INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY
 INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY_NO, PHONE) VALUES ('9', 'Jesse', 'Sergent', 'Jesse', '77', '+7653356215695');
 INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY_NO, PHONE) VALUES ('10', 'Ivan', 'Rovny', 'Ivan', '76', '+653335865513');
 
-INSERT INTO "CADENCE"."MESSAGE" (MESSAGE_ID, MESSAGE, USER_ID, MESSAGE_TS, SENT) VALUES ('1', 'Jesse, fall behind Manny.',        '1', TO_DATE('2014-06-12 12:05:19', 'YYYY-MM-DD HH24:MI:SS'), 'N');
-INSERT INTO "CADENCE"."MESSAGE" (MESSAGE_ID, MESSAGE, USER_ID, MESSAGE_TS, SENT) VALUES ('2', 'Nelson, catch a breath. Go slow.', '1', TO_DATE('2014-06-12 12:06:00', 'YYYY-MM-DD HH24:MI:SS'), 'Y');
+insert into race (Race_ID, Race_Name, Race_Start, Race_End, ISONGOING, Coach_ID) values (1, 'Tour Down Under', TO_DATE('2014/05/03', 'yyyy/mm/dd'), null, 'Y', 1);
+insert into race_team values (1, 1, 1 );
+insert into race_team values (1, 2, 2 );
+insert into race_team values (1, 3, 3 );
+insert into race_team values (1, 4, 4 );
+insert into race_team values (1, 5, 5 );
+
+INSERT INTO "CADENCE"."MESSAGE" (MESSAGE_ID, MESSAGE, USER_ID, MESSAGE_TS, RACE_ID, SENT) VALUES ('1', 'Jesse, fall behind Manny.',        '1', TO_DATE('2014-06-12 12:05:19', 'YYYY-MM-DD HH24:MI:SS'), 1, 'N');
+INSERT INTO "CADENCE"."MESSAGE" (MESSAGE_ID, MESSAGE, USER_ID, MESSAGE_TS, RACE_ID, SENT) VALUES ('2', 'Nelson, catch a breath. Go slow.', '1', TO_DATE('2014-06-12 12:06:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 'Y');
 
 INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('2', '2');
 INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '1');
@@ -26,13 +33,6 @@ INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '6
 INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '7');
 INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '8');
 INSERT INTO "CADENCE"."MESSAGE_RECIPIENT" (MESSAGE_ID, RIDER_ID) VALUES ('1', '9');
-
-insert into race (Race_ID, Race_Name, Race_Start, Race_End, ISONGOING, Coach_ID) values (1, 'Tour Down Under', TO_DATE('2014/05/03', 'yyyy/mm/dd'), null, 'Y', 1);
-insert into race_team values (1, 1, 1 );
-insert into race_team values (1, 2, 2 );
-insert into race_team values (1, 3, 3 );
-insert into race_team values (1, 4, 4 );
-insert into race_team values (1, 5, 5 );
 
 Insert into Statistic (STAT_ID,RIDER_ID,HEART_RATE,SPEED,LATITUDE,LONGITUDE,ELEVATION,DISTANCE,CADENCE,POWER,STAT_TS) VALUES (1,1,80,50.03, -34.926870,138.599825,341.6000061,84.212,18.45,20.05,TO_DATE('2014-06-18 06:41:58','YYYY-MM-DD HH24:MI:SS'));
 Insert into Statistic (STAT_ID,RIDER_ID,HEART_RATE,SPEED,LATITUDE,LONGITUDE,ELEVATION,DISTANCE,CADENCE,POWER,STAT_TS) VALUES (2,1,83,50.038,-34.927043,138.599934,341,84.219,18.458,20.059,TO_DATE('2014-06-18 06:42:08','YYYY-MM-DD HH24:MI:SS'));

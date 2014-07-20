@@ -2,6 +2,7 @@ package au.edu.cmu.dao;
 
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import au.edu.cmu.model.Message;
+import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,6 +25,9 @@ public class MessageDaoTest {
 	
 	@Autowired
 	RiderDao riderDao;
+	
+	@Autowired
+	RaceDao raceDao;
 	
 	@Test
 	public void testCreate() {
@@ -58,6 +63,13 @@ public class MessageDaoTest {
 		Message message = messageDao.getLatestMessageForRider(rider);
 		System.out.println(message.getMessage());
 		assertNotNull(message);
+	}
+	
+	@Test
+	public void testGetMessageForThisRace(){
+		Race currentRace = raceDao.getCurrentRace();
+		List<Message> messages = messageDao.getMessageForThisRace(currentRace);
+		assertTrue(messages.size() > 0);
 	}
 
 }

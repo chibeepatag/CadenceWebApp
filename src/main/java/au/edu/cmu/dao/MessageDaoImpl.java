@@ -21,7 +21,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import au.edu.cmu.model.MessageFromRider;
+import au.edu.cmu.model.MessageFromRider_;
 import au.edu.cmu.model.Message_;
+import au.edu.cmu.model.Note;
+import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.User;
 import au.edu.cmu.model.Message;
@@ -84,6 +88,19 @@ public class MessageDaoImpl implements MessageDao {
 		TypedQuery<Message> messageQuery = this.entityManager.createQuery(cq).setMaxResults(1);
 //		messageQuery.setParameter("rider", rider);
 		return messageQuery.getSingleResult();
+	}
+	
+	@Override
+	public List<Message> getMessageForThisRace(Race race) {
+		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Message> cq = cb.createQuery(Message.class);
+		Root<Message> root = cq.from(Message.class);
+		Predicate racePred = cb.equal(root.get(Message_.race), race);
+		
+		cq.select(root).where(racePred);
+		TypedQuery<Message> messageQuery = this.entityManager.createQuery(cq);
+		
+		return messageQuery.getResultList();
 	}
 	
 }

@@ -3,32 +3,43 @@
  */
 package au.edu.cmu.service;
 
-import java.security.Principal;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.edu.cmu.dao.MessageDao;
+import au.edu.cmu.dao.MessageFromRiderDao;
 import au.edu.cmu.dao.NoteDao;
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
 import au.edu.cmu.dao.StatisticsDao;
 import au.edu.cmu.dao.UserDao;
 import au.edu.cmu.exceptions.CadencePersistenceException;
+import au.edu.cmu.model.Log;
 import au.edu.cmu.model.Message;
+import au.edu.cmu.model.MessageFromRider;
 import au.edu.cmu.model.Note;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.model.User;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * @author ChibeePatag
@@ -45,6 +56,9 @@ public class DashboardServiceImpl implements DashboardService {
 	
 	@Autowired
 	MessageDao messageDao;
+	
+	@Autowired
+	MessageFromRiderDao messageFromRiderDao;
 	
 	@Autowired
 	RiderDao riderDao;
@@ -133,6 +147,56 @@ public class DashboardServiceImpl implements DashboardService {
 		
 		User coach = userDao.findByUsername(username);
 		return coach;
+	}
+	
+	@Override
+	public OutputStream createLogFile(Race currentRace, OutputStream out) {
+		List<Log> logContent = getLogContent(currentRace);
+		out  = createLogPdf(logContent, out);
+		return out;
+	}
+	private List<Log> getLogContent(Race currentRace) {
+		List<Log> logs = new ArrayList<Log>();
+		logs.addAll(messageDao.getMessageForThisRace(currentRace));
+		logs.addAll(messageFromRiderDao.getMessagesFromRiderForThisRace(currentRace));
+		logs.addAll(noteDao.getNotesForThisRider(currentRace));
+		Collections.sort(logs);
+
+		return logs;
+	}
+	
+	OutputStream createLogPdf(List<Log> logContent, OutputStream outputStream){
+		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+		try {
+			PdfWriter writer = PdfWriter.getInstance(document, outputStream);
+			document.open();
+			for(Log log : logContent){
+				Paragraph paragraph = new Paragraph();
+				if(log instanceof Note){
+					paragraph.add("Note: ");
+					paragraph.add(log.getMessage_ts());
+					paragraph.add(((Note) log).getNote());
+				}else if(log instanceof Message){
+					paragraph.add("Message From coach: ");
+					paragraph.add(log.getMessage_ts());
+					paragraph.add(((Message) log).getMessage());
+				}else if (log instanceof MessageFromRider){
+					paragraph.add("Message From coach: ");
+					paragraph.add(log.getMessage_ts());
+					paragraph.add(((MessageFromRider) log).getMessage());
+				}
+				document.add(paragraph);
+				document.close();
+				outputStream.close();
+			}
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return outputStream;
 	}
 
 }

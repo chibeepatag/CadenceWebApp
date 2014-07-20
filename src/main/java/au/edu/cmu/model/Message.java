@@ -3,7 +3,6 @@
  */
 package au.edu.cmu.model;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;

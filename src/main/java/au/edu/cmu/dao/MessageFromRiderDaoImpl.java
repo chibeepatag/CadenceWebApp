@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.MessageFromRider;
 import au.edu.cmu.model.MessageFromRider_;
+import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
 /**
@@ -81,13 +82,15 @@ public class MessageFromRiderDaoImpl implements MessageFromRiderDao {
 	}
 
 	@Override
-	public MessageFromRider getLatestMessageFromRider(Rider rider) {
+	public MessageFromRider getLatestMessageFromRider(Rider rider, Race race) {
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<MessageFromRider> cq = cb.createQuery(MessageFromRider.class);
 		Root<MessageFromRider> root = cq.from(MessageFromRider.class);
 		Predicate riderPred = cb.equal(root.get(MessageFromRider_.from), rider);
+		Predicate racePred = cb.equal(root.get(MessageFromRider_.race), race);
+		Predicate riderAndRacePred = cb.and(riderPred, racePred);
 		Order order = cb.desc(root.get(MessageFromRider_.message_ts));
-		cq.select(root).where(riderPred).orderBy(order);
+		cq.select(root).where(riderAndRacePred).orderBy(order);
 		TypedQuery<MessageFromRider> msgFromRiderQry = this.entityManager.createQuery(cq).setMaxResults(1);
 		try{
 			MessageFromRider msg = msgFromRiderQry.getSingleResult();
@@ -96,5 +99,17 @@ public class MessageFromRiderDaoImpl implements MessageFromRiderDao {
 			CadencePersistenceException cpe = new CadencePersistenceException(nre, "No message for this rider");
 		}
 		return null;
+	}
+	
+	@Override
+	public List<MessageFromRider> getMessagesFromRiderForThisRace(Race race) {
+		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<MessageFromRider> cq = cb.createQuery(MessageFromRider.class);
+		Root<MessageFromRider> root = cq.from(MessageFromRider.class);
+		Predicate racePred = cb.equal(root.get(MessageFromRider_.race), race);
+		
+		cq.select(root).where(racePred);
+		TypedQuery<MessageFromRider> messageQuery = this.entityManager.createQuery(cq);
+		return messageQuery.getResultList();
 	}
 }

@@ -3,7 +3,10 @@
  */
 package au.edu.cmu.dao;
 
+import java.util.List;
+
 import au.edu.cmu.model.Note;
+import au.edu.cmu.model.Race;
 
 /**
  * @author ChibeePatag
@@ -11,4 +14,5 @@ import au.edu.cmu.model.Note;
  */
 public interface NoteDao extends BaseDao<Note> {
 	
+	List<Note> getNotesForThisRider(Race race);
 }

@@ -5,6 +5,7 @@ package au.edu.cmu.service;
 
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.MessageFromRider;
+import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
 /**
@@ -19,5 +20,5 @@ public interface MessageService {
 	
 	void saveMessageFromRider(String nickname, String message);
 	
-	MessageFromRider getMessageFromRider(Rider rider);
+	MessageFromRider getMessageFromRider(Rider rider, Race currentRace);
 }

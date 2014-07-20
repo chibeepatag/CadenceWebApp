@@ -161,6 +161,13 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
+		<!-- iText Pdf Generator -->
+		<dependency>
+			<groupId>itext</groupId>
+			<artifactId>itext</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>CadenceWebApp</finalName>

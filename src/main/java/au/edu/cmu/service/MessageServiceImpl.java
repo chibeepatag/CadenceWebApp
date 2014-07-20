@@ -65,7 +65,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public MessageFromRider getMessageFromRider(Rider rider) {
-		return messageFromRiderDao.getLatestMessageFromRider(rider);
+	public MessageFromRider getMessageFromRider(Rider rider, Race currentRace) {
+		return messageFromRiderDao.getLatestMessageFromRider(rider, currentRace);
 	}
 }

@@ -3,6 +3,7 @@
  */
 package au.edu.cmu.service;
 
+import java.io.OutputStream;
 import java.util.List;
 
 import au.edu.cmu.exceptions.CadencePersistenceException;
@@ -41,4 +42,6 @@ public interface DashboardService {
 	 * @param noteTxt
 	 */
 	void saveNote(String noteTxt);
+	
+	OutputStream createLogFile(Race currentRace, OutputStream out);
 }

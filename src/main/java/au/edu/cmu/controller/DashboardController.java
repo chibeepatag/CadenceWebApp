@@ -3,17 +3,22 @@
  */
 package au.edu.cmu.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.MessageFromRider;
@@ -27,6 +32,7 @@ import au.edu.cmu.service.MessageService;
  *
  */
 @Controller
+@SessionAttributes("currentRace")
 public class DashboardController {
 	Logger logger = Logger.getLogger(DashboardController.class);
 	
@@ -42,7 +48,7 @@ public class DashboardController {
 			List<Statistic> statistics = dashboardService.buildStatisticTable();
 			model.addAttribute("statistics", statistics);
 			
-			Race currentRace = dashboardService.getCurrentRace();
+			Race currentRace = dashboardService.getCurrentRace();			
 			model.addAttribute("currentRace", currentRace);
 			return "shared/dashboard";
 		}catch(CadencePersistenceException cpe){
@@ -53,11 +59,11 @@ public class DashboardController {
 	
 	@RequestMapping(value="/shared/refreshStat", method=RequestMethod.GET)
 	@ResponseBody
-	public List<RefreshStatResponse> refreshDashboard(){
+	public List<RefreshStatResponse> refreshDashboard(@ModelAttribute("currentRace") Race currentRace){
 		List<Statistic> statistics = dashboardService.buildStatisticTable();
 		List<RefreshStatResponse> responseList = new ArrayList<RefreshStatResponse>();
 		for(Statistic statistic : statistics){
-			MessageFromRider message = messageService.getMessageFromRider(statistic.getRider());
+			MessageFromRider message = messageService.getMessageFromRider(statistic.getRider(), currentRace);
 			RefreshStatResponse resp;
 			if(null != message){
 				resp = new RefreshStatResponse(statistic, message.getMessage(), message.getMsg_rider_id());				
@@ -88,9 +94,15 @@ public class DashboardController {
 		dashboardService.saveNote(note);
 	}
 	
-	@RequestMapping(value="/admin/downloadLogs", method=RequestMethod.POST)
-	public void downloadLogs(){
-		
+	@RequestMapping(value="/shared/downloadLogs", method=RequestMethod.GET)
+	public void downloadLogs(@ModelAttribute("currentRace") Race currentRace, HttpServletResponse response){
+		try {
+			response.setContentType("application/pdf");
+			dashboardService.createLogFile(currentRace, response.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
