@@ -20,11 +20,13 @@ import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
+import au.edu.cmu.dao.StatisticsDao;
 import au.edu.cmu.dao.UserDao;
 import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.exceptions.OnGoingRaceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
+import au.edu.cmu.model.Statistic;
 import au.edu.cmu.model.User;
 
 /**
@@ -43,12 +45,19 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	StatisticsDao statisticDao;
 	/* (non-Javadoc)
 	 * @see au.edu.cmu.service.ConfigurationService#addRider(au.edu.cmu.model.Rider)
 	 */
 	@Override
-	public Rider addRider(Rider rider) {		
-		return riderDao.create(rider);
+	public Rider addRider(Rider rider) {
+		Rider riderPersist = riderDao.create(rider); 
+		Statistic statistic = new Statistic();
+		statistic.setRider(riderPersist);
+		statisticDao.create(statistic);
+		return riderPersist;
 	}
 	
 	@Override
