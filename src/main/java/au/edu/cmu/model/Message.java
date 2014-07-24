@@ -5,6 +5,7 @@ package au.edu.cmu.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Type;
 
@@ -25,7 +27,7 @@ public class Message extends Log{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int message_id;
+	private long message_id;
 
 	private String message;
 
@@ -33,22 +35,19 @@ public class Message extends Log{
 	@JoinColumn(name = "user_id", nullable = false)
 	private User coach;
 
-	@ManyToMany
-	@JoinTable(name = "message_recipient", joinColumns = @JoinColumn(name = "Message_ID"), inverseJoinColumns = @JoinColumn(name = "Rider_ID"))
-	private List<Rider> recipients;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinTable(name = "message_recipient", joinColumns = @JoinColumn(name = "Message_ID"))
+	private List<MessageRecipient> recipients; 			
 	
 	@ManyToOne
 	@JoinColumn(name="race_id")
 	private Race race;
-	
-	@Type(type="yes_no")
-	private boolean sent;
 
-	public int getMessage_id() {
+	public long getMessage_id() {
 		return message_id;
 	}
 
-	public void setMessage_id(int message_id) {
+	public void setMessage_id(long message_id) {
 		this.message_id = message_id;
 	}
 
@@ -68,11 +67,11 @@ public class Message extends Log{
 		this.coach = coach;
 	}
 
-	public List<Rider> getRecipients() {
+	public List<MessageRecipient> getRecipients() {
 		return recipients;
 	}
 
-	public void setRecipients(List<Rider> recipients) {
+	public void setRecipients(List<MessageRecipient> recipients) {
 		this.recipients = recipients;
 	}
 
@@ -82,14 +81,6 @@ public class Message extends Log{
 
 	public void setRace(Race race) {
 		this.race = race;
-	}
-
-	public boolean isSent() {
-		return sent;
-	}
-
-	public void setSent(boolean sent) {
-		this.sent = sent;
 	}		
 		
 }
