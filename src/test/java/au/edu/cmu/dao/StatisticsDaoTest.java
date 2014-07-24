@@ -27,7 +27,7 @@ public class StatisticsDaoTest {
 
 	@Test
 	public void testCreate() {
-		Statistic statistic = new Statistic(12, 12, 12, 12, 12, 12, 12, 12, Calendar.getInstance().getTime());
+		Statistic statistic = new Statistic(12, 12, 12, 12, 12, 12, 12, Calendar.getInstance().getTime());
 		Rider rider = riderDao.findById(1L);
 		statistic.setRider(rider);
 		
