@@ -4,6 +4,7 @@
 package au.edu.cmu.service;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import au.edu.cmu.dao.MessageFromRiderDao;
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.MessageFromRider;
+import au.edu.cmu.model.MessageRecipient;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
@@ -45,7 +47,10 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public void setMessageAsSent(Message message) {
-		message.setSent(true);
+		List<MessageRecipient> recipients = message.getRecipients();
+		for(MessageRecipient msgRec : recipients){
+			msgRec.setSent(true);
+		}
 		messageDao.edit(message);		
 	}
 	

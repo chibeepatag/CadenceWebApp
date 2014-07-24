@@ -4,6 +4,7 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>au.edu.cmu.model.User</class>
         <class>au.edu.cmu.model.Message</class>
+        <class>au.edu.cmu.model.MessageRecipient</class>
         <class>au.edu.cmu.model.Rider</class>
         <class>au.edu.cmu.model.Statistic</class>
         <class>au.edu.cmu.model.Race</class>

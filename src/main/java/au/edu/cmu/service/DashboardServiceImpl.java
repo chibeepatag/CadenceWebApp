@@ -29,6 +29,8 @@ import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Log;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.MessageFromRider;
+import au.edu.cmu.model.MessageRecipient;
+import au.edu.cmu.model.MessageRecipientId;
 import au.edu.cmu.model.Note;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
@@ -112,22 +114,26 @@ public class DashboardServiceImpl implements DashboardService {
 	
 	@Override
 	public void saveMessage(String msgContent, List<Long> recipientIds) {
-		List<Rider> riderRecipients = new ArrayList<Rider>();
-		for(Long id : recipientIds){
-			Rider rider = riderDao.findById(id);
-			riderRecipients.add(rider);
-		}
-		User coach = getCoach();
-		
-		Race race = raceDao.getLatestRace();
-		
 		Message message = new Message();
 		message.setMessage(msgContent);
-		message.setRecipients(riderRecipients);
+		User coach = getCoach();
 		message.setCoach(coach);
 		message.setMessage_ts(Calendar.getInstance().getTime());
+		Race race = raceDao.getLatestRace();
 		message.setRace(race);
-		message.setSent(false);
+		
+		List<MessageRecipient> riderRecipients = new ArrayList<MessageRecipient>();
+		for(Long id : recipientIds){
+			Rider rider = riderDao.findById(id);
+			MessageRecipient recipient = new MessageRecipient();
+			MessageRecipientId messageRecipientId = new MessageRecipientId();
+			messageRecipientId.setRider(rider);
+			messageRecipientId.setMessage(message);
+			recipient.setSent(false);
+			recipient.setMessageRecipientId(messageRecipientId);
+			riderRecipients.add(recipient);
+		}
+		message.setRecipients(riderRecipients);
 		messageDao.create(message);					
 	}	
 	
