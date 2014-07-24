@@ -25,7 +25,6 @@ function getRandomData(){
 		      "speed": getRandomNumber(),
 			  "latitude": lat,
 			  "longitude": long,
-			  "elevation": getRandomNumber(),
 			  "distance": getRandomNumber(),
 			  "cadence": getRandomNumber(),
 			  "power":getRandomNumber()
