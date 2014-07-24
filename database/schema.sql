@@ -50,7 +50,6 @@ CREATE TABLE statistic
  Speed NUMBER(9,2),
  Latitude NUMBER(9,5),
  Longitude NUMBER(9,5),
- Elevation NUMBER(9,5),
  Distance NUMBER(9,2),
  Cadence NUMBER(9,2),
  Power NUMBER(9,5),
