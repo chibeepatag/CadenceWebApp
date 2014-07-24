@@ -46,8 +46,9 @@ public class DataReceiverController {
 		
 		statisticService.saveStatistic(statistic, nickname);
 		Message messageForRider = messageService.getMessageForRider(nickname);
-		messageService.setMessageAsSent(messageForRider);
+		
 		if(null != messageForRider){
+			messageService.setMessageAsSent(messageForRider);
 			return messageForRider.getMessage();
 		}
 		return MESSAGE_SUCCESS;
