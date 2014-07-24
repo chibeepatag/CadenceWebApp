@@ -27,6 +27,8 @@ public class DataReceiverController {
 	
 	static Logger logger = Logger.getLogger(DataReceiverController.class);
 	
+	public static final String MESSAGE_SUCCESS= "200";
+	
 	@Autowired
 	StatisticService statisticService;
 	
@@ -48,7 +50,7 @@ public class DataReceiverController {
 		if(null != messageForRider){
 			return messageForRider.getMessage();
 		}
-		return "received";
+		return MESSAGE_SUCCESS;
 	}
 	
 	private void logStatisticReceived(String nickname, Statistic statistic){

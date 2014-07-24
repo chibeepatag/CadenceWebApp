@@ -6,6 +6,7 @@ package au.edu.cmu.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Parameter;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,6 +18,7 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,8 @@ import au.edu.cmu.model.Message;
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
 public class MessageDaoImpl implements MessageDao {
+	
+	static Logger logger = Logger.getLogger(MessageDaoImpl.class);
 
 	@PersistenceContext(unitName = "entityManager")
 	EntityManager entityManager;
@@ -87,7 +91,15 @@ public class MessageDaoImpl implements MessageDao {
 		cq.select(messageRoot).where(notSentPred, equalRider).orderBy(messageTsOrder);
 		TypedQuery<Message> messageQuery = this.entityManager.createQuery(cq).setMaxResults(1);
 //		messageQuery.setParameter("rider", rider);
-		return messageQuery.getSingleResult();
+		Message message = null;
+		try{
+			message = messageQuery.getSingleResult();			
+		}catch(NoResultException nre){
+			StringBuffer buffer = new StringBuffer("No message for rider.");
+			buffer.append(rider.getNickname());
+			logger.info(buffer.toString());
+		}
+		return message;
 	}
 	
 	@Override
