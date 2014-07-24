@@ -95,9 +95,7 @@ public class MessageDaoImpl implements MessageDao {
 		try{
 			message = messageQuery.getSingleResult();			
 		}catch(NoResultException nre){
-			StringBuffer buffer = new StringBuffer("No message for rider.");
-			buffer.append(rider.getNickname());
-			logger.info(buffer.toString());
+			logger.info("No message for rider.");
 		}
 		return message;
 	}
