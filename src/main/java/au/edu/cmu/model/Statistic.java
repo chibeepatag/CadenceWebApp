@@ -35,9 +35,7 @@ public class Statistic {
 	
 	private double latitude;
 	
-	private double longitude;
-	
-	private double elevation;
+	private double longitude;		
 	
 	private double distance;
 	
@@ -53,14 +51,13 @@ public class Statistic {
 	}		
 
 	public Statistic(int heart_rate, double speed, double latitude,
-			double longitude, double elevation, double distance,
+			double longitude, double distance,
 			double cadence, double power, Date stat_ts) {
 		super();
 		this.heart_rate = heart_rate;
 		this.speed = speed;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.elevation = elevation;
 		this.distance = distance;
 		this.cadence = cadence;
 		this.power = power;
@@ -117,14 +114,6 @@ public class Statistic {
 		this.longitude = longitude;
 	}
 
-	public double getElevation() {
-		return elevation;
-	}
-
-	public void setElevation(double elevation) {
-		this.elevation = elevation;
-	}
-
 	public double getDistance() {
 		return distance;
 	}
@@ -167,9 +156,7 @@ public class Statistic {
 		buffer.append(" Location: ");
 		buffer.append(this.getLatitude());
 		buffer.append(", ");
-		buffer.append(this.getLongitude());
-		buffer.append(", ");
-		buffer.append(this.getElevation());
+		buffer.append(this.getLongitude());		
 		buffer.append(" Distance: ");
 		buffer.append(this.getDistance());
 		buffer.append(" Cadence: ");

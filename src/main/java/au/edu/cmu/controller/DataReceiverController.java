@@ -37,9 +37,9 @@ public class DataReceiverController {
 	
 	@RequestMapping(value="/riderData", method=RequestMethod.GET)
 	@ResponseBody
-	public String receiveData(String nickname, int heart_rate, double speed, double latitude, double longitude, double elevation, double distance, double cadence, double power, String message){
+	public String receiveData(String nickname, int heart_rate, double speed, double latitude, double longitude, double distance, double cadence, double power, String message){
 		Date stat_ts = Calendar.getInstance().getTime();
-		Statistic statistic = new Statistic(heart_rate, speed, latitude, longitude, elevation, distance, cadence, power, stat_ts);				
+		Statistic statistic = new Statistic(heart_rate, speed, latitude, longitude, distance, cadence, power, stat_ts);				
 		logStatisticReceived(nickname, statistic);
 		
 		messageService.saveMessageFromRider(nickname, message);
