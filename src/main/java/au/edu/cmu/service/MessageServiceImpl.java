@@ -50,11 +50,13 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public void setMessageAsSent(Message message) {
+	public void setMessageAsSent(Message message, Rider rider) {
 		List<MessageRecipient> recipients = message.getRecipients();
 		for(MessageRecipient msgRec : recipients){
-			msgRec.setSent(true);
-			messageRecipientDao.edit(msgRec);
+			if(msgRec.getMessageRecipientId().getRider().equals(rider)){
+				msgRec.setSent(true);				
+				messageRecipientDao.edit(msgRec);
+			}
 		}		
 	}
 	
