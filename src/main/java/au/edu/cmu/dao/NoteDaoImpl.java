@@ -74,7 +74,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 	
 	@Override
-	public List<Note> getNotesForThisRider(Race race){
+	public List<Note> getNotesForThisRace(Race race){
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<Note> cq = cb.createQuery(Note.class);
 		Root<Note> root = cq.from(Note.class);

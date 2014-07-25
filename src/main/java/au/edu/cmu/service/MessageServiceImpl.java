@@ -38,12 +38,15 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Autowired
 	MessageFromRiderDao messageFromRiderDao;
+	
+	@Autowired
+	StatisticService statisticService;
 	/* (non-Javadoc)
 	 * @see au.edu.cmu.service.MessageService#getMessageForRider(java.lang.String)
 	 */
 	@Override
 	public Message getMessageForRider(String nickname) {
-		Race currentRace = raceDao.getCurrentRace();
+		Race currentRace = statisticService.getCurrentRace();
 		Rider rider = currentRace.getRiders().get(nickname);
 		Message message = messageDao.getLatestMessageForRider(rider);
 		return message;
@@ -62,7 +65,7 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public void saveMessageFromRider(String nickname, String message) {
-		Race race = raceDao.getCurrentRace();		
+		Race race = statisticService.getCurrentRace();	
 		Map<String, Rider> riders = race.getRiders();
 		Rider rider = riders.get(nickname);	
 		

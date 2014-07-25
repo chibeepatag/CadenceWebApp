@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.edu.cmu.model.Message;
+import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.service.MessageService;
@@ -26,7 +27,7 @@ import au.edu.cmu.service.StatisticService;
 @Controller
 public class DataReceiverController {
 	
-	static Logger logger = Logger.getLogger(DataReceiverController.class);
+	static Logger logger = Logger.getLogger(DataReceiverController.class);	
 	
 	public static final String MESSAGE_SUCCESS= "200";
 	

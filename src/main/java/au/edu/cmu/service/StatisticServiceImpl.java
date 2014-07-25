@@ -31,14 +31,23 @@ public class StatisticServiceImpl implements StatisticService{
 	@Autowired
 	RaceDao raceDao;
 	
+	public static Race currentRace;
 	@Override
 	public Rider saveStatistic(Statistic statistic, String nickname) {
-		Race race = raceDao.getCurrentRace();		
+		Race race = getCurrentRace();		
 		Map<String, Rider> riders = race.getRiders();
 		Rider rider = riders.get(nickname);		
 		statistic.setRider(rider);
 		statisticsDao.create(statistic);
 		return rider;
+	}
+	
+	@Override
+	public Race getCurrentRace(){
+		if(null == currentRace){
+			currentRace = raceDao.getCurrentRace();			
+		}
+		return currentRace;
 	}
 
 }
