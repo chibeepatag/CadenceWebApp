@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.edu.cmu.model.Message;
+import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.service.MessageService;
 import au.edu.cmu.service.StatisticService;
@@ -46,11 +47,11 @@ public class DataReceiverController {
 			messageService.saveMessageFromRider(nickname, message);			
 		}
 		
-		statisticService.saveStatistic(statistic, nickname);
+		Rider rider = statisticService.saveStatistic(statistic, nickname);
 		Message messageForRider = messageService.getMessageForRider(nickname);
 		
 		if(null != messageForRider){
-			messageService.setMessageAsSent(messageForRider);
+			messageService.setMessageAsSent(messageForRider, rider);
 			return messageForRider.getMessage();
 		}
 		return MESSAGE_SUCCESS;
