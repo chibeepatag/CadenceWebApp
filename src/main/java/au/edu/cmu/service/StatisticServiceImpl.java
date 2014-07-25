@@ -32,12 +32,13 @@ public class StatisticServiceImpl implements StatisticService{
 	RaceDao raceDao;
 	
 	@Override
-	public void saveStatistic(Statistic statistic, String nickname) {
+	public Rider saveStatistic(Statistic statistic, String nickname) {
 		Race race = raceDao.getCurrentRace();		
 		Map<String, Rider> riders = race.getRiders();
 		Rider rider = riders.get(nickname);		
 		statistic.setRider(rider);
-		statisticsDao.create(statistic);				
+		statisticsDao.create(statistic);
+		return rider;
 	}
 
 }

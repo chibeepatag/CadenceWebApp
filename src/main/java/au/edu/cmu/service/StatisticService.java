@@ -3,6 +3,7 @@
  */
 package au.edu.cmu.service;
 
+import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 
 /**
@@ -11,6 +12,6 @@ import au.edu.cmu.model.Statistic;
  */
 public interface StatisticService {
 	
-	void saveStatistic(Statistic statistic, String nickname);
+	Rider saveStatistic(Statistic statistic, String nickname);
 
 }
