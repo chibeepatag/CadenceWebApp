@@ -14,5 +14,5 @@ import au.edu.cmu.model.Race;
  */
 public interface NoteDao extends BaseDao<Note> {
 	
-	List<Note> getNotesForThisRider(Race race);
+	List<Note> getNotesForThisRace(Race race);
 }

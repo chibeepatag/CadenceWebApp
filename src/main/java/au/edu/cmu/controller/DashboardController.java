@@ -26,6 +26,7 @@ import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.service.DashboardService;
 import au.edu.cmu.service.MessageService;
+import au.edu.cmu.service.StatisticServiceImpl;
 
 /**
  * @author ChibeePatag
@@ -79,6 +80,7 @@ public class DashboardController {
 	@RequestMapping(value="/admin/endRace", method=RequestMethod.GET)
 	public String endRace(Model model, @ModelAttribute("currentRace") Race currentRace){
 		Race raceEnded = dashboardService.endRace(currentRace);
+		StatisticServiceImpl.currentRace = null;
 		model.addAttribute("raceEnded", raceEnded);
 		return "shared/endedRace";
 	}
