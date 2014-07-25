@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class Message extends Log{
 	@JoinColumn(name = "user_id", nullable = false)
 	private User coach;
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="messageRecipientId.message")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="messageRecipientId.message", fetch=FetchType.EAGER)
 	private List<MessageRecipient> recipients; 			
 	
 	@ManyToOne
