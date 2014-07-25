@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import au.edu.cmu.dao.MessageDao;
 import au.edu.cmu.dao.MessageFromRiderDao;
+import au.edu.cmu.dao.MessageRecipientDao;
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.MessageFromRider;
@@ -33,6 +34,9 @@ public class MessageServiceImpl implements MessageService {
 	MessageDao messageDao;
 	
 	@Autowired
+	MessageRecipientDao messageRecipientDao;
+	
+	@Autowired
 	MessageFromRiderDao messageFromRiderDao;
 	/* (non-Javadoc)
 	 * @see au.edu.cmu.service.MessageService#getMessageForRider(java.lang.String)
@@ -50,8 +54,8 @@ public class MessageServiceImpl implements MessageService {
 		List<MessageRecipient> recipients = message.getRecipients();
 		for(MessageRecipient msgRec : recipients){
 			msgRec.setSent(true);
-		}
-		messageDao.edit(message);		
+			messageRecipientDao.edit(msgRec);
+		}		
 	}
 	
 	@Override
