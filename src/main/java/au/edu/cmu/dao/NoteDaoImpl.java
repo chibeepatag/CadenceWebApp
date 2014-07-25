@@ -34,9 +34,7 @@ public class NoteDaoImpl implements NoteDao {
 	
 	@Override
 	public Note create(Note entity) {
-		this.entityManager.persist(entity);
-        this.entityManager.flush();
-        this.entityManager.refresh(entity);
+		this.entityManager.persist(entity);     
         return entity;
 	}
 

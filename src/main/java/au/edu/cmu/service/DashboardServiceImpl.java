@@ -79,9 +79,9 @@ public class DashboardServiceImpl implements DashboardService {
 	 * @see au.edu.cmu.service.DashboardService#getCurrentRiders()
 	 */
 	@Override
-	public List<Statistic> buildStatisticTable() throws CadencePersistenceException {
+	public List<Statistic> buildStatisticTable(Race currentRace) throws CadencePersistenceException {
 		try{
-			Map<String, Rider> riderMap = raceDao.getCurrentRace().getRiders();
+			Map<String, Rider> riderMap = currentRace.getRiders();
 			List<Rider> riders = new ArrayList<Rider>(riderMap.values());
 			List<Statistic> latestStatistics = new ArrayList<Statistic>();
 			for(Rider rider : riders){
@@ -103,12 +103,11 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 	
 	@Override
-	public Race endRace() {	
-		Race race = getCurrentRace();
-		race.setIsOngoing(false);
-		race.setRace_end(Calendar.getInstance().getTime());
-		raceDao.edit(race);
-		return race;
+	public Race endRace(Race currentRace) {			
+		currentRace.setIsOngoing(false);
+		currentRace.setRace_end(Calendar.getInstance().getTime());
+		raceDao.edit(currentRace);
+		return currentRace;
 	}
 	
 	
