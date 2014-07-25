@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Fetch;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
@@ -25,6 +26,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import au.edu.cmu.model.MessageFromRider;
 import au.edu.cmu.model.MessageFromRider_;
+import au.edu.cmu.model.MessageRecipient;
+import au.edu.cmu.model.MessageRecipientId;
+import au.edu.cmu.model.MessageRecipientId_;
+import au.edu.cmu.model.MessageRecipient_;
 import au.edu.cmu.model.Message_;
 import au.edu.cmu.model.Note;
 import au.edu.cmu.model.Race;
@@ -48,8 +53,8 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public Message create(Message entity) {
 		this.entityManager.persist(entity);
-        this.entityManager.flush();
-        this.entityManager.refresh(entity);
+//        this.entityManager.flush();
+//        this.entityManager.refresh(entity);
         return entity;
 	}
 
@@ -82,10 +87,11 @@ public class MessageDaoImpl implements MessageDao {
 		CriteriaQuery<Message> cq = cb.createQuery(Message.class);
 				
 		Root<Message> messageRoot = cq.from(Message.class);
-		Join<Message, Rider> riderRoot = messageRoot.join(Message_.recipients);
+		Join<Message, MessageRecipient> msgRecipientRoot = messageRoot.join(Message_.recipients);
+		Join<MessageRecipientId, Rider> riderRoot = msgRecipientRoot.join(MessageRecipient_.messageRecipientId).join(MessageRecipientId_.rider);
 		
 //		Parameter<Rider> riderRecipientParam = cb.parameter(Rider.class, "rider");			
-		Predicate notSentPred = cb.equal(messageRoot.get(Message_.sent), Boolean.FALSE);
+		Predicate notSentPred = cb.equal(msgRecipientRoot.get(MessageRecipient_.sent), Boolean.FALSE);
 		Predicate equalRider = cb.equal(riderRoot, rider);
 		Order messageTsOrder = cb.desc(messageRoot.get(Message_.message_ts));
 		cq.select(messageRoot).where(notSentPred, equalRider).orderBy(messageTsOrder);

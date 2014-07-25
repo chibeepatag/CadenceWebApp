@@ -35,8 +35,7 @@ public class Message extends Log{
 	@JoinColumn(name = "user_id", nullable = false)
 	private User coach;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name = "message_recipient", joinColumns = @JoinColumn(name = "Message_ID"))
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="messageRecipientId.message")
 	private List<MessageRecipient> recipients; 			
 	
 	@ManyToOne

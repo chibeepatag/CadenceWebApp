@@ -42,8 +42,8 @@ public class MessageFromRiderDaoImpl implements MessageFromRiderDao {
 	@Override
 	public MessageFromRider create(MessageFromRider entity) {
 		this.entityManager.persist(entity);
-        this.entityManager.flush();
-        this.entityManager.refresh(entity);
+//        this.entityManager.flush();
+//        this.entityManager.refresh(entity);
         return entity;
 	}
 

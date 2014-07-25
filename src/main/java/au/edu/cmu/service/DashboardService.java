@@ -17,13 +17,13 @@ import au.edu.cmu.model.Statistic;
  */
 public interface DashboardService {
 
-	List<Statistic> buildStatisticTable() throws CadencePersistenceException;
+	List<Statistic> buildStatisticTable(Race currentRace) throws CadencePersistenceException;
 	
 	Statistic getLatestStatistic(Rider rider);
 	
 	Race getCurrentRace();
 	
-	Race endRace();
+	Race endRace(Race currentRace);
 	
 	/**
 	 * Saves the message sent to the riders.
