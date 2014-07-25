@@ -16,7 +16,7 @@ public interface MessageService {
 
 	Message getMessageForRider(String nickname);
 
-	void setMessageAsSent(Message message);
+	void setMessageAsSent(Message message, Rider rider);
 	
 	void saveMessageFromRider(String nickname, String message);
 	
