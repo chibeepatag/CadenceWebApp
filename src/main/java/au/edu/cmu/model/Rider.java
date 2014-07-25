@@ -75,6 +75,30 @@ public class Rider {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}	
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (rider_id ^ (rider_id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rider other = (Rider) obj;
+		if (rider_id != other.rider_id)
+			return false;
+		return true;
+	}
+	
+	
 	
 }
