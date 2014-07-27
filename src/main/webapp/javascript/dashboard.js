@@ -29,6 +29,7 @@ $( document ).on( "pageinit", "#page", function() {
 			position: latlng,
 			map: map,
 			title: name,
+			opacity: 0.0,
 			labelClass: "labels", // the CSS class for the label
 		    labelInBackground: false,
 		    labelContent: jersey,
@@ -86,7 +87,7 @@ function updateStatistics(data){
 		var cadence = stat.cadence;
 		var power = stat.power;
 		var heartRate = stat.heart_rate;
-		var longitude = stat.logitude;
+		var longitude = stat.longitude;
 		var latitude = stat.latitude;
 		var row = $("#statTable").find(".riderRow").find(".rider_id").filter(function() { return $(this).text() === riderId.toString() }).parent().parent();
 		var key = $(row).find(".name").text();
@@ -110,7 +111,7 @@ function updateStatistics(data){
 		}
 
 	}
-//	map.setCenter(findCenter());
+	map.setCenter(findCenter());
 
 }
 
