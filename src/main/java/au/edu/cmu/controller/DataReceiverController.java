@@ -44,7 +44,7 @@ public class DataReceiverController {
 		Statistic statistic = new Statistic(heart_rate, speed, latitude, longitude, distance, cadence, power, stat_ts);				
 		logStatisticReceived(nickname, statistic);
 		
-		if(message.length() > 0){
+		if(null != message && message.length() > 0){
 			messageService.saveMessageFromRider(nickname, message);			
 		}
 		
