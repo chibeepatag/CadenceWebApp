@@ -88,7 +88,11 @@ public class DashboardServiceImpl implements DashboardService {
 			List<Statistic> latestStatistics = new ArrayList<Statistic>();
 			for (Rider rider : riders) {
 				Statistic statistic = getLatestStatistic(rider);
-				latestStatistics.add(statistic);
+				if(null==statistic){
+					statistic = new Statistic();
+					statistic.setRider(rider);
+				}
+				latestStatistics.add(statistic);	
 			}
 
 			return latestStatistics;
