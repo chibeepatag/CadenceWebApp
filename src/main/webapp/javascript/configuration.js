@@ -93,8 +93,13 @@ function deleteRiders(){
 		data: {"ids":ids},
 		dataType: "json",
 		type: "POST",
+		success: removeDeletedRow,
 		error: cantDelete
 	});	
+	
+}
+
+function removeDeletedRow(){
 	$(deleteRows).remove();
 }
 
