@@ -5,6 +5,7 @@ package au.edu.cmu.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Statistic {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int stat_id;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="Rider_ID")
 	private Rider rider;
 	
