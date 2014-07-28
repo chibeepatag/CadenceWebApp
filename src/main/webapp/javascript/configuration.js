@@ -47,7 +47,12 @@ function addRider(){
 			type: "POST",
 			success: appendNewRider
 		});
+<<<<<<< HEAD
 	} 	
+=======
+	}
+	$("#resetNewRider").click();
+>>>>>>> master
 }
 
 function selectEditRider(){
@@ -98,11 +103,21 @@ function deleteRiders(){
 	$.ajax({
 		url: "deleteRiders",
 		data: {"ids":ids},
-		dataType: "json",
-		type: "POST",		
+		type: "POST",
+		error: cantDelete,
+		success: function(data){
+			$(deleteRows).remove();
+		}
 	});	
-	$(deleteRows).remove();
-		
+	
+}
+
+function cantDelete(jqXHR, textStatus, errorThrown){
+	console.log('cantDelet called');
+	if(jqXHR.status == 500){
+		$(".errorPopup").text("Cannot delete rider. He has participated in a race.");
+		$("#errorButton").click();		
+	}
 }
 
 function removeRidersFromTable(){

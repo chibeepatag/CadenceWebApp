@@ -88,7 +88,11 @@ public class DashboardServiceImpl implements DashboardService {
 			List<Statistic> latestStatistics = new ArrayList<Statistic>();
 			for (Rider rider : riders) {
 				Statistic statistic = getLatestStatistic(rider);
-				latestStatistics.add(statistic);
+				if(null==statistic){
+					statistic = new Statistic();
+					statistic.setRider(rider);
+				}
+				latestStatistics.add(statistic);	
 			}
 
 			return latestStatistics;
@@ -184,6 +188,7 @@ public class DashboardServiceImpl implements DashboardService {
 				if (log instanceof Note) {
 					paragraph.add("Note: ");
 					paragraph.add(log.getMessage_ts().toString());
+<<<<<<< HEAD
 					paragraph.add(((Note) log).getNote());
 				} else if (log instanceof Message) {
 					paragraph.add("Message From coach: ");
@@ -192,6 +197,28 @@ public class DashboardServiceImpl implements DashboardService {
 				} else if (log instanceof MessageFromRider) {
 					paragraph.add("Message From coach: ");
 					paragraph.add(log.getMessage_ts().toString());
+=======
+					paragraph.add(" ");
+					paragraph.add(((Note) log).getNote());
+				} else if (log instanceof Message) {
+					paragraph.add("Message From coach: ");
+					paragraph.add("Sent to ");
+					
+					for(MessageRecipient recipient : ((Message) log).getRecipients()){
+						paragraph.add(recipient.getMessageRecipientId().getRider().getNickname());
+						paragraph.add(" ");
+					}			
+					
+					paragraph.add(log.getMessage_ts().toString());
+					paragraph.add(" ");
+					paragraph.add(((Message) log).getMessage());
+				} else if (log instanceof MessageFromRider) {
+					paragraph.add("Message from ");
+					paragraph.add(((MessageFromRider) log).getFrom().getNickname());
+					paragraph.add(": ");
+					paragraph.add(log.getMessage_ts().toString());
+					paragraph.add(" ");
+>>>>>>> master
 					paragraph.add(((MessageFromRider) log).getMessage());
 				}
 				document.add(paragraph);
