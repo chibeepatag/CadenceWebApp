@@ -91,20 +91,18 @@ function deleteRiders(){
 	$.ajax({
 		url: "deleteRiders",
 		data: {"ids":ids},
-		dataType: "json",
 		type: "POST",
-		success: removeDeletedRow,
-		error: cantDelete
+		error: cantDelete,
+		success: function(data){
+			$(deleteRows).remove();
+		}
 	});	
 	
 }
 
-function removeDeletedRow(){
-	$(deleteRows).remove();
-}
-
 function cantDelete(jqXHR, textStatus, errorThrown){
-	if(textStatus === 'error'){
+	console.log('cantDelet called');
+	if(jqXHR.status == 500){
 		$(".errorPopup").text("Cannot delete rider. He has participated in a race.");
 		$("#errorButton").click();		
 	}
