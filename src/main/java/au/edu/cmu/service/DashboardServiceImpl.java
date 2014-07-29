@@ -188,16 +188,6 @@ public class DashboardServiceImpl implements DashboardService {
 				if (log instanceof Note) {
 					paragraph.add("Note: ");
 					paragraph.add(log.getMessage_ts().toString());
-<<<<<<< HEAD
-					paragraph.add(((Note) log).getNote());
-				} else if (log instanceof Message) {
-					paragraph.add("Message From coach: ");
-					paragraph.add(log.getMessage_ts().toString());
-					paragraph.add(((Message) log).getMessage());
-				} else if (log instanceof MessageFromRider) {
-					paragraph.add("Message From coach: ");
-					paragraph.add(log.getMessage_ts().toString());
-=======
 					paragraph.add(" ");
 					paragraph.add(((Note) log).getNote());
 				} else if (log instanceof Message) {
@@ -218,7 +208,6 @@ public class DashboardServiceImpl implements DashboardService {
 					paragraph.add(": ");
 					paragraph.add(log.getMessage_ts().toString());
 					paragraph.add(" ");
->>>>>>> master
 					paragraph.add(((MessageFromRider) log).getMessage());
 				}
 				document.add(paragraph);

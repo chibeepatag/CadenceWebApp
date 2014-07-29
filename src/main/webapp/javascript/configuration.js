@@ -47,12 +47,9 @@ function addRider(){
 			type: "POST",
 			success: appendNewRider
 		});
-<<<<<<< HEAD
-	} 	
-=======
-	}
+	} 		
 	$("#resetNewRider").click();
->>>>>>> master
+
 }
 
 function selectEditRider(){
