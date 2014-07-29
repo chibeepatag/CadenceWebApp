@@ -37,10 +37,23 @@ $( document ).on( "pageinit", "#page", function() {
 		});
 		markers[name] = marker;
 	});
-	
+	map.fitBounds(extendBounds());	
 	map.setCenter(findCenter());	
 });
 
+function extendBounds(){
+	var bounds = new google.maps.LatLngBounds();
+	var lat= 0;
+	var long =0;
+		for (var i in markers){
+		   	lat = markers[i].getPosition().lat();
+		   	long = markers[i].getPosition().lng();
+		   	var latlng = new google.maps.LatLng(lat, long);
+		   	
+			bounds.extend(latlng);
+			}
+ return bounds;
+}
 function findCenter(){
 	var sumLat = 0;
 	var sumLong = 0;
@@ -112,6 +125,7 @@ function updateStatistics(data){
 
 	}
 	map.setCenter(findCenter());
+	map.fitBounds(extendBounds());
 
 }
 
