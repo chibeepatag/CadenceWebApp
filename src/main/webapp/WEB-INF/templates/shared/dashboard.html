@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1" />
 <title>Dashboard</title>
@@ -37,9 +37,10 @@
 	src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
 </head>
 <body>
-	<div data-role="page" id="page">
+	<div data-role="page" id="page">		
 		<div data-role="header" data-theme="a">
-			<h1>Race Management System</h1>
+			<h1>Race Management System</h1>	
+			<button disabled="" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-left" sec:authentication="name">User</button>			
 			<a th:href="@{/j_spring_security_logout}" data-icon="power"
 				class="ui-btn-right">Logout</a>
 		</div>
@@ -78,7 +79,7 @@
 							data-icon="edit">Message and Notes</button></a>
 				</div>
 				<div id="endRaceContainer">
-					<div>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
 						<a href="#endRaceDiv" data-rel="popup" data-position-to="window"
 							data-transition="pop"
 							class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">End
@@ -86,7 +87,7 @@
 					</div>
 					<div data-role="popup" id="endRaceDiv" data-overlay-theme="b"
 						data-theme="b" data-dismissible="false" style="max-width: 400px;">
-						<div data-role="header" data-theme="a">
+						<div data-role="header" data-theme="a" >
 							<h1>End Race</h1>
 						</div>
 						<div role="main" class="ui-content">
@@ -106,7 +107,7 @@
 
 
 		<div class="msgAndNotes" data-role="panel" id="messageAndNotes">
-			<div class="messageContainer">
+			<div class="messageContainer" sec:authorize="hasRole('ROLE_ADMIN')">
 				<span>Message: &nbsp;</span>
 				<textarea rows="5" cols="45" id="messageTxt"></textarea>
 				<div class="ui-grid-b">				
@@ -122,7 +123,7 @@
 				<button id="sendMsg">Send</button>
 				<button id="msgClearBtn">Reset</button>
 			</div>
-			<div class="notesContainer">
+			<div class="notesContainer" sec:authorize="hasRole('ROLE_ADMIN')">
 				<span>Notes: &nbsp;</span>
 				<textarea rows="5" cols="45" id="notesTxt"></textarea>
 				<button id="saveNote">Save</button>
