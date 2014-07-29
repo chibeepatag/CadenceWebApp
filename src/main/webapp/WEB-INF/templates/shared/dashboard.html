@@ -49,7 +49,9 @@
 			<div class="ui-content" id="map-canvas">
 					<!-- map loads here... -->
 			</div>
-			
+			<div class="autocenterDiv">
+				<span><input type="checkbox" id="autoCenter"/></span><span class="autocenter">Autocenter </span>
+			</div>
 			<div id="raceDetails">
 				Event: <span th:text="${currentRace.race_name}" id="raceName"></span><br />
 				Start Time: <span th:text="${currentRace.race_start}"></span>

@@ -111,7 +111,10 @@ function updateStatistics(data){
 		}
 
 	}
-	map.setCenter(findCenter());
+	var autoCenter = $('#autoCenter').prop('checked');
+	if(autoCenter){
+		map.setCenter(findCenter());		
+	}	
 
 }
 
