@@ -144,6 +144,7 @@ function sendMsg(){
 			data: {"message": messageTxt, "recipientIds":selectedRows },
 			success: function(data){
 				$("#messageTxt").val("");
+				$(".riderRow").removeClass("selectedRow");
 			}
 		});
 	}	

@@ -46,9 +46,14 @@ function addRider(){
 			dataType: "json",
 			type: "POST",
 			success: appendNewRider
+
 		});
-	} 		
+	}else {
+		$(".errorPopup").text("New Rider Missing Information");
+			$("#errorButton").click()}; 		
+
 	$("#resetNewRider").click();
+
 
 }
 
@@ -129,9 +134,9 @@ function createRace(){
 		
 		
 		var sameJersey= false;
-		for(var x=0; x<riderJerseys.length;x++){
+		for(var x=0; x<riderJerseys.length-1;x++){
 			for (var y=x+1; y<riderJerseys.length; y++){
-			  if (riderJerseys[x].innerText == riderJerseys[y].innerText){
+			  if (riderJerseys[x].innerHTML == riderJerseys[y].innerHTML){
 			  	sameJersey= true;
 			  }
 			}
