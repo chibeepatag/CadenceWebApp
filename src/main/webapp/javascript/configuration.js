@@ -110,7 +110,6 @@ function deleteRiders(){
 }
 
 function cantDelete(jqXHR, textStatus, errorThrown){
-	console.log('cantDelet called');
 	if(jqXHR.status == 500){
 		$(".errorPopup").text("Cannot delete rider. He has participated in a race.");
 		$("#errorButton").click();		
