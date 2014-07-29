@@ -46,18 +46,15 @@ function addRider(){
 			dataType: "json",
 			type: "POST",
 			success: appendNewRider
-<<<<<<< HEAD
-		});
-	} 		
-	$("#resetNewRider").click();
 
-=======
-		
-			});
+		});
 	}else {
 		$(".errorPopup").text("New Rider Missing Information");
-			$("#errorButton").click()} 	
->>>>>>> 07086d67629d46b93e895fc6d156eb793d339273
+			$("#errorButton").click()}; 		
+
+	$("#resetNewRider").click();
+
+
 }
 
 function selectEditRider(){
@@ -137,9 +134,9 @@ function createRace(){
 		
 		
 		var sameJersey= false;
-		for(var x=0; x<riderJerseys.length;x++){
+		for(var x=0; x<riderJerseys.length-1;x++){
 			for (var y=x+1; y<riderJerseys.length; y++){
-			  if (riderJerseys[x].innerText == riderJerseys[y].innerText){
+			  if (riderJerseys[x].innerHTML == riderJerseys[y].innerHTML){
 			  	sameJersey= true;
 			  }
 			}
