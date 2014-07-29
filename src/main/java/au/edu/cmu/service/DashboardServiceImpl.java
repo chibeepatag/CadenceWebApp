@@ -183,33 +183,40 @@ public class DashboardServiceImpl implements DashboardService {
 		try {
 			PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 			document.open();
-			for (Log log : logContent) {
-				Paragraph paragraph = new Paragraph();
-				if (log instanceof Note) {
-					paragraph.add("Note: ");
-					paragraph.add(log.getMessage_ts().toString());
-					paragraph.add(" ");
-					paragraph.add(((Note) log).getNote());
-				} else if (log instanceof Message) {
-					paragraph.add("Message From coach: ");
-					paragraph.add("Sent to ");
-					
-					for(MessageRecipient recipient : ((Message) log).getRecipients()){
-						paragraph.add(recipient.getMessageRecipientId().getRider().getNickname());
+			if(!logContent.isEmpty()){				
+				for (Log log : logContent) {
+					Paragraph paragraph = new Paragraph();
+					if (log instanceof Note) {
+						paragraph.add("Note: ");
+						paragraph.add(log.getMessage_ts().toString());
 						paragraph.add(" ");
-					}			
-					
-					paragraph.add(log.getMessage_ts().toString());
-					paragraph.add(" ");
-					paragraph.add(((Message) log).getMessage());
-				} else if (log instanceof MessageFromRider) {
-					paragraph.add("Message from ");
-					paragraph.add(((MessageFromRider) log).getFrom().getNickname());
-					paragraph.add(": ");
-					paragraph.add(log.getMessage_ts().toString());
-					paragraph.add(" ");
-					paragraph.add(((MessageFromRider) log).getMessage());
+						paragraph.add(((Note) log).getNote());
+					} else if (log instanceof Message) {
+						paragraph.add("Message From coach: ");
+						paragraph.add("Sent to ");
+						
+						for(MessageRecipient recipient : ((Message) log).getRecipients()){
+							paragraph.add(recipient.getMessageRecipientId().getRider().getNickname());
+							paragraph.add(" ");
+						}			
+						
+						paragraph.add(log.getMessage_ts().toString());
+						paragraph.add(" ");
+						paragraph.add(((Message) log).getMessage());
+					} else if (log instanceof MessageFromRider) {
+						paragraph.add("Message from ");
+						paragraph.add(((MessageFromRider) log).getFrom().getNickname());
+						paragraph.add(": ");
+						paragraph.add(log.getMessage_ts().toString());
+						paragraph.add(" ");
+						paragraph.add(((MessageFromRider) log).getMessage());
+					}
+					document.add(paragraph);
 				}
+			}else{
+				Paragraph paragraph = new Paragraph();
+				paragraph.add("No messages have been sent.");
+				paragraph.add("No notes have been saved.");			
 				document.add(paragraph);
 			}
 			document.close();
