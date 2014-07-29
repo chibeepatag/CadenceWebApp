@@ -37,7 +37,7 @@ $( document ).on( "pageinit", "#page", function() {
 		});
 		markers[name] = marker;
 	});
-	map.fitBounds(extendBounds());	
+		
 	map.setCenter(findCenter());	
 });
 
@@ -125,11 +125,12 @@ function updateStatistics(data){
 
 	}
 
-	map.fitBounds(extendBounds());
+	
 
 	var autoCenter = $('#autoCenter').prop('checked');
 	if(autoCenter){
-		map.setCenter(findCenter());		
+		map.setCenter(findCenter());
+		map.fitBounds(extendBounds());		
 	}	
 
 }

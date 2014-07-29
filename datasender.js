@@ -23,6 +23,7 @@ function getRandomData(){
 	return { "nickname" : "Matt", 
 	         "heart_rate": getRandomNumber(),
 		      "speed": getRandomNumber(),
+		      "distance" :getRandomNumber(),
 			  "latitude": lat,
 			  "longitude": long,
 			  "cadence": getRandomNumber(),
