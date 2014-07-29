@@ -46,10 +46,18 @@ function addRider(){
 			dataType: "json",
 			type: "POST",
 			success: appendNewRider
+<<<<<<< HEAD
 		});
 	} 		
 	$("#resetNewRider").click();
 
+=======
+		
+			});
+	}else {
+		$(".errorPopup").text("New Rider Missing Information");
+			$("#errorButton").click()} 	
+>>>>>>> 07086d67629d46b93e895fc6d156eb793d339273
 }
 
 function selectEditRider(){
