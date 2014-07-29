@@ -124,8 +124,13 @@ function updateStatistics(data){
 		}
 
 	}
-	map.setCenter(findCenter());
+
 	map.fitBounds(extendBounds());
+
+	var autoCenter = $('#autoCenter').prop('checked');
+	if(autoCenter){
+		map.setCenter(findCenter());		
+	}	
 
 }
 

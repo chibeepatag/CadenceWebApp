@@ -56,3 +56,12 @@
 .newMessage{
 	color: red;
 }
+
+.autocenterDiv{
+	padding: 10px;
+	display: inline-flex;
+}
+
+.autocenter{
+	margin-left: 30px;
+}
