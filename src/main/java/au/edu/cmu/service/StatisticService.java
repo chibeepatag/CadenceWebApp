@@ -3,6 +3,7 @@
  */
 package au.edu.cmu.service;
 
+import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
@@ -13,7 +14,7 @@ import au.edu.cmu.model.Statistic;
  */
 public interface StatisticService {
 	
-	Rider saveStatistic(Statistic statistic, String nickname);
+	Rider saveStatistic(Statistic statistic, String nickname) throws RiderNotInRaceException;
 	
 	Race getCurrentRace();
 

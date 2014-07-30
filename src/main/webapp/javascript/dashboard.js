@@ -6,6 +6,7 @@ var markers = {};
 var interval;
 var map;
 var messageTemplateMap={"left":"Left", "right":"Right", "breakAway":"Break away", "timeGap":"Time Gap", "safety":"Safety"};
+var startTime;
 
 $( document ).on( "pageinit", "#page", function() {
     
@@ -74,6 +75,8 @@ function findCenter(){
 
 $(document).ready(function(){		
 	interval = setInterval(refreshDashboard,5000);
+	var startString = $("#raceStartTime").text(); 
+	startTime = new Date(startString);
 	$("#sendMsg").click(sendMsg);
 	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
@@ -91,6 +94,7 @@ function refreshDashboard(){
 		dataType: "json",
 		success: updateStatistics
 	});
+	updateRaceDuration();
 }
 
 function updateStatistics(data){	
@@ -129,12 +133,20 @@ function updateStatistics(data){
 
 	
 
-	var autoCenter = $('#autoCenter').prop('checked');
+	var autoCenter = $('#checkbox-h-2a').prop('checked');
 	if(autoCenter){
 		map.setCenter(findCenter());
 		map.fitBounds(extendBounds());		
 	}	
 
+}
+
+function updateRaceDuration(){	
+	var now = new Date();
+	var duration = new Date(now - startTime);	
+	
+	$("#durationHour").text(duration.getHours() - 12);
+	$("#durationMin").text(duration.getMinutes());
 }
 
 function endRace(){
