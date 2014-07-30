@@ -13,7 +13,9 @@ $( document ).on( "pageinit", "#page", function() {
         
     function drawMap() {
         var myOptions = {
-            zoom: 17,            
+            zoom: 17,
+			minZoom: 10,
+            maxZoom: 18,            
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);              
