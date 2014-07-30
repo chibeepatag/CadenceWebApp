@@ -7,8 +7,9 @@ var interval;
 var map;
 var messageTemplateMap={"left":"Left", "right":"Right", "breakAway":"Break away", "timeGap":"Time Gap", "safety":"Safety"};
 
+
 $( document ).on( "pageinit", "#page", function() {
-    
+	 $("#messageAndNotes").panel("open");
     drawMap();
         
     function drawMap() {
@@ -38,6 +39,8 @@ $( document ).on( "pageinit", "#page", function() {
 	});
 	
 	map.setCenter(findCenter());	
+	
+	
 });
 
 function findCenter(){

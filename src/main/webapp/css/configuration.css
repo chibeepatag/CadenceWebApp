@@ -1,3 +1,16 @@
+.ui-page {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	font-family:"Cambria", Times, serif;
+	
+	font-size: 12pt;
+    width:auto;    
+	color: white;
+        background: linear-gradient(black,#626365);
+       
+}
+
 #ridersDiv{
 	float: left;
 	margin: 10px;
@@ -5,4 +18,80 @@
 
 #newRiderDiv{
 	margin: 10px;
+	position: absolute;
+	right: 50px;
+	width: 40%
+}
+
+.ui-header{
+	font-size:16pt;
+
+	}
+
+
+#addRider{
+	width: 250px;
+background: khaki;
+position: relative;
+left: 15%;
+}
+
+#resButton{
+	
+background: khaki;
+	position: relative;
+left: 25%;
+width: 50px;
+text-align: center;
+}
+
+#NewRiderTable{
+	width: 600px;
+	border-width: thick;
+    border: 8px solid;
+    border-radius: 25px;
+    border-color: orange;
+    text-align: center;
+    font-size: 12pt;
+    color: black;
+    background: white;
+	
+}
+
+.riderTable{
+	display: table;
+    width: 100%;
+    border-width: thick;
+    border: 8px solid;
+    border-radius: 25px;
+    border-color: orange;
+    text-align: center;
+    font-size: 12pt;
+    color: black;
+    background: white;
+    
+}
+
+table td{
+border:1px solid black;
+width: 80px;
+padding-top: 2px;
+padding-bottom: 2px;
+padding-left: 10px;
+padding-right: 10px;
+
+}
+
+th{
+	background-color: khaki;
+	border: 1px solid black;
+	font-size: 14pt;
+	padding: 5px;
+}
+
+
+
+
+#newRiderTab{
+	padding: 10px;
 }

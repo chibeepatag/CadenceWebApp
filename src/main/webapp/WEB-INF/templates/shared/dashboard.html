@@ -38,10 +38,10 @@
 </head>
 <body>
 	<div data-role="page" id="page">
-		<div data-role="header" data-theme="a">
+		<div data-role="header" data-fullscreen="true">
 			<h1>Race Management System</h1>
 			<a th:href="@{/j_spring_security_logout}" data-icon="power"
-				class="ui-btn-right">Logout</a>
+				class="ui-btn-left">Logout</a>
 		</div>
 
 		<div data-role="content">
@@ -57,10 +57,10 @@
 
 			<div>
 				<div class="weather">
-					<div style="width: 300px;">
+					<div style="width: 350px;">
 						<iframe style="display: block;"
 							src="http://cdn1.willyweather.com.au/widget/loadView.html?id=13158"
-							width="300" height="228" frameborder="0" scrolling="no"></iframe>
+							width="350" height="228" frameborder="0" scrolling="no"></iframe>
 						<a
 							style="height: 20px; text-indent: -9999em; z-index: 1; margin: -20px 0 0 0; display: block; position: relative"
 							href="http://www.willyweather.com.au/sa/adelaide/adelaide.html">weather
@@ -71,10 +71,17 @@
 				<div class="statisticTable"
 					th:replace="shared/statisticTable :: statTable"></div>
 				<div class="endAndNotes">
-				<div>
-					<a href="#messageAndNotes" data-rel="close"><button
-							data-icon="edit">Message and Notes</button></a>
-				</div>
+				
+				
+				
+				 <div>
+					
+							<a href="downloadLogs">
+			<button id="downloadMsgNotes"
+				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
+				Messages and Notes</button>
+			</a>
+				</div> 
 				<div id="endRaceContainer">
 					<div>
 						<a href="#endRaceDiv" data-rel="popup" data-position-to="window"
@@ -103,11 +110,14 @@
 		</div>
 
 
-		<div class="msgAndNotes" data-role="panel" id="messageAndNotes">
-			<div class="messageContainer">
-				<span>Message: &nbsp;</span>
-				<textarea rows="5" cols="45" id="messageTxt"></textarea>
-				<div class="ui-grid-b">				
+		<div class="msgAndNotes" data-role="panel" data-panel="menu" id="messageAndNotes" data-position="right" data-swipe-close="false" data-dismissible="false" data-position-fixed="true" data-display="overlay">
+			
+			<ul data-role="listview" data-divider-theme="a">
+						<li data-role="list-divider" id="li1">Message</li>
+			
+				
+				<textarea id="messageTxt" style="height: 90px;"></textarea>
+				<div class="ui-grid-c">				
 								
 					<button id="left" class="msgTemplate ui-block-a">Left</button>
 					<button id="right" class="msgTemplate ui-block-b">Right</button>					
@@ -119,18 +129,20 @@
 				</div>				
 				<button id="sendMsg">Send</button>
 				<button id="msgClearBtn">Reset</button>
-			</div>
-			<div class="notesContainer">
-				<span>Notes: &nbsp;</span>
-				<textarea rows="5" cols="45" id="notesTxt"></textarea>
+			<br/><br/>
+			
+			<li data-role="list-divider" id="li2">Notes</li>
+				
+				<textarea id="notesTxt" style="height: 120px;"></textarea>
 				<button id="saveNote">Save</button>
 				<button id="notesClearBtn">Reset</button>
-			</div>
-			<a href="downloadLogs">
+			
+			</ul>
+			<!-- <a href="downloadLogs">
 			<button id="downloadMsgNotes"
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
 				Messages and Notes</button>
-			</a>
+			</a> -->
 		</div>
 
 	</div>
