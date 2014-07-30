@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
@@ -31,6 +32,8 @@ public class DataReceiverController {
 	
 	public static final String MESSAGE_SUCCESS= "200";
 	
+	public static final String MESSAGE_FAIL = "500";
+	
 	@Autowired
 	StatisticService statisticService;
 	
@@ -45,16 +48,23 @@ public class DataReceiverController {
 		logStatisticReceived(nickname, statistic);
 		
 		if(null != message && message.length() > 0){
-			messageService.saveMessageFromRider(nickname, message);			
+			try {
+				messageService.saveMessageFromRider(nickname, message);
+				
+				Rider rider = statisticService.saveStatistic(statistic, nickname);
+				Message messageForRider = messageService.getMessageForRider(nickname);
+				
+				if(null != messageForRider){
+					messageService.setMessageAsSent(messageForRider, rider);
+					return messageForRider.getMessage();
+				}
+			} catch (RiderNotInRaceException e) {				
+				e.printStackTrace();
+				return MESSAGE_FAIL;
+			}			
 		}
 		
-		Rider rider = statisticService.saveStatistic(statistic, nickname);
-		Message messageForRider = messageService.getMessageForRider(nickname);
 		
-		if(null != messageForRider){
-			messageService.setMessageAsSent(messageForRider, rider);
-			return messageForRider.getMessage();
-		}
 		return MESSAGE_SUCCESS;
 	}
 	

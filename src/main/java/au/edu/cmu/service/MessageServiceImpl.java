@@ -14,6 +14,7 @@ import au.edu.cmu.dao.MessageDao;
 import au.edu.cmu.dao.MessageFromRiderDao;
 import au.edu.cmu.dao.MessageRecipientDao;
 import au.edu.cmu.dao.RaceDao;
+import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.MessageFromRider;
 import au.edu.cmu.model.MessageRecipient;
@@ -64,11 +65,13 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public void saveMessageFromRider(String nickname, String message) {
+	public void saveMessageFromRider(String nickname, String message) throws RiderNotInRaceException{
 		Race race = statisticService.getCurrentRace();	
 		Map<String, Rider> riders = race.getRiders();
 		Rider rider = riders.get(nickname);	
-		
+		if(null == rider){
+			throw new RiderNotInRaceException(nickname);
+		}
 		MessageFromRider msgFromRider = new MessageFromRider();
 		msgFromRider.setRace(race);
 		msgFromRider.setMessage(message);

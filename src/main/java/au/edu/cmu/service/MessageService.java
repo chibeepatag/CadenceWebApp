@@ -3,6 +3,7 @@
  */
 package au.edu.cmu.service;
 
+import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.MessageFromRider;
 import au.edu.cmu.model.Race;
@@ -18,7 +19,7 @@ public interface MessageService {
 
 	void setMessageAsSent(Message message, Rider rider);
 	
-	void saveMessageFromRider(String nickname, String message);
+	void saveMessageFromRider(String nickname, String message) throws RiderNotInRaceException;
 	
 	MessageFromRider getMessageFromRider(Rider rider, Race currentRace);
 }
