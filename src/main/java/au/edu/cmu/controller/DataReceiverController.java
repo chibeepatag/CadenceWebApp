@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.Race;
@@ -59,7 +60,9 @@ public class DataReceiverController {
 					return messageForRider.getMessage();
 				}
 			} catch (RiderNotInRaceException e) {				
-				e.printStackTrace();
+				e.printStackTrace();				
+				return MESSAGE_FAIL;
+			}catch (CadencePersistenceException cpe){
 				return MESSAGE_FAIL;
 			}			
 		}

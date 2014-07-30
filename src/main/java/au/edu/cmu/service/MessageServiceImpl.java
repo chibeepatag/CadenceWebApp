@@ -7,9 +7,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import au.edu.cmu.controller.DataReceiverController;
 import au.edu.cmu.dao.MessageDao;
 import au.edu.cmu.dao.MessageFromRiderDao;
 import au.edu.cmu.dao.MessageRecipientDao;
@@ -28,6 +30,8 @@ import au.edu.cmu.model.Rider;
 @Service
 public class MessageServiceImpl implements MessageService {
 
+	static Logger logger = Logger.getLogger(MessageServiceImpl.class);	
+	
 	@Autowired
 	RaceDao raceDao;
 		
@@ -70,6 +74,7 @@ public class MessageServiceImpl implements MessageService {
 		Map<String, Rider> riders = race.getRiders();
 		Rider rider = riders.get(nickname);	
 		if(null == rider){
+			logger.info(String.format("%s attempted to send the message, %s", nickname, message));
 			throw new RiderNotInRaceException(nickname);
 		}
 		MessageFromRider msgFromRider = new MessageFromRider();
