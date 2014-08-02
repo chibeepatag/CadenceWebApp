@@ -3,24 +3,21 @@
 html,body {
 	height: 100%;
 	margin: 0px;
-	padding: 0px;
-	font-family:"Cambria", Times, serif;
+	padding: 0px;	
 	font-size: 12pt;
     width:auto;    
 	color: black;
-    background: linear-gradient(black,#626365);       
+ /*   background: linear-gradient(black,#626365);      */ 
 }
 
 .ui-page{
     min-width: 100% !important;
 }
-.ui-content, .ui-page{
-	
+.ui-content, .ui-page{	
 	height: 100%;
-	font-family:"Cambria", Times, serif;
 	font-size: 14pt;
 	color: black;
-        background: linear-gradient(black,#626365);
+       /* background: linear-gradient(black,#626365);*/
         color: white;
         overflow: scroll;
     
@@ -28,44 +25,35 @@ html,body {
 
 
 #map-page,#map-canvas {
-	width: 80%;
+	width: 76%;
 	height: 300px;
 	padding: 0;
 	border: 5px solid;
     border-radius: 10px;
     border-color: orange;
     font-size: 12pt;
+    position: relative;
+    top: -10px;
 }
 
 #raceDetails{
 	position: relative;
-	top:20px;
+	top: 5px;
 	border: 5px solid orange;
-    border-radius: 15px;
+    border-radius: 10px;
     font-size: 12pt;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 10px;
-    width:340px;
-    font-family: monospace;
-
-	}
+    padding-left: 10px;    
+}
 	
 .weather {
 	position: relative;
-	top:30px;
-border: 5px solid orange;
-    border-radius: 10px;
+	top: 15px;
+	border: 5px solid orange;
+    border-radius: 10px;	
 	float: left;
 	width: 350px;
-}
-
-.header {
-	width: 100%;
-	text-align: right;
-	font:"verdana";
-	font-size: 24pt;
-	font-style: italic;
 }
 
 .msgAndNotes {
@@ -101,17 +89,21 @@ th{
 
 table td{
 border:1px solid black;
-width: 10pt;
+width: auto;
 padding-top: 2px;
 padding-bottom: 2px;
+padding-left: 3px;
+padding-right: 3px;
 }
 
 .statisticTable {
+	width: 580px;
 	position: relative;
-	left:30px;
-	top:-50px;
+top: 10px;
+left: 35px;
 	float: left;
 	display: inline;
+	max-width: 580px;
 }
 
 .endAndNotes {
@@ -125,8 +117,7 @@ padding-bottom: 2px;
 
 .labels {
 	color: white;
-	background-color: red;
-	font-family: "Lucida Grande", "Arial", sans-serif;
+	background-color: red;	
 	font-size: 16px;
 	text-align: center;
 	width: 20px;
@@ -142,11 +133,11 @@ padding-bottom: 2px;
 }
 
 #notesTxt{
-	height="120px"
+	height:120px;
 }
 .ui-input-text
 {
-	height="90px"
+	height:90px;
 }
 
 #li1, #li2{
@@ -158,6 +149,15 @@ font-style: italic;
 .msgTemplate
 {
 color: black;
-font-style: italic;
 font-family: -webkit-pictograph;
 }
+
+.logo{
+	
+	height: 30px;
+	width: 40px;
+}
+.footer{
+	height:30px;
+}
+

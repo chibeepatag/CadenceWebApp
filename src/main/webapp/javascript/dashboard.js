@@ -157,7 +157,7 @@ function endRace(){
 		success: function(data){
 			clearInterval(interval);
 			$("#raceDetails").html(data);
-			$("#endRaceContainer").remove();
+			//$("#endRaceContainer").remove();
 		}
 	});	
 }
