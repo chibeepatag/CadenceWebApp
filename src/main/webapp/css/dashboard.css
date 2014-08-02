@@ -7,7 +7,6 @@ html,body {
 	font-size: 12pt;
     width:auto;    
 	color: black;
- /*   background: linear-gradient(black,#626365);      */ 
 }
 
 .ui-page{
@@ -17,7 +16,6 @@ html,body {
 	height: 100%;
 	font-size: 14pt;
 	color: black;
-       /* background: linear-gradient(black,#626365);*/
         color: white;
         overflow: scroll;
     
@@ -30,7 +28,7 @@ html,body {
 	padding: 0;
 	border: 5px solid;
     border-radius: 10px;
-    border-color: orange;
+    border-color: #990000;
     font-size: 12pt;
     position: relative;
     top: -10px;
@@ -39,7 +37,7 @@ html,body {
 #raceDetails{
 	position: relative;
 	top: 5px;
-	border: 5px solid orange;
+	border: 5px solid #990000;
     border-radius: 10px;
     font-size: 12pt;
     padding-top: 10px;
@@ -50,7 +48,7 @@ html,body {
 .weather {
 	position: relative;
 	top: 15px;
-	border: 5px solid orange;
+	border: 5px solid #990000;
     border-radius: 10px;	
 	float: left;
 	width: 350px;
@@ -72,7 +70,7 @@ table{
     border-width: medium;
     border: 5px solid;
     border-radius: 10px;
-    border-color: orange;
+    border-color: #990000;
     text-align: center;
     font-size: 12pt;
     color: black;
@@ -81,14 +79,14 @@ table{
 }
 
 th{
-	background-color: khaki;
+	background-color: #990000;
+	color:#d8d8d8;
 	border: 1px solid black;
 	padding: 5px;
 
 }
 
 table td{
-border:1px solid black;
 width: auto;
 padding-top: 2px;
 padding-bottom: 2px;
