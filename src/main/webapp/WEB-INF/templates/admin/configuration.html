@@ -38,10 +38,7 @@
 <body>
 	<div data-role="page">
 		
-
 		<div data-role="header" data-theme="b">
-		<div data-role="header" data-theme="a">
-			<button disabled="" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-left" sec:authentication="name">User</button>
 			<h1>Race Configuration</h1>			
 			<a th:href="@{/j_spring_security_logout}" data-icon="power" class="ui-btn-right">Logout</a>		
 		</div>
@@ -60,8 +57,7 @@
 							<th>Last Name</th>
 							<th>Nickname</th>
 							<th>Mobile Number</th>
-							<th>Jersey Number</th>
-							<th></th>
+							<th>Jersey Number</th>					
 						</tr>
 					</thead>
 					<tbody>
@@ -71,7 +67,7 @@
 							<td th:text="${rider.nickname}" class="riderNickname"></td>
 							<td th:text="${rider.phone}" class="riderPhone"></td>
 							<td th:text="${rider.jersey_no}" class="riderJersey"></td>
-							<td><span class="hiddenField rider_id"
+							<td class="hiddenField"><span class="rider_id"
 								th:text="${rider.rider_id}"></span></td>
 						</tr>
 					</tbody>
@@ -88,8 +84,8 @@
 				id="newRiderForm">
 				<table id="NewRiderTable">
 					<tr>
-						<td>First Name</td>
-						<td><input type="text" th:field="*{first_Name}"
+						<td class="newRiderTab">First Name</td>
+						<td class="newRiderTab"><input type="text" th:field="*{first_Name}"
 							id="firstNameInput" /></td>
 					</tr>
 					<tr>
@@ -112,10 +108,9 @@
 							id="jerseyNoInput" /></td>
 					</tr>
 					<tr>
-
-						<td class="newRiderTab"><input type="reset" value="Reset" id="resButton"/></td>
-						<td class="newRiderTab"><button type="button" id="addRider">Add/Edit Rider</button></td>
-
+						<td class="newRiderTab"><input type="reset" value="Reset"/></td>
+						<td class="newRiderTab"><button type="button" id="addRider">Add/Edit
+								Rider</button></td>
 					</tr>
 				</table>
 				<div class="hiddenField">
@@ -148,7 +143,6 @@
 				class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 			<div class="errorPopup"></div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

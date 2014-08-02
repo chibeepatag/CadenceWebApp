@@ -1,7 +1,9 @@
 .hiddenField{
-	display: none;
+	
+	display:none; 
 }
 
 .selectedRow{
 	background-color: #A8AEEF;
 }
+

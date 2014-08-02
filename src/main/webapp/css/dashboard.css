@@ -50,6 +50,8 @@ border: 8px solid orange;
     width:340px;
     font-family: monospace;
 
+	}
+	
 .weather {
 	position: relative;
 	top:30px;
@@ -71,9 +73,6 @@ border: 8px solid orange;
 	display: inline-block;
 }
 
-#raceDetails {
-	font-weight: bold;
-}
 
 .endRaceContainer {
 	float: left;
@@ -143,13 +142,12 @@ padding-bottom: 2px;
 	color: red;
 }
 
-
 #notesTxt{
-	height:120px
+	height="120px"
 }
 .ui-input-text
 {
-	height:90px;
+	height="90px"
 }
 
 #li1, #li2{
@@ -170,9 +168,4 @@ font-family: -webkit-pictograph;
 	width: 180px;
 position: relative;
 left: 25%;
-
-}
-
-.autocenter{
-	margin-left: 30px;
 }

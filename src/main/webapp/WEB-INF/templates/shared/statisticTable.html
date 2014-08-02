@@ -1,8 +1,7 @@
 				<div class="statisticTable" th:fragment="statTable">
 				<table id="statTable">
 					<thead>
-						<tr>	
-							<th></th>						
+						<tr>					
 							<th>Jersey</th>
 							<th>Rider</th>
 							<th>Speed</th>
@@ -13,9 +12,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="stat: ${statistics}" class="riderRow">
-							<td th:if="${stat} != null"><span  class="hiddenField rider_id" th:text="${stat?.rider.rider_id}"></span></td>							
-							<td th:if="${stat} != null" th:text="${stat?.rider.jersey_no}" class="jersey">Prince Harry</td>
+						<tr th:each="stat: ${statistics}" class="riderRow">									
+							<td th:if="${stat} != null" >
+							<span th:text="${stat?.rider.jersey_no}" class="jersey"></span>
+							<span  class="rider_id hiddenField" th:text="${stat?.rider.rider_id}"></span>
+							</td>
 							<td th:if="${stat} != null" th:text="${stat?.rider.nickname}" class="name">Prince Harry</td>
 							<td th:if="${stat} != null" th:text="${stat?.speed}" class="speed">50</td>
 							<td th:if="${stat} != null" th:text="${stat?.cadence}" class="cadence">50</td>
@@ -23,7 +24,7 @@
 							<td th:if="${stat} != null" th:text="${stat?.heart_rate}" class="heartRate">50</td>
 							<td th:if="${stat} != null" th:text="${stat?.latitude}" class="latitude hiddenField">50</td>
 							<td th:if="${stat} != null" th:text="${stat?.longitude}" class="longitude hiddenField">50</td>							
-							<td class="message"><span class="msgTxt"></span><span class="msgId hiddenField"></span></td>
+							<td class="message"><span class="msgTxt"></span><span class="msgId hiddenField"></span></td>								
 						</tr>						
 					</tbody>
 				</table>
