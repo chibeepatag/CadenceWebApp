@@ -38,45 +38,42 @@
 </head>
 <body>
 	<div data-role="page" id="page">
-		<div data-role="header" data-fullscreen="true">
-			<h1>Race Management System</h1>
-			<a th:href="@{/j_spring_security_logout}" data-icon="power"
-				class="ui-btn-left">Logout</a>
-		</div>
-
+	
+		 
 		<div data-role="content">
 			
 			<div class="ui-content" id="map-canvas">
 					<!-- map loads here... -->
 			</div>
 			
+			<!-- 
 			<div id="raceDetails">
 				Event: <span th:text="${currentRace.race_name}" id="raceName"></span><br />
 				Start Time: <span th:text="${currentRace.race_start}"></span>
-			</div>
+			</div>  -->
 
 			<div>
 				<div class="weather">
 					<div style="width: 350px;">
 						<iframe style="display: block;"
 							src="http://cdn1.willyweather.com.au/widget/loadView.html?id=13158"
-							width="350" height="228" frameborder="0" scrolling="no"></iframe>
+							width="350" height="200" frameborder="0" scrolling="no"></iframe>
 						<a
 							style="height: 20px; text-indent: -9999em; z-index: 1; margin: -20px 0 0 0; display: block; position: relative"
 							href="http://www.willyweather.com.au/sa/adelaide/adelaide.html">weather
 							for Adelaide</a>
 					</div>
 				</div>
-
+				
+				
+				
 				<div class="statisticTable"
 					th:replace="shared/statisticTable :: statTable"></div>
 				<div class="endAndNotes">
 				
-				
-				
-				 <div>
+				<!--  <div>
 					
-							<a href="downloadLogs">
+							 <a href="downloadLogs">
 			<button id="downloadMsgNotes"
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
 				Messages and Notes</button>
@@ -104,12 +101,12 @@
 								data-rel="back" data-transition="flow">End</a>
 						</div>
 					</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
 
-
+<div class="footer" data-role="footer" data-position="fixed" data-tap-toggle="false"><img class="logo" alt="Cadence Logo" th:src="@{/images/logo3.jpg}"/><img alt="CMUA" th:src="@{/images/CMULogo.jpg}" height="30px"/></div>
 		<div class="msgAndNotes" data-role="panel" data-panel="menu" id="messageAndNotes" data-position="right" data-swipe-close="false" data-dismissible="false" data-position-fixed="true" data-display="overlay">
 			
 			<ul data-role="listview" data-divider-theme="a">
@@ -125,6 +122,7 @@
 					<button id="breakAway" class="msgTemplate ui-block-a">Break </button>
 					<button id="timeGap" class="msgTemplate ui-block-b">Time gap</button>
 					
+					<button id="breakAway" class="msgTemplate ui-block-a">Recieved</button>
 					<button id="safety" class="msgTemplate ui-block-b">Safety</button>
 				</div>				
 				<button id="sendMsg">Send</button>
@@ -138,11 +136,11 @@
 				<button id="notesClearBtn">Reset</button>
 			
 			</ul>
-			<!-- <a href="downloadLogs">
+			 <a href="downloadLogs">
 			<button id="downloadMsgNotes"
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
 				Messages and Notes</button>
-			</a> -->
+			</a> 
 		</div>
 
 	</div>
