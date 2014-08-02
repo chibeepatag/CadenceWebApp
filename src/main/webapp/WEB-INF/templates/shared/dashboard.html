@@ -39,9 +39,6 @@
 <body>
 	<div data-role="page" id="page">
 		<div data-role="header" data-fullscreen="true">
-			<h1>Race Management System</h1>
-			<a th:href="@{/j_spring_security_logout}" data-icon="power"
-				class="ui-btn-left">Logout</a>
 		</div>
 
 		<div data-role="content">
@@ -71,24 +68,8 @@
 				<div class="statisticTable"
 					th:replace="shared/statisticTable :: statTable"></div>
 				<div class="endAndNotes">
-				
-				
-				
-				 <div>
-					
-							<a href="downloadLogs">
-			<button id="downloadMsgNotes"
-				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
-				Messages and Notes</button>
-			</a>
-				</div> 
+														
 				<div id="endRaceContainer">
-					<div>
-						<a href="#endRaceDiv" data-rel="popup" data-position-to="window"
-							data-transition="pop"
-							class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">End
-							Race</a>
-					</div>
 					<div data-role="popup" id="endRaceDiv" data-overlay-theme="b"
 						data-theme="b" data-dismissible="false" style="max-width: 400px;">
 						<div data-role="header" data-theme="a">
@@ -111,38 +92,46 @@
 
 
 		<div class="msgAndNotes" data-role="panel" data-panel="menu" id="messageAndNotes" data-position="right" data-swipe-close="false" data-dismissible="false" data-position-fixed="true" data-display="overlay">
-			
+			<div class="ui-grid-a">
+			<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user  ui-mini" sec:authentication="name">User</button>			
+			<button class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-mini"><a th:href="@{/j_spring_security_logout}">Logout</a> </button>			
+			</div>
+			<div class="ui-grid-a">				
+				<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear  ui-mini"><a href="">Config</a></button>								
+				<button class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check ui-mini"><a href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop">End</a></button>								
+			</div><br/>
 			<ul data-role="listview" data-divider-theme="a">
-						<li data-role="list-divider" id="li1">Message</li>
-			
-				
-				<textarea id="messageTxt" style="height: 90px;"></textarea>
-				<div class="ui-grid-c">				
-								
-					<button id="left" class="msgTemplate ui-block-a">Left</button>
-					<button id="right" class="msgTemplate ui-block-b">Right</button>					
-					
-					<button id="breakAway" class="msgTemplate ui-block-a">Break </button>
-					<button id="timeGap" class="msgTemplate ui-block-b">Time gap</button>
-					
-					<button id="safety" class="msgTemplate ui-block-b">Safety</button>
-				</div>				
-				<button id="sendMsg">Send</button>
-				<button id="msgClearBtn">Reset</button>
-			<br/><br/>
-			
+						<li data-role="list-divider" id="li1">Message</li>							
+				<textarea id="messageTxt"></textarea>																								
+				<div class="ui-grid-c  ui-responsive">											
+					<button id="left"      class="msgTemplate ui-block-a">Left</button>
+					<button id="right"     class="msgTemplate ui-block-b">Right</button>										
+					<button id="breakAway" class="msgTemplate ui-block-c">Break </button>
+					<button id="timeGap"   class="msgTemplate ui-block-a">Time gap</button>					
+					<button id="safety"    class="msgTemplate ui-block-b">Safety</button>
+					<button id="received"  class="msgTemplate ui-block-c">Received</button>
+				</div>
+				<div class="ui-grid-a ui-responsive">
+					<button id="sendMsg"     class="ui-block-a">Send</button>
+					<button id="msgClearBtn" class="ui-block-b">Reset</button>
+				</div>
+		
 			<li data-role="list-divider" id="li2">Notes</li>
 				
-				<textarea id="notesTxt" style="height: 120px;"></textarea>
-				<button id="saveNote">Save</button>
-				<button id="notesClearBtn">Reset</button>
+				<textarea id="notesTxt"></textarea>
+			<div class="ui-grid-a ui-responsive">
+				<button id="saveNote"       class="ui-block-a">Save</button>
+				<button id="notesClearBtn"  class="ui-block-b">Reset</button>
+			</div>
 			
-			</ul>
-			<!-- <a href="downloadLogs">
+ 			<div>
+			<a href="downloadLogs">
 			<button id="downloadMsgNotes"
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
 				Messages and Notes</button>
-			</a> -->
+			</a>
+			</div>
+			</ul>
 		</div>
 
 	</div>

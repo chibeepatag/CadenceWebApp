@@ -8,8 +8,7 @@ html,body {
 	font-size: 12pt;
     width:auto;    
 	color: black;
-        background: linear-gradient(black,#626365);
-       
+    background: linear-gradient(black,#626365);       
 }
 
 .ui-page{
@@ -32,8 +31,8 @@ html,body {
 	width: 80%;
 	height: 300px;
 	padding: 0;
-	border: 8px solid;
-    border-radius: 25px;
+	border: 5px solid;
+    border-radius: 10px;
     border-color: orange;
     font-size: 12pt;
 }
@@ -41,7 +40,7 @@ html,body {
 #raceDetails{
 	position: relative;
 	top:20px;
-border: 8px solid orange;
+	border: 5px solid orange;
     border-radius: 15px;
     font-size: 12pt;
     padding-top: 10px;
@@ -55,8 +54,8 @@ border: 8px solid orange;
 .weather {
 	position: relative;
 	top:30px;
-border: 8px solid orange;
-    border-radius: 15px;
+border: 5px solid orange;
+    border-radius: 10px;
 	float: left;
 	width: 350px;
 }
@@ -82,9 +81,9 @@ border: 8px solid orange;
 table{
 	display: table;
     width: 100%;
-    border-width: thick;
-    border: 8px solid;
-    border-radius: 25px;
+    border-width: medium;
+    border: 5px solid;
+    border-radius: 10px;
     border-color: orange;
     text-align: center;
     font-size: 12pt;
@@ -151,21 +150,14 @@ padding-bottom: 2px;
 }
 
 #li1, #li2{
-	font-size: 16pt;
+font-size: 12pt;
 font-family: -webkit-pictograph;
 font-style: italic;
 }
 
-#left, #right, #breakAway, #timeGap, #safety, #sendMsg, #msgClearBtn, #saveNote, #notesClearBtn
+.msgTemplate
 {
-	color: black;
+color: black;
 font-style: italic;
 font-family: -webkit-pictograph;
-}
-
-#sendMsg, #msgClearBtn, #saveNote, #notesClearBtn
-{
-	width: 180px;
-position: relative;
-left: 25%;
 }
