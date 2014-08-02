@@ -12,6 +12,8 @@ html,body {
        
 }
 
+
+
 .ui-page{
     min-width: 100% !important;
 }
@@ -29,13 +31,15 @@ html,body {
 
 
 #map-page,#map-canvas {
-	width: 80%;
+	width: 76%;
 	height: 300px;
 	padding: 0;
 	border: 8px solid;
     border-radius: 25px;
     border-color: orange;
     font-size: 12pt;
+    position: relative;
+    top: -10px;
 }
 
 #raceDetails{
@@ -54,7 +58,7 @@ border: 8px solid orange;
 	
 .weather {
 	position: relative;
-	top:30px;
+	top:80px;
 border: 8px solid orange;
     border-radius: 15px;
 	float: left;
@@ -67,6 +71,7 @@ border: 8px solid orange;
 	font:"verdana";
 	font-size: 24pt;
 	font-style: italic;
+	height:30px;
 }
 
 .msgAndNotes {
@@ -102,17 +107,21 @@ th{
 
 table td{
 border:1px solid black;
-width: 10pt;
+width: auto;
 padding-top: 2px;
 padding-bottom: 2px;
+padding-left: 3px;
+padding-right: 3px;
 }
 
 .statisticTable {
+	width: 580px;
 	position: relative;
-	left:30px;
-	top:-50px;
+top: 10px;
+left: 35px;
 	float: left;
 	display: inline;
+	max-width: 580px;
 }
 
 .endAndNotes {
@@ -143,11 +152,11 @@ padding-bottom: 2px;
 }
 
 #notesTxt{
-	height="120px"
+	height:120px;
 }
 .ui-input-text
 {
-	height="90px"
+	height:90px;
 }
 
 #li1, #li2{
@@ -168,4 +177,13 @@ font-family: -webkit-pictograph;
 	width: 180px;
 position: relative;
 left: 25%;
+}
+
+.logo{
+	
+	height: 30px;
+	width: 40px;
+}
+.footer{
+	height:30px;
 }
