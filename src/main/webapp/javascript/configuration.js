@@ -24,6 +24,13 @@ function selectRow(){
 
 function addRider(){	
 	var riderId = $("#riderIdInput").val();
+	var firstName = $("#firstNameInput").val();
+	var lastName = $("#lastNameInput").val();
+	var nickname = $("#nicknameInput").val();
+	var phone = $("#phoneInput").val();
+	var jersey = $("#jerseyNoInput").val();
+	
+	
 	if(riderId > 0){		
 		$.ajax({
 			url: "editRider",
@@ -32,15 +39,22 @@ function addRider(){
 			type: "POST",
 			success: updateEditedRider
 		});
-	}else{
+	}else if (firstName !== "" && lastName !== "" && nickname !== "" && phone !== "" && jersey !== ""){
 		$.ajax({
 			url: "addRider",
 			data: $("#newRiderForm").serialize(),
 			dataType: "json",
 			type: "POST",
 			success: appendNewRider
+
 		});
-	}	
+	}else {
+		$(".errorPopup").text("New Rider Missing Information");
+			$("#errorButton").click()}; 		
+
+	$("#resetNewRider").click();
+
+
 }
 
 function selectEditRider(){
@@ -70,6 +84,7 @@ function appendNewRider(data){
 	$(".riderTable").append(lastRowClone);
 	$(lastRowClone).removeClass("selectedRow");
 	$(lastRowClone).click(selectRow);
+	$(lastRowClone).dblclick(selectEditRider);
 }
 
 function updateEditedRider(data){
@@ -90,11 +105,20 @@ function deleteRiders(){
 	$.ajax({
 		url: "deleteRiders",
 		data: {"ids":ids},
-		dataType: "json",
-		type: "POST",		
+		type: "POST",
+		error: cantDelete,
+		success: function(data){
+			$(deleteRows).remove();
+		}
 	});	
-	$(deleteRows).remove();
-		
+	
+}
+
+function cantDelete(jqXHR, textStatus, errorThrown){
+	if(jqXHR.status == 500){
+		$(".errorPopup").text("Cannot delete rider. He has participated in a race.");
+		$("#errorButton").click();		
+	}
 }
 
 function removeRidersFromTable(){
@@ -105,10 +129,25 @@ function createRace(){
 	var raceName = $("#raceName").val();
 		
 	if(raceName){
-		var riderIds = $(".selectedRow").find(".rider_id");		
-		if(riderIds.length > 0){
+		var riderIds = $(".selectedRow").find(".rider_id");
+		var riderJerseys = $(".selectedRow").find(".riderJersey");
+		
+		
+		var sameJersey= false;
+		for(var x=0; x<riderJerseys.length-1;x++){
+			for (var y=x+1; y<riderJerseys.length; y++){
+			  if (riderJerseys[x].innerHTML == riderJerseys[y].innerHTML){
+			  	sameJersey= true;
+			  }
+			}
+		} 
+		if (sameJersey == true){
+			$(".errorPopup").text("Jersey number duplicate");
+			$("#errorButton").click();
+		
+		}else if(riderIds.length > 0){
 			var selectedRows = $(riderIds).map(function(){return $(this).text()}).get().join(",");
-			
+	
 			$.ajax({
 				url: "createRace", 
 				data: {"raceName":raceName, "ids":selectedRows},
@@ -121,7 +160,7 @@ function createRace(){
 			$(".errorPopup").text("You must select at least one rider.");
 			$("#errorButton").click();
 		}
-				
+	
 	}else{
 		$(".errorPopup").text("You must enter a race name");
 		$("#errorButton").click();

@@ -142,6 +142,7 @@ padding-bottom: 2px;
 	color: red;
 }
 
+<<<<<<< HEAD
 #notesTxt{
 	height="120px"
 }
@@ -168,4 +169,13 @@ font-family: -webkit-pictograph;
 	width: 180px;
 position: relative;
 left: 25%;
+=======
+.autocenterDiv{
+	padding: 10px;
+	display: inline-flex;
+}
+
+.autocenter{
+	margin-left: 30px;
+>>>>>>> 63940a4c473424d7d542290e60ce8067ffcfbcc0
 }

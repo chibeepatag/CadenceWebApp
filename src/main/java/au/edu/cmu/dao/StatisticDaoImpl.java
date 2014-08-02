@@ -38,10 +38,13 @@ public class StatisticDaoImpl implements StatisticsDao {
 	EntityManager entityManager;
 
 	@Override
-	public Statistic create(Statistic entity) {
+	public Statistic create(Statistic entity) {		
+		Rider rider = entity.getRider();
+		Rider managedRider = this.entityManager.merge(rider);
+		entity.setRider(managedRider);
 		this.entityManager.persist(entity);
-		this.entityManager.flush();
-		this.entityManager.refresh(entity);
+//		this.entityManager.flush();
+//		this.entityManager.refresh(entity);
 		return entity;
 	}
 

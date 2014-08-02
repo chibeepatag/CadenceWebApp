@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import au.edu.cmu.exceptions.CadencePersistenceException;
+import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Message;
+import au.edu.cmu.model.Race;
+import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.service.MessageService;
 import au.edu.cmu.service.StatisticService;
@@ -25,9 +29,11 @@ import au.edu.cmu.service.StatisticService;
 @Controller
 public class DataReceiverController {
 	
-	static Logger logger = Logger.getLogger(DataReceiverController.class);
+	static Logger logger = Logger.getLogger(DataReceiverController.class);	
 	
 	public static final String MESSAGE_SUCCESS= "200";
+	
+	public static final String MESSAGE_FAIL = "500";
 	
 	@Autowired
 	StatisticService statisticService;
@@ -42,15 +48,26 @@ public class DataReceiverController {
 		Statistic statistic = new Statistic(heart_rate, speed, latitude, longitude, distance, cadence, power, stat_ts);				
 		logStatisticReceived(nickname, statistic);
 		
-		messageService.saveMessageFromRider(nickname, message);
-		
-		statisticService.saveStatistic(statistic, nickname);
-		Message messageForRider = messageService.getMessageForRider(nickname);
-		
-		if(null != messageForRider){
-			messageService.setMessageAsSent(messageForRider);
-			return messageForRider.getMessage();
+		if(null != message && message.length() > 0){
+			try {
+				messageService.saveMessageFromRider(nickname, message);
+				
+				Rider rider = statisticService.saveStatistic(statistic, nickname);
+				Message messageForRider = messageService.getMessageForRider(nickname);
+				
+				if(null != messageForRider){
+					messageService.setMessageAsSent(messageForRider, rider);
+					return messageForRider.getMessage();
+				}
+			} catch (RiderNotInRaceException e) {				
+				e.printStackTrace();				
+				return MESSAGE_FAIL;
+			}catch (CadencePersistenceException cpe){
+				return MESSAGE_FAIL;
+			}			
 		}
+		
+		
 		return MESSAGE_SUCCESS;
 	}
 	

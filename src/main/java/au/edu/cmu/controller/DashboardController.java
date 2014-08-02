@@ -26,6 +26,7 @@ import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Statistic;
 import au.edu.cmu.service.DashboardService;
 import au.edu.cmu.service.MessageService;
+import au.edu.cmu.service.StatisticServiceImpl;
 
 /**
  * @author ChibeePatag
@@ -45,10 +46,11 @@ public class DashboardController {
 	@RequestMapping(value="/shared/dashboard", method=RequestMethod.GET)
 	public String goToDashboard(Model model){
 		try{
-			List<Statistic> statistics = dashboardService.buildStatisticTable();
+			Race currentRace = dashboardService.getCurrentRace();
+			List<Statistic> statistics = dashboardService.buildStatisticTable(currentRace);
 			model.addAttribute("statistics", statistics);
 			
-			Race currentRace = dashboardService.getCurrentRace();			
+						
 			model.addAttribute("currentRace", currentRace);
 			return "shared/dashboard";
 		}catch(CadencePersistenceException cpe){
@@ -60,12 +62,12 @@ public class DashboardController {
 	@RequestMapping(value="/shared/refreshStat", method=RequestMethod.GET)
 	@ResponseBody
 	public List<RefreshStatResponse> refreshDashboard(@ModelAttribute("currentRace") Race currentRace){
-		List<Statistic> statistics = dashboardService.buildStatisticTable();
+		List<Statistic> statistics = dashboardService.buildStatisticTable(currentRace);
 		List<RefreshStatResponse> responseList = new ArrayList<RefreshStatResponse>();
 		for(Statistic statistic : statistics){
 			MessageFromRider message = messageService.getMessageFromRider(statistic.getRider(), currentRace);
 			RefreshStatResponse resp;
-			if(null != message){
+			if(null != message && message.getMessage().length() > 0){
 				resp = new RefreshStatResponse(statistic, message.getMessage(), message.getMsg_rider_id());				
 			}else{
 				resp = new RefreshStatResponse(statistic, "", 0);			
@@ -76,8 +78,9 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/admin/endRace", method=RequestMethod.GET)
-	public String endRace(Model model){
-		Race raceEnded = dashboardService.endRace();
+	public String endRace(Model model, @ModelAttribute("currentRace") Race currentRace){
+		Race raceEnded = dashboardService.endRace(currentRace);
+		StatisticServiceImpl.currentRace = null;
 		model.addAttribute("raceEnded", raceEnded);
 		return "shared/endedRace";
 	}

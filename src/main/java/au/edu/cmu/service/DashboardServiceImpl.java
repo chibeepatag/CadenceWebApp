@@ -3,8 +3,6 @@
  */
 package au.edu.cmu.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -29,6 +27,8 @@ import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Log;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.MessageFromRider;
+import au.edu.cmu.model.MessageRecipient;
+import au.edu.cmu.model.MessageRecipientId;
 import au.edu.cmu.model.Note;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
@@ -43,96 +43,106 @@ import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * @author ChibeePatag
- *
+ * 
  */
 @Service
 public class DashboardServiceImpl implements DashboardService {
 
 	@Autowired
 	RaceDao raceDao;
-	
+
 	@Autowired
 	StatisticsDao statisticsDao;
-	
+
 	@Autowired
 	MessageDao messageDao;
-	
+
 	@Autowired
 	MessageFromRiderDao messageFromRiderDao;
-	
+
 	@Autowired
 	RiderDao riderDao;
-	
+
 	@Autowired
 	UserDao userDao;
-	
+
 	@Autowired
 	NoteDao noteDao;
-	
+
 	@Override
-	public Race getCurrentRace() {		
+	public Race getCurrentRace() {
 		return raceDao.getCurrentRace();
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see au.edu.cmu.service.DashboardService#getCurrentRiders()
 	 */
 	@Override
-	public List<Statistic> buildStatisticTable() throws CadencePersistenceException {
-		try{
-			Map<String, Rider> riderMap = raceDao.getCurrentRace().getRiders();
+	public List<Statistic> buildStatisticTable(Race currentRace)
+			throws CadencePersistenceException {
+		try {
+			Map<String, Rider> riderMap = currentRace.getRiders();
 			List<Rider> riders = new ArrayList<Rider>(riderMap.values());
 			List<Statistic> latestStatistics = new ArrayList<Statistic>();
-			for(Rider rider : riders){
+			for (Rider rider : riders) {
 				Statistic statistic = getLatestStatistic(rider);
-				latestStatistics.add(statistic);
+				if(null==statistic){
+					statistic = new Statistic();
+					statistic.setRider(rider);
+				}
+				latestStatistics.add(statistic);	
 			}
-							
+
 			return latestStatistics;
-			
-		}catch(CadencePersistenceException cpe){
+
+		} catch (CadencePersistenceException cpe) {
 			throw cpe;
 		}
-		
+
 	}
-	
+
 	@Override
-	public Statistic getLatestStatistic(Rider rider){		
+	public Statistic getLatestStatistic(Rider rider) {
 		return statisticsDao.getRiderLatestStatistic(rider);
 	}
-	
+
 	@Override
-	public Race endRace() {	
-		Race race = getCurrentRace();
-		race.setIsOngoing(false);
-		race.setRace_end(Calendar.getInstance().getTime());
-		raceDao.edit(race);
-		return race;
+	public Race endRace(Race currentRace) {
+		currentRace.setIsOngoing(false);
+		currentRace.setRace_end(Calendar.getInstance().getTime());
+		raceDao.edit(currentRace);
+		return currentRace;
 	}
-	
-	
+
 	@Override
 	public void saveMessage(String msgContent, List<Long> recipientIds) {
-		List<Rider> riderRecipients = new ArrayList<Rider>();
-		for(Long id : recipientIds){
-			Rider rider = riderDao.findById(id);
-			riderRecipients.add(rider);
-		}
-		User coach = getCoach();
-		
-		Race race = raceDao.getLatestRace();
-		
 		Message message = new Message();
 		message.setMessage(msgContent);
-		message.setRecipients(riderRecipients);
+		User coach = getCoach();
 		message.setCoach(coach);
 		message.setMessage_ts(Calendar.getInstance().getTime());
+		Race race = raceDao.getLatestRace();
 		message.setRace(race);
-		message.setSent(false);
-		messageDao.create(message);					
-	}	
-	
+
+		List<MessageRecipient> riderRecipients = new ArrayList<MessageRecipient>();
+		for (Long id : recipientIds) {
+			Rider rider = riderDao.findById(id);
+			MessageRecipient recipient = new MessageRecipient();
+			MessageRecipientId messageRecipientId = new MessageRecipientId();
+			messageRecipientId.setRider(rider);
+			messageRecipientId.setMessage(message);
+			recipient.setSent(false);
+			recipient.setMessageRecipientId(messageRecipientId);
+			riderRecipients.add(recipient);
+		}
+		message.setRecipients(riderRecipients);
+		messageDao.create(message);
+	}
+
 	@Override
-	public void saveNote(String noteTxt) {		
+	public void saveNote(String noteTxt) {
 		Note note = new Note();
 		note.setNote(noteTxt);
 		note.setCoach(getCoach());
@@ -142,57 +152,79 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 
 	private User getCoach() {
-		UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = principal.getUsername();		
-		
+		UserDetails principal = (UserDetails) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+		String username = principal.getUsername();
+
 		User coach = userDao.findByUsername(username);
 		return coach;
 	}
-	
+
 	@Override
 	public OutputStream createLogFile(Race currentRace, OutputStream out) {
 		List<Log> logContent = getLogContent(currentRace);
-		out  = createLogPdf(logContent, out);
+		out = createLogPdf(logContent, out);
 		return out;
 	}
+
 	private List<Log> getLogContent(Race currentRace) {
 		List<Log> logs = new ArrayList<Log>();
 		logs.addAll(messageDao.getMessageForThisRace(currentRace));
-		logs.addAll(messageFromRiderDao.getMessagesFromRiderForThisRace(currentRace));
-		logs.addAll(noteDao.getNotesForThisRider(currentRace));
+		logs.addAll(messageFromRiderDao
+				.getMessagesFromRiderForThisRace(currentRace));
+		logs.addAll(noteDao.getNotesForThisRace(currentRace));
 		Collections.sort(logs);
 
 		return logs;
 	}
-	
-	OutputStream createLogPdf(List<Log> logContent, OutputStream outputStream){
+
+	OutputStream createLogPdf(List<Log> logContent, OutputStream outputStream) {
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		try {
 			PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 			document.open();
-			for(Log log : logContent){
-				Paragraph paragraph = new Paragraph();
-				if(log instanceof Note){
-					paragraph.add("Note: ");
-					paragraph.add(log.getMessage_ts());
-					paragraph.add(((Note) log).getNote());
-				}else if(log instanceof Message){
-					paragraph.add("Message From coach: ");
-					paragraph.add(log.getMessage_ts());
-					paragraph.add(((Message) log).getMessage());
-				}else if (log instanceof MessageFromRider){
-					paragraph.add("Message From coach: ");
-					paragraph.add(log.getMessage_ts());
-					paragraph.add(((MessageFromRider) log).getMessage());
+			if(!logContent.isEmpty()){				
+				for (Log log : logContent) {
+					Paragraph paragraph = new Paragraph();
+					if (log instanceof Note) {
+						paragraph.add("Note: ");
+						paragraph.add(log.getMessage_ts().toString());
+						paragraph.add(" ");
+						paragraph.add(((Note) log).getNote());
+					} else if (log instanceof Message) {
+						paragraph.add("Message From coach: ");
+						paragraph.add("Sent to ");
+						
+						for(MessageRecipient recipient : ((Message) log).getRecipients()){
+							paragraph.add(recipient.getMessageRecipientId().getRider().getNickname());
+							paragraph.add(" ");
+						}			
+						
+						paragraph.add(log.getMessage_ts().toString());
+						paragraph.add(" ");
+						paragraph.add(((Message) log).getMessage());
+					} else if (log instanceof MessageFromRider) {
+						paragraph.add("Message from ");
+						paragraph.add(((MessageFromRider) log).getFrom().getNickname());
+						paragraph.add(": ");
+						paragraph.add(log.getMessage_ts().toString());
+						paragraph.add(" ");
+						paragraph.add(((MessageFromRider) log).getMessage());
+					}
+					document.add(paragraph);
 				}
+			}else{
+				Paragraph paragraph = new Paragraph();
+				paragraph.add("No messages have been sent.");
+				paragraph.add("No notes have been saved.");			
 				document.add(paragraph);
-				document.close();
-				outputStream.close();
 			}
+			document.close();
+			outputStream.close();
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 

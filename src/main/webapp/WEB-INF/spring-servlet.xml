@@ -45,10 +45,16 @@
 
 	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
+		 <property name="additionalDialects">
+            <set>
+                <bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect" />
+            </set>
+        </property>
 	</bean>
 
-	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+	<bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="UTF-8" />
 	</bean>
 
 </beans>

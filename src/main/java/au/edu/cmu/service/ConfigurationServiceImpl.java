@@ -54,9 +54,6 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	@Override
 	public Rider addRider(Rider rider) {
 		Rider riderPersist = riderDao.create(rider); 
-		Statistic statistic = new Statistic();
-		statistic.setRider(riderPersist);
-		statisticDao.create(statistic);
 		return riderPersist;
 	}
 	

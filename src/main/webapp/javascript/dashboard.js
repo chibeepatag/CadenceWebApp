@@ -6,6 +6,7 @@ var markers = {};
 var interval;
 var map;
 var messageTemplateMap={"left":"Left", "right":"Right", "breakAway":"Break away", "timeGap":"Time Gap", "safety":"Safety"};
+var startTime;
 
 
 $( document ).on( "pageinit", "#page", function() {
@@ -14,7 +15,9 @@ $( document ).on( "pageinit", "#page", function() {
         
     function drawMap() {
         var myOptions = {
-            zoom: 17,            
+            zoom: 17,
+			minZoom: 10,
+            maxZoom: 18,            
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);              
@@ -30,6 +33,7 @@ $( document ).on( "pageinit", "#page", function() {
 			position: latlng,
 			map: map,
 			title: name,
+			opacity: 0.0,
 			labelClass: "labels", // the CSS class for the label
 		    labelInBackground: false,
 		    labelContent: jersey,
@@ -37,12 +41,25 @@ $( document ).on( "pageinit", "#page", function() {
 		});
 		markers[name] = marker;
 	});
-	
+		
 	map.setCenter(findCenter());	
 	
 	
 });
 
+function extendBounds(){
+	var bounds = new google.maps.LatLngBounds();
+	var lat= 0;
+	var long =0;
+		for (var i in markers){
+		   	lat = markers[i].getPosition().lat();
+		   	long = markers[i].getPosition().lng();
+		   	var latlng = new google.maps.LatLng(lat, long);
+		   	
+			bounds.extend(latlng);
+			}
+ return bounds;
+}
 function findCenter(){
 	var sumLat = 0;
 	var sumLong = 0;
@@ -61,11 +78,12 @@ function findCenter(){
 
 $(document).ready(function(){		
 	interval = setInterval(refreshDashboard,5000);
+	var startString = $("#raceStartTime").text(); 
+	startTime = new Date(startString);
 	$("#sendMsg").click(sendMsg);
 	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
 	$(".riderRow").click(selectRow);
-	
 	$("#msgClearBtn").click(clearMessage);
 	$("#notesClearBtn").click(clearNotes);	
 	$(".msgTemplate").click(messageTemplate);
@@ -79,6 +97,7 @@ function refreshDashboard(){
 		dataType: "json",
 		success: updateStatistics
 	});
+	updateRaceDuration();
 }
 
 function updateStatistics(data){	
@@ -90,9 +109,8 @@ function updateStatistics(data){
 		var cadence = stat.cadence;
 		var power = stat.power;
 		var heartRate = stat.heart_rate;
-		var longitude = stat.logitude;
+		var longitude = stat.longitude;
 		var latitude = stat.latitude;
-		var elevation = stat.elevation;
 		var row = $("#statTable").find(".riderRow").find(".rider_id").filter(function() { return $(this).text() === riderId.toString() }).parent().parent();
 		var key = $(row).find(".name").text();
 		var oldMsgId = $(row).find(".msgId").text();
@@ -102,20 +120,36 @@ function updateStatistics(data){
 		$(row).find(".heartRate").text(heartRate);
 		$(row).find(".longitude").text(longitude);
 		$(row).find(".latitude").text(latitude);
-		$(row).find(".elevation").text(elevation);
+		var newPosition = new google.maps.LatLng(latitude, longitude);
+		markers[key].setPosition(newPosition);
+
 		if(data[i].messageId>0){
 			$(row).find(".message").find(".msgTxt").text(message);			
 		}
 		$(".message").click(messageSeen);
-		if(message.length > 0 && data[i].messageId!==parseInt(oldMsgId) && data[i].messageId > 0){			
+		if(message!= null && message.length > 0 && data[i].messageId!==parseInt(oldMsgId) && data[i].messageId > 0){			
 			$(row).find(".message").addClass("newMessage");		
 			$(row).find(".msgId").text(data[i].messageId);
 		}
-		var newPosition = new google.maps.LatLng(latitude, longitude);
-		markers[key].setPosition(newPosition);
-	}
-//	map.setCenter(findCenter());
 
+	}
+
+	
+
+	var autoCenter = $('#checkbox-h-2a').prop('checked');
+	if(autoCenter){
+		map.setCenter(findCenter());
+		map.fitBounds(extendBounds());		
+	}	
+
+}
+
+function updateRaceDuration(){	
+	var now = new Date();
+	var duration = new Date(now - startTime);	
+	
+	$("#durationHour").text(duration.getHours() - 12);
+	$("#durationMin").text(duration.getMinutes());
 }
 
 function endRace(){
@@ -147,6 +181,7 @@ function sendMsg(){
 			data: {"message": messageTxt, "recipientIds":selectedRows },
 			success: function(data){
 				$("#messageTxt").val("");
+				$(".riderRow").removeClass("selectedRow");
 			}
 		});
 	}	

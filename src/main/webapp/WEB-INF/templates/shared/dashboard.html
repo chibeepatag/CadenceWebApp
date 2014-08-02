@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1" />
 <title>Dashboard</title>
@@ -38,21 +40,36 @@
 </head>
 <body>
 	<div data-role="page" id="page">
+<<<<<<< HEAD
 		<div data-role="header" data-fullscreen="true">
 			<h1>Race Management System</h1>
+=======
+		<div data-role="header" data-theme="a">
+			<h1 th:text="${currentRace.race_name}" id="raceName"></h1>
+			<button disabled=""
+				class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-left"
+				sec:authentication="name">User</button>
+>>>>>>> 63940a4c473424d7d542290e60ce8067ffcfbcc0
 			<a th:href="@{/j_spring_security_logout}" data-icon="power"
 				class="ui-btn-left">Logout</a>
 		</div>
 
 		<div data-role="content">
-			
+
 			<div class="ui-content" id="map-canvas">
-					<!-- map loads here... -->
+				<!-- map loads here... -->
 			</div>
-			
+
+			<form>
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a"/>
+					<label for="checkbox-h-2a">Autocenter</label>					
+				</fieldset>
+			</form>
+
 			<div id="raceDetails">
-				Event: <span th:text="${currentRace.race_name}" id="raceName"></span><br />
-				Start Time: <span th:text="${currentRace.race_start}"></span>
+				<span th:text="${currentRace.race_start}" id="raceStartTime" class="hiddenField"></span>
+				Race duration: <span id="durationHour"></span>h <span id="durationMin"> </span>m
 			</div>
 
 			<div>
@@ -71,6 +88,7 @@
 				<div class="statisticTable"
 					th:replace="shared/statisticTable :: statTable"></div>
 				<div class="endAndNotes">
+<<<<<<< HEAD
 				
 				
 				
@@ -83,33 +101,42 @@
 			</a>
 				</div> 
 				<div id="endRaceContainer">
+=======
+>>>>>>> 63940a4c473424d7d542290e60ce8067ffcfbcc0
 					<div>
-						<a href="#endRaceDiv" data-rel="popup" data-position-to="window"
-							data-transition="pop"
-							class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">End
-							Race</a>
+						<a href="#messageAndNotes" data-rel="close"><button
+								data-icon="edit">Message and Notes</button></a>
 					</div>
-					<div data-role="popup" id="endRaceDiv" data-overlay-theme="b"
-						data-theme="b" data-dismissible="false" style="max-width: 400px;">
-						<div data-role="header" data-theme="a">
-							<h1>End Race</h1>
+					<div id="endRaceContainer">
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+							<a href="#endRaceDiv" data-rel="popup" data-position-to="window"
+								data-transition="pop"
+								class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">End
+								Race</a>
 						</div>
-						<div role="main" class="ui-content">
-							<h3 class="ui-title">Are you sure you want to end this race?</h3>
-							<p>This action cannot be undone.</p>
-							<a href="#"
-								class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"
-								data-rel="back">Cancel</a> <a href="#" id="endRaceBtn"
-								class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"
-								data-rel="back" data-transition="flow">End</a>
+						<div data-role="popup" id="endRaceDiv" data-overlay-theme="b"
+							data-theme="b" data-dismissible="false" style="max-width: 400px;">
+							<div data-role="header" data-theme="a">
+								<h1>End Race</h1>
+							</div>
+							<div role="main" class="ui-content">
+								<h3 class="ui-title">Are you sure you want to end this
+									race?</h3>
+								<p>This action cannot be undone.</p>
+								<a href="#"
+									class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"
+									data-rel="back">Cancel</a> <a href="#" id="endRaceBtn"
+									class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"
+									data-rel="back" data-transition="flow">End</a>
+							</div>
 						</div>
-					</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
 
+<<<<<<< HEAD
 		<div class="msgAndNotes" data-role="panel" data-panel="menu" id="messageAndNotes" data-position="right" data-swipe-close="false" data-dismissible="false" data-position-fixed="true" data-display="overlay">
 			
 			<ul data-role="listview" data-divider-theme="a">
@@ -119,16 +146,27 @@
 				<textarea id="messageTxt" style="height: 90px;"></textarea>
 				<div class="ui-grid-c">				
 								
+=======
+		<div class="msgAndNotes" data-role="panel" id="messageAndNotes">
+			<div class="messageContainer" sec:authorize="hasRole('ROLE_ADMIN')">
+				<span>Message: &nbsp;</span>
+				<textarea rows="5" cols="45" id="messageTxt"></textarea>
+				<div class="ui-grid-b">
+
+>>>>>>> 63940a4c473424d7d542290e60ce8067ffcfbcc0
 					<button id="left" class="msgTemplate ui-block-a">Left</button>
-					<button id="right" class="msgTemplate ui-block-b">Right</button>					
-					
-					<button id="breakAway" class="msgTemplate ui-block-a">Break </button>
-					<button id="timeGap" class="msgTemplate ui-block-b">Time gap</button>
-					
+					<button id="right" class="msgTemplate ui-block-b">Right</button>
+
+					<button id="breakAway" class="msgTemplate ui-block-a">Break
+					</button>
+					<button id="timeGap" class="msgTemplate ui-block-b">Time
+						gap</button>
+
 					<button id="safety" class="msgTemplate ui-block-b">Safety</button>
-				</div>				
+				</div>
 				<button id="sendMsg">Send</button>
 				<button id="msgClearBtn">Reset</button>
+<<<<<<< HEAD
 			<br/><br/>
 			
 			<li data-role="list-divider" id="li2">Notes</li>
@@ -143,6 +181,20 @@
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
 				Messages and Notes</button>
 			</a> -->
+=======
+			</div>
+			<div class="notesContainer" sec:authorize="hasRole('ROLE_ADMIN')">
+				<span>Notes: &nbsp;</span>
+				<textarea rows="5" cols="45" id="notesTxt"></textarea>
+				<button id="saveNote">Save</button>
+				<button id="notesClearBtn">Reset</button>
+			</div>
+			<a href="downloadLogs" target="_blank">
+				<button id="downloadMsgNotes"
+					class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
+					Messages and Notes</button>
+			</a>
+>>>>>>> 63940a4c473424d7d542290e60ce8067ffcfbcc0
 		</div>
 
 	</div>
