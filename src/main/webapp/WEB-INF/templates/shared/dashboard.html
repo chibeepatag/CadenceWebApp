@@ -48,8 +48,9 @@
 			</div>
 			
 			<div id="raceDetails">
-				Event: <span th:text="${currentRace.race_name}" id="raceName"></span><br />
-				Start Time: <span th:text="${currentRace.race_start}"></span>
+				<span class="raceStartTime" th:text="${currentRace.race_start}"></span>
+				<span class="durationHour"></span>h
+				<span class="durationMin"> </span>m
 			</div>
 
 			<div>
