@@ -9,7 +9,7 @@ var messageTemplateMap={"left":"Left", "right":"Right", "breakAway":"Break away"
 var startTime;
 
 $( document ).on( "pageinit", "#page", function() {
-    
+	 $("#messageAndNotes").panel("open");
     drawMap();
         
     function drawMap() {

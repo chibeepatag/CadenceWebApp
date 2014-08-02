@@ -38,6 +38,8 @@
 <body>
 	<div data-role="page">
 		
+
+		<div data-role="header" data-theme="b">
 		<div data-role="header" data-theme="a">
 			<button disabled="" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-left" sec:authentication="name">User</button>
 			<h1>Race Configuration</h1>			
@@ -49,7 +51,7 @@
 		</div>
 		<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
 			<h2>Select Riders</h2>
-			<span>Double click on row to edit.</span>
+			
 			<form id="deleteRiderForm">
 				<table class="riderTable">
 					<thead>
@@ -59,6 +61,7 @@
 							<th>Nickname</th>
 							<th>Mobile Number</th>
 							<th>Jersey Number</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -74,6 +77,7 @@
 					</tbody>
 				</table>
 			</form>
+			<span>Double click on row to edit.</span>
 			<button id="deleteRiders">Delete Riders</button>
 			<button id="createRace">Create Race</button>
 		</div>
@@ -82,35 +86,36 @@
 			<h2>Add New Rider</h2>
 			<form th:action="@{/addRider}" th:object="${rider}" method="post"
 				id="newRiderForm">
-				<table>
+				<table id="NewRiderTable">
 					<tr>
 						<td>First Name</td>
 						<td><input type="text" th:field="*{first_Name}"
 							id="firstNameInput" /></td>
 					</tr>
 					<tr>
-						<td>Last Name</td>
-						<td><input type="text" th:field="*{last_name}"
+						<td class="newRiderTab">Last Name</td>
+						<td class="newRiderTab"><input type="text" th:field="*{last_name}"
 							id="lastNameInput" /></td>
 					</tr>
 					<tr>
-						<td>Nickname</td>
-						<td><input type="text" th:field="*{nickname}"
+						<td class="newRiderTab">Nickname</td>
+						<td class="newRiderTab"><input type="text" th:field="*{nickname}"
 							id="nicknameInput" /></td>
 					</tr>
 					<tr>
-						<td>Mobile Number</td>
-						<td><input type="text" th:field="*{phone}" id="phoneInput" /></td>
+						<td class="newRiderTab">Mobile Number</td>
+						<td class="newRiderTab"><input type="text" th:field="*{phone}" id="phoneInput" /></td>
 					</tr>
 					<tr>
-						<td>Jersey Number</td>
-						<td><input type="text" th:field="*{jersey_no}"
+						<td class="newRiderTab">Jersey Number</td>
+						<td class="newRiderTab"><input type="text" th:field="*{jersey_no}"
 							id="jerseyNoInput" /></td>
 					</tr>
 					<tr>
-						<td><input type="reset" value="Reset" id="resetNewRider" /></td>
-						<td><button type="button" id="addRider">Add/Edit
-								Rider</button></td>
+
+						<td class="newRiderTab"><input type="reset" value="Reset" id="resButton"/></td>
+						<td class="newRiderTab"><button type="button" id="addRider">Add/Edit Rider</button></td>
+
 					</tr>
 				</table>
 				<div class="hiddenField">
@@ -143,6 +148,7 @@
 				class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 			<div class="errorPopup"></div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
