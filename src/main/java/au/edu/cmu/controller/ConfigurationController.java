@@ -87,6 +87,13 @@ public class ConfigurationController {
 			return "admin/configuration";		
 	}
 	
+	@RequestMapping(value = "/admin/reconfigure", method = RequestMethod.GET)
+	public String reconfiguration(Model model) {			
+			List<Rider> allRiders = configService.getAllRiders();
+			model.addAttribute("riders", allRiders);
+			return "admin/configuration";
+	}
+	
 	@ModelAttribute("rider")
 	public Rider getRider() {
 		return new Rider();
