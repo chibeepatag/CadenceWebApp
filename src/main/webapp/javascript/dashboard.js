@@ -86,19 +86,33 @@ $(document).ready(function(){
 		$("#endRace").addClass("hiddenField");
 		$("#startRace").removeClass("hiddenField");
 	}
-	$("#sendMsg").click(sendMsg);
-	$("#saveNote").click(saveNote);
-	$("#endRaceBtn").click(endRace);
-	$(".riderRow").click(selectRow);
-	$("#msgClearBtn").click(clearMessage);
-	$("#notesClearBtn").click(clearNotes);	
-	$(".msgTemplate").click(messageTemplate);
-	$(".newMessage").click(messageSeen);
-	$("#startRace").click(startRace);
+	var role = $("#role").text()
+	var contains = role.indexOf("ROLE_ADMIN")
+	if(contains>0){
+		$("#sendMsg").click(sendMsg);
+		$("#saveNote").click(saveNote);
+		$("#endRaceBtn").click(endRace);
+		$(".riderRow").click(selectRow);
+		$("#msgClearBtn").click(clearMessage);
+		$("#notesClearBtn").click(clearNotes);	
+		$(".msgTemplate").click(messageTemplate);
+		$(".newMessage").click(messageSeen);
+		$("#startRace").click(startRace);
+	}else{
+		$("#configBtn").addClass("ui-disabled");
+		$("#startRace").addClass("ui-disabled");
+		$("#endRace").addClass("ui-disabled");
+		$("#startRace").addClass("ui-disabled");
+		$(".msgTemplate").addClass("ui-disabled");
+		$(".msgNote").addClass("ui-disabled");
+		$("textarea").addClass("ui-disabled");
+	}
 	
 	if(startTime){
 		interval = setInterval(refreshDashboard,5000);		
 	}
+	
+
 });
 
 function refreshDashboard(){
