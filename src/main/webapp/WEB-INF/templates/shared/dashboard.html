@@ -38,55 +38,33 @@
 </head>
 <body>
 	<div data-role="page" id="page">
-	
-		 
+		<div data-role="header" data-fullscreen="true">
+		</div>
+
 		<div data-role="content">
-			
+			<div class="mainDashboard">
 			<div class="ui-content" id="map-canvas">
 					<!-- map loads here... -->
-			</div>
-			
-			<!-- 
-			<div id="raceDetails">
-				Event: <span th:text="${currentRace.race_name}" id="raceName"></span><br />
-				Start Time: <span th:text="${currentRace.race_start}"></span>
-			</div>  -->
-
-			<div>
-				<div class="weather">
-					<div style="width: 350px;">
+			</div>						
+			<div class="weatherStatLogo">
+				<div class="weatherAndLogo">
+				<div class="weather">					
 						<iframe style="display: block;"
 							src="http://cdn1.willyweather.com.au/widget/loadView.html?id=13158"
-							width="350" height="200" frameborder="0" scrolling="no"></iframe>
+						height="200" width="330" frameborder="0" scrolling="no"></iframe>
 						<a
 							style="height: 20px; text-indent: -9999em; z-index: 1; margin: -20px 0 0 0; display: block; position: relative"
 							href="http://www.willyweather.com.au/sa/adelaide/adelaide.html">weather
-							for Adelaide</a>
-					</div>
+							for Adelaide</a>								
 				</div>
-				
-				
-				
+				<div class="logocontainer">
+				<img class="logo" alt="Cadence Logo" th:src="@{/images/logo3.jpg}"/>Project Cadence<img alt="CMUA" th:src="@{/images/CMULogo.jpg}" height="30px"/>
+				</div>
+				</div>			
 				<div class="statisticTable"
 					th:replace="shared/statisticTable :: statTable"></div>
-				<div class="endAndNotes">
-				
-				<!--  <div>
-					
-							 <a href="downloadLogs">
-			<button id="downloadMsgNotes"
-				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
-				Messages and Notes</button>
-			</a>
-				</div> 
-				<div id="endRaceContainer">
-					<div>
-						<a href="#endRaceDiv" data-rel="popup" data-position-to="window"
-							data-transition="pop"
-							class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">End
-							Race</a>
-					</div>
-					<div data-role="popup" id="endRaceDiv" data-overlay-theme="b"
+				<div class="endAndNotes">		
+				<div data-role="popup" id="endRaceDiv" data-overlay-theme="b"
 						data-theme="b" data-dismissible="false" style="max-width: 400px;">
 						<div data-role="header" data-theme="a">
 							<h1>End Race</h1>
@@ -99,49 +77,68 @@
 								data-rel="back">Cancel</a> <a href="#" id="endRaceBtn"
 								class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"
 								data-rel="back" data-transition="flow">End</a>
-						</div>
-					</div>
-					</div> -->
+						</div>					
+				</div>
 				</div>
 			</div>
-		</div>
 
-<div class="footer" data-role="footer" data-position="fixed" data-tap-toggle="false"><img class="logo" alt="Cadence Logo" th:src="@{/images/logo3.jpg}"/><img alt="CMUA" th:src="@{/images/CMULogo.jpg}" height="30px"/></div>
-		<div class="msgAndNotes" data-role="panel" data-panel="menu" id="messageAndNotes" data-position="right" data-swipe-close="false" data-dismissible="false" data-position-fixed="true" data-display="overlay">
-			
-			<ul data-role="listview" data-divider-theme="a">
-						<li data-role="list-divider" id="li1">Message</li>
-			
-				
-				<textarea id="messageTxt" style="height: 90px;"></textarea>
-				<div class="ui-grid-c">				
-								
-					<button id="left" class="msgTemplate ui-block-a">Left</button>
-					<button id="right" class="msgTemplate ui-block-b">Right</button>					
-					
-					<button id="breakAway" class="msgTemplate ui-block-a">Break </button>
-					<button id="timeGap" class="msgTemplate ui-block-b">Time gap</button>
-					
-					<button id="breakAway" class="msgTemplate ui-block-a">Recieved</button>
-					<button id="safety" class="msgTemplate ui-block-b">Safety</button>
-				</div>				
-				<button id="sendMsg">Send</button>
-				<button id="msgClearBtn">Reset</button>
-			<br/><br/>
-			
-			<li data-role="list-divider" id="li2">Notes</li>
-				
-				<textarea id="notesTxt" style="height: 120px;"></textarea>
-				<button id="saveNote">Save</button>
-				<button id="notesClearBtn">Reset</button>
-			
-			</ul>
-			 <a href="downloadLogs">
+		</div><!--close main dashboard  -->
+		
+		<div class="msgAndNotes">
+			<div class="ui-grid-a">
+				<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user  ui-mini" sec:authentication="name">User</button>			
+				<button class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-mini"><a th:href="@{/j_spring_security_logout}">Logout</a> </button>			
+			</div>
+			<div class="ui-grid-a">				
+				<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear  ui-mini"><a href="">Config</a></button>								
+				<button class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check ui-mini"><a href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop">End</a></button>								
+			</div>
+			<div>
+			<a href="downloadLogs" target="_blank">
 			<button id="downloadMsgNotes"
 				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
-				Messages and Notes</button>
-			</a> 
+				Download</button>
+			</a>
+			</div>	
+			<div id="raceDetails">
+				<span class="raceStartTime hiddenField" th:text="${currentRace.race_start}"></span>
+				Duration:
+				<span class="durationHour"></span>h
+				<span class="durationMin"> </span>m
+			</div>
+			<div>Message</div>								
+				<textarea id="messageTxt"></textarea>																								
+				<div class="msgTemplateGroup">											
+					<table>
+						<tr>
+							<td><button id="left"      class="msgTemplate ui-block-a ">Left</button></td>
+							<td><button id="right"     class="msgTemplate ui-block-b ">Right</button></td>
+							<td><button id="breakAway" class="msgTemplate ui-block-c ">Break </button></td>
+						</tr>
+						<tr>
+							<td><button id="timeGap"   class="msgTemplate ui-block-a ">Time gap</button></td>
+							<td><button id="safety"    class="msgTemplate ui-block-b ">Safety</button></td>
+							<td><button id="received"  class="msgTemplate ui-block-c ">Received</button></td>
+						</tr>	
+					</table>																																	
+				</div>
+				<div class="ui-grid-a ui-responsive sendReset">
+					<button id="msgClearBtn" class="ui-block-a">Reset</button>
+					<button id="sendMsg"     class="ui-block-b">Send</button>					
+				</div>
+			<div>Notes</div>				
+				<textarea id="notesTxt"></textarea>
+			<div class="ui-grid-a ui-responsive">
+				<button id="notesClearBtn"  class="ui-block-a">Reset</button>
+				<button id="saveNote"       class="ui-block-b">Save</button>				
+			</div>		
+			
 		</div>
+		</div>
+
+
+
+		
 
 	</div>
 </body>

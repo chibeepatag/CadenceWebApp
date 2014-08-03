@@ -4,130 +4,120 @@ html,body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-	font-family:"Cambria", Times, serif;
 	font-size: 12pt;
-    width:auto;    
-	color: black;
-        background: linear-gradient(black,#626365);
-       
+	width: auto;
+	color: #403f42;
 }
 
-
-
-.ui-page{
-    min-width: 100% !important;
+A {
+	text-decoration: none
 }
-.ui-content, .ui-page{
-	
+
+.mainDashboard {
+	width: 80%;
+	float: left;
+}
+
+.msgAndNotes {
+	width: 20%;
+	float: left;
+}
+
+.ui-page {
+	min-width: 100% !important;
+}
+
+.ui-content,.ui-page {
 	height: 100%;
-	font-family:"Cambria", Times, serif;
 	font-size: 14pt;
-	color: black;
-        background: linear-gradient(black,#626365);
-        color: white;
-        overflow: scroll;
-    
 }
-
 
 #map-page,#map-canvas {
-	width: 76%;
+	width: 98%;
 	height: 300px;
 	padding: 0;
-	border: 8px solid;
-    border-radius: 25px;
-    border-color: orange;
-    font-size: 12pt;
-    position: relative;
-    top: -10px;
+	border: 5px solid;
+	border-radius: 10px;
+	border-color: #990000;
+	font-size: 12pt;
+	position: relative;
+	top: -10px;
 }
 
-#raceDetails{
+#raceDetails {
 	position: relative;
-	top:20px;
-border: 8px solid orange;
-    border-radius: 15px;
-    font-size: 12pt;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    width:340px;
-    font-family: monospace;
+	font-size: 12pt;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+.weatherAndLogo{
+	float: left;
+	margin-right: 10px;
+}
 
-	}
-	
 .weather {
 	position: relative;
-	top:80px;
-border: 8px solid orange;
-    border-radius: 15px;
-	float: left;
-	width: 350px;
-}
-
-.header {
-	width: 100%;
-	text-align: right;
-	font:"verdana";
-	font-size: 24pt;
-	font-style: italic;
-	height:30px;
+	border: 5px solid #990000;
+	border-radius: 10px;	
 }
 
 .msgAndNotes {
 	display: inline-block;
 }
 
-
 .endRaceContainer {
 	float: left;
 	display: inline;
 }
 
-table{
-	display: table;
-    width: 100%;
-    border-width: thick;
-    border: 8px solid;
-    border-radius: 25px;
-    border-color: orange;
-    text-align: center;
-    font-size: 12pt;
-    color: black;
-    background: white;
-    
-}
-
-th{
-	background-color: khaki;
-	border: 1px solid black;
-	padding: 5px;
-
-}
-
-table td{
-border:1px solid black;
-width: auto;
-padding-top: 2px;
-padding-bottom: 2px;
-padding-left: 3px;
-padding-right: 3px;
-}
-
-.statisticTable {
-	width: 580px;
-	position: relative;
-top: 10px;
-left: 35px;
-	float: left;
+.weatherStatLogo{
 	display: inline;
-	max-width: 580px;
+}
+
+
+table {
+
+}
+
+th {
+	background-color: #990000;
+	padding: 5px;
+	font-weight: normal;
+	color: white;
+}
+
+table td {
+	width: auto;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.message{
+	width: 200px;
+}
+
+.statisticTable {	
+	float: right;
+	margin-right: 10px;
+	
+	display: table;
+	border-width: medium;
+	border: 5px solid;
+	border-radius: 10px;
+	border-color: #990000;
+	text-align: center;
+	font-size: 12pt;
+	color: black;
+	background: white;
 }
 
 .endAndNotes {
 	position: relative;
-	left:20px;
-	top:-50px;
+	left: 20px;
+	top: -50px;
 	padding-left: 40px;
 	display: inline;
 	float: left;
@@ -136,54 +126,45 @@ left: 35px;
 .labels {
 	color: white;
 	background-color: red;
-	font-family: "Lucida Grande", "Arial", sans-serif;
 	font-size: 16px;
 	text-align: center;
 	width: 20px;
 	white-space: nowrap;
 }
 
-.msgTemplate{
-	margin: 5px;
+.msgTemplate {
+	width: auto;
 }
 
-.newMessage{
+.newMessage {
 	color: red;
 }
 
-#notesTxt{
-	height:120px;
-}
-.ui-input-text
-{
-	height:90px;
+#notesTxt {
+	height: 120px;
 }
 
-#li1, #li2{
-	font-size: 16pt;
-font-family: -webkit-pictograph;
-font-style: italic;
+.ui-input-text {
+	height: 90px;
 }
 
-#left, #right, #breakAway, #timeGap, #safety, #sendMsg, #msgClearBtn, #saveNote, #notesClearBtn
-{
-	color: black;
-font-style: italic;
-font-family: -webkit-pictograph;
+.msgTemplateGroup {
+	width: 100%
 }
 
-#sendMsg, #msgClearBtn, #saveNote, #notesClearBtn
-{
-	width: 180px;
-position: relative;
-left: 25%;
-}
-
-.logo{
+.msgTemplate {
 	
+}
+
+.sendReset {
+	margin-top: 5px;
+}
+
+.logo {
 	height: 30px;
 	width: 40px;
 }
-.footer{
-	height:30px;
+
+.footer {
+	height: 30px;
 }

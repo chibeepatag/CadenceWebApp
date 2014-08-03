@@ -5,7 +5,7 @@
 var markers = {};
 var interval;
 var map;
-var messageTemplateMap={"left":"Left", "right":"Right", "breakAway":"Break away", "timeGap":"Time Gap", "safety":"Safety"};
+var messageTemplateMap={"left":"Left", "right":"Right", "breakAway":"Break away", "timeGap":"Time Gap", "safety":"Safety", "received":"Received"};
 var startTime;
 
 $( document ).on( "pageinit", "#page", function() {
@@ -157,7 +157,7 @@ function endRace(){
 		success: function(data){
 			clearInterval(interval);
 			$("#raceDetails").html(data);
-			$("#endRaceContainer").remove();
+			//$("#endRaceContainer").remove();
 		}
 	});	
 }
