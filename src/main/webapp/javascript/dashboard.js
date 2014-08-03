@@ -264,6 +264,7 @@ function startRace(){
 			startTime = new Date(data.race_start);
 			$("#raceStartTime").text(startTime);			
 			$("#raceDuration").removeClass("hiddenField");
+			$("#configBtn").addClass("ui-disabled");
 		}
 	});
 	
