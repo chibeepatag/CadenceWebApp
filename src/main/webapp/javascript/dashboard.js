@@ -185,7 +185,7 @@ function endRace(){
 		success: function(data){
 			clearInterval(interval);
 			$("#raceDetails").html(data);
-			//$("#endRaceContainer").remove();
+			$("#endRace").addClass("ui-disabled");
 		}
 	});	
 }
@@ -264,6 +264,7 @@ function startRace(){
 			startTime = new Date(data.race_start);
 			$("#raceStartTime").text(startTime);			
 			$("#raceDuration").removeClass("hiddenField");
+			$("#configBtn").addClass("ui-disabled");
 		}
 	});
 	

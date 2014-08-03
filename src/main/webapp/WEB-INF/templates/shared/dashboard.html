@@ -95,7 +95,7 @@
 				<a th:href="@{/j_spring_security_logout}" class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power panelButton">Logout</a>				                                                   			
 			</div>
 			<div class="ui-grid-a">				
-				<a id="configBtn" class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear panelButton">Config</a>					           							
+				<a id="configBtn" th:href="@{/admin/reconfigure}" class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear panelButton">Config</a>					           							
 				<a href="downloadLogs" target="_blank" id="downloadMsgNotes" class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d panelButton">Logs
 				</a>
 				<a id="startRace" href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check panelButton">Start</a>

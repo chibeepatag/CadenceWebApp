@@ -74,8 +74,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public Race createRace(String raceName, List<Long> ids) throws OnGoingRaceException, PersistenceException {
 		Race currentRace;
 		try{
-			currentRace = raceDao.getCurrentRace();			
-			throw new OnGoingRaceException();
+			currentRace = raceDao.getCurrentRace();
+			raceDao.remove(currentRace);
 		}catch(CadencePersistenceException cpe){
 			logger.info("No race is in session.");
 		}				
@@ -111,7 +111,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 	
 	@Override
-	public boolean isThereAnOngoingRace() {
+	public boolean isThereAnOngoingRace() {		
 		return raceDao.isRaceOngoing();		
 	}
 	
