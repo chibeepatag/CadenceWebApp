@@ -73,10 +73,19 @@ function findCenter(){
 	return center;
 }
 
-$(document).ready(function(){		
-	interval = setInterval(refreshDashboard,5000);
-	var startString = $("#raceStartTime").text(); 
-	startTime = new Date(startString);
+$(document).ready(function(){	
+	var startString = $("#raceStartTime").text();
+	console.log(startString.length);
+	if(startString.length > 0){
+		startTime = new Date(startString);
+		$("#startRace").addClass("hiddenField");
+		$("#endRace").removeClass("hiddenField");
+		
+		$("#raceDuration").removeClass("hiddenField");
+	}else{
+		$("#endRace").addClass("hiddenField");
+		$("#startRace").removeClass("hiddenField");
+	}
 	$("#sendMsg").click(sendMsg);
 	$("#saveNote").click(saveNote);
 	$("#endRaceBtn").click(endRace);
@@ -85,6 +94,11 @@ $(document).ready(function(){
 	$("#notesClearBtn").click(clearNotes);	
 	$(".msgTemplate").click(messageTemplate);
 	$(".newMessage").click(messageSeen);
+	$("#startRace").click(startRace);
+	
+	if(startTime){
+		interval = setInterval(refreshDashboard,5000);		
+	}
 });
 
 function refreshDashboard(){
@@ -133,7 +147,7 @@ function updateStatistics(data){
 
 	
 
-	var autoCenter = $('#checkbox-h-2a').prop('checked');
+	var autoCenter = $('#autocenter').prop('checked');
 	if(autoCenter){
 		map.setCenter(findCenter());
 		map.fitBounds(extendBounds());		
@@ -222,5 +236,26 @@ function messageTemplate(){
 
 function messageSeen(){
 	$(this).removeClass("newMessage");
+}
+
+function startRace(){
+	$(this).addClass("hiddenField");
+	$("#endRace").removeClass("hiddenField");	
+	
+	$.ajax({
+		url: "../admin/startRace",
+		type: "GET",
+		success: function(data){
+			interval = setInterval(refreshDashboard,5000);
+			startTime = new Date(data.race_start);
+			$("#raceStartTime").text(startTime);			
+			$("#raceDuration").removeClass("hiddenField");
+		}
+	});
+	
+	
+	
+	
+	
 }
 

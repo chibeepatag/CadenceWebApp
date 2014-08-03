@@ -51,7 +51,7 @@ public class MessageServiceImpl implements MessageService {
 	 */
 	@Override
 	public Message getMessageForRider(String nickname) {
-		Race currentRace = statisticService.getCurrentRace();
+		Race currentRace = statisticService.getStartedRace();
 		Rider rider = currentRace.getRiders().get(nickname);
 		Message message = messageDao.getLatestMessageForRider(rider);
 		return message;
@@ -70,7 +70,7 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public void saveMessageFromRider(String nickname, String message) throws RiderNotInRaceException{
-		Race race = statisticService.getCurrentRace();	
+		Race race = statisticService.getStartedRace();	
 		Map<String, Rider> riders = race.getRiders();
 		Rider rider = riders.get(nickname);	
 		if(null == rider){

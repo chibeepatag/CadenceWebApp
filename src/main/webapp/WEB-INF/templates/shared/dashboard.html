@@ -38,7 +38,7 @@
 </head>
 <body>
 	<div data-role="page" id="page">
-		<div data-role="header" data-fullscreen="true">
+		<div data-role="header" data-fullscreen="true">		
 		</div>
 
 		<div data-role="content">
@@ -48,6 +48,10 @@
 			</div>						
 			<div class="weatherStatLogo">
 				<div class="weatherAndLogo">
+				<div>
+					 <input type="checkbox" name="autocenter" id="autocenter" checked="checked"/>
+        			 <label for="autocenter">Autocenter</label>
+				</div>
 				<div class="weather">					
 						<iframe style="display: block;"
 							src="http://cdn1.willyweather.com.au/widget/loadView.html?id=13158"
@@ -93,17 +97,19 @@
 				<a class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear panelButton">Config</a>					           							
 				<a href="downloadLogs" target="_blank" id="downloadMsgNotes" class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d panelButton">Logs
 				</a>
-				<a href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check panelButton">Start</a>
-				<a href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check panelButton hiddenField">End</a>							
+				<a id="startRace" href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check panelButton">Start</a>
+				<a id="endRace" href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-minus panelButton hiddenField">End</a>							
 			</div>
 			
 												
 				
 			<div id="raceDetails">
-				<span class="raceStartTime hiddenField" th:text="${currentRace.race_start}"></span>
-				Duration:
-				<span class="durationHour"></span>h
-				<span class="durationMin"> </span>m
+				<span id="raceStartTime" class="hiddenField" th:text="${currentRace.race_start}"></span>
+				<span id="raceDuration" class="hiddenField">
+				Duration:				
+				<span id="durationHour"></span>h
+				<span id="durationMin"> </span>m
+				</span>
 			</div>
 			<div>Message</div>								
 				<textarea id="messageTxt"></textarea>																								

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.edu.cmu.exceptions.CadencePersistenceException;
+import au.edu.cmu.exceptions.NoStartedRaceException;
 import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Message;
 import au.edu.cmu.model.Race;
@@ -32,6 +33,8 @@ public class DataReceiverController {
 	static Logger logger = Logger.getLogger(DataReceiverController.class);	
 	
 	public static final String MESSAGE_SUCCESS= "200";
+	
+	public static final String NO_STARTED_RACE = "No started race.";
 	
 	public static final String MESSAGE_FAIL = "500";
 	
@@ -62,11 +65,13 @@ public class DataReceiverController {
 			} catch (RiderNotInRaceException e) {				
 				e.printStackTrace();				
 				return MESSAGE_FAIL;
+			}catch(NoStartedRaceException e){
+				e.printStackTrace();				
+				return NO_STARTED_RACE;
 			}catch (CadencePersistenceException cpe){
 				return MESSAGE_FAIL;
 			}			
-		}
-		
+		}		
 		
 		return MESSAGE_SUCCESS;
 	}

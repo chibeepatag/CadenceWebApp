@@ -47,15 +47,27 @@ public class DashboardController {
 	public String goToDashboard(Model model){
 		try{
 			Race currentRace = dashboardService.getCurrentRace();
-			List<Statistic> statistics = dashboardService.buildStatisticTable(currentRace);
-			model.addAttribute("statistics", statistics);
-			
+			List<Statistic> statistics = dashboardService.createStatisticTable(currentRace);
+			model.addAttribute("statistics", statistics);			
 						
 			model.addAttribute("currentRace", currentRace);
 			return "shared/dashboard";
 		}catch(CadencePersistenceException cpe){
 			return "shared/NoOnGoingRace";
+		}		
+	}
+	
+	@RequestMapping(value="/admin/startRace", method=RequestMethod.GET)
+	@ResponseBody
+	public Race startRace(Model model){
+		try{
+			Race currentRace = dashboardService.startRace();			
+			model.addAttribute("currentRace", currentRace);
+			return currentRace;
+		}catch (Exception e){
+			logger.error(e.getMessage());
 		}
+		return null;
 		
 	}
 	
