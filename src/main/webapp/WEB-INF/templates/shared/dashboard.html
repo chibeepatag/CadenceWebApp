@@ -108,13 +108,19 @@
 			</div>
 			<div>Message</div>								
 				<textarea id="messageTxt"></textarea>																								
-				<div class="ui-grid-c  ui-responsive msgTemplateGroup">											
-					<button id="left"      class="msgTemplate ui-block-a ">Left</button>
-					<button id="right"     class="msgTemplate ui-block-b ">Right</button>										
-					<button id="breakAway" class="msgTemplate ui-block-c ">Break </button>
-					<button id="timeGap"   class="msgTemplate ui-block-a ">Time gap</button>					
-					<button id="safety"    class="msgTemplate ui-block-b ">Safety</button>
-					<button id="received"  class="msgTemplate ui-block-c ">Received</button>
+				<div class="msgTemplateGroup">											
+					<table>
+						<tr>
+							<td><button id="left"      class="msgTemplate ui-block-a ">Left</button></td>
+							<td><button id="right"     class="msgTemplate ui-block-b ">Right</button></td>
+							<td><button id="breakAway" class="msgTemplate ui-block-c ">Break </button></td>
+						</tr>
+						<tr>
+							<td><button id="timeGap"   class="msgTemplate ui-block-a ">Time gap</button></td>
+							<td><button id="safety"    class="msgTemplate ui-block-b ">Safety</button></td>
+							<td><button id="received"  class="msgTemplate ui-block-c ">Received</button></td>
+						</tr>	
+					</table>																																	
 				</div>
 				<div class="ui-grid-a ui-responsive sendReset">
 					<button id="msgClearBtn" class="ui-block-a">Reset</button>
