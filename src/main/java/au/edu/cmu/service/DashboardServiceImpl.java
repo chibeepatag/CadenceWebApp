@@ -74,6 +74,25 @@ public class DashboardServiceImpl implements DashboardService {
 		return raceDao.getCurrentRace();
 	}
 
+	@Override
+	public List<Statistic> createStatisticTable(Race currentRace)
+			throws CadencePersistenceException {
+		try {
+			Map<String, Rider> riderMap = currentRace.getRiders();
+			List<Rider> riders = new ArrayList<Rider>(riderMap.values());
+			List<Statistic> startStatistics = new ArrayList<Statistic>();
+			for (Rider rider : riders) {							
+				Statistic statistic = new Statistic();
+				statistic.setRider(rider);				
+				startStatistics.add(statistic);	
+			}
+
+			return startStatistics;
+
+		} catch (CadencePersistenceException cpe) {
+			throw cpe;
+		}
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -100,12 +119,23 @@ public class DashboardServiceImpl implements DashboardService {
 		} catch (CadencePersistenceException cpe) {
 			throw cpe;
 		}
-
 	}
 
 	@Override
 	public Statistic getLatestStatistic(Rider rider) {
 		return statisticsDao.getRiderLatestStatistic(rider);
+	}
+	
+	@Override
+	public Race startRace() throws Exception{
+		Race currentRace = getCurrentRace();
+		if(null == currentRace.getRace_start()){
+			currentRace.setRace_start(Calendar.getInstance().getTime());			
+			raceDao.edit(currentRace);
+		}else{
+			throw new Exception("Race has already started.");
+		}
+		return currentRace;
 	}
 
 	@Override

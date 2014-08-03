@@ -38,7 +38,7 @@
 </head>
 <body>
 	<div data-role="page" id="page">
-		<div data-role="header" data-fullscreen="true">
+		<div data-role="header" data-fullscreen="true">		
 		</div>
 
 		<div data-role="content">
@@ -48,6 +48,10 @@
 			</div>						
 			<div class="weatherStatLogo">
 				<div class="weatherAndLogo">
+				<div>
+					 <input type="checkbox" name="autocenter" id="autocenter" checked="checked"/>
+        			 <label for="autocenter">Autocenter</label>
+				</div>
 				<div class="weather">					
 						<iframe style="display: block;"
 							src="http://cdn1.willyweather.com.au/widget/loadView.html?id=13158"
@@ -86,59 +90,56 @@
 		
 		<div class="msgAndNotes">
 			<div class="ui-grid-a">
-				<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user  ui-mini" sec:authentication="name">User</button>			
-				<button class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-mini"><a th:href="@{/j_spring_security_logout}">Logout</a> </button>			
+				<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user panelButton" sec:authentication="name">User</button>			
+				<a th:href="@{/j_spring_security_logout}" class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power panelButton">Logout</a>				                                                   			
 			</div>
 			<div class="ui-grid-a">				
-				<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear  ui-mini"><a href="">Config</a></button>								
-				<button class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check ui-mini"><a href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop">End</a></button>								
+				<a class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear panelButton">Config</a>					           							
+				<a href="downloadLogs" target="_blank" id="downloadMsgNotes" class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d panelButton">Logs
+				</a>
+				<a id="startRace" href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check panelButton">Start</a>
+				<a id="endRace" href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-minus panelButton hiddenField">End</a>							
 			</div>
-			<div>
-			<a href="downloadLogs" target="_blank">
-			<button id="downloadMsgNotes"
-				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">
-				Download</button>
-			</a>
-			</div>	
+			
+												
+				
 			<div id="raceDetails">
-				<span class="raceStartTime hiddenField" th:text="${currentRace.race_start}"></span>
-				Duration:
-				<span class="durationHour"></span>h
-				<span class="durationMin"> </span>m
+				<span id="raceStartTime" class="hiddenField" th:text="${currentRace.race_start}"></span>
+				<span id="raceDuration" class="hiddenField">
+				Duration:				
+				<span id="durationHour"></span>h
+				<span id="durationMin"> </span>m
+				</span>
 			</div>
 			<div>Message</div>								
 				<textarea id="messageTxt"></textarea>																								
 				<div class="msgTemplateGroup">											
 					<table>
 						<tr>
-							<td><button id="left"      class="msgTemplate ui-block-a ">Left</button></td>
-							<td><button id="right"     class="msgTemplate ui-block-b ">Right</button></td>
-							<td><button id="breakAway" class="msgTemplate ui-block-c ">Break </button></td>
+							<td><button id="left"      class="msgTemplate ui-block-a panelButton">Left</button></td>
+							<td><button id="right"     class="msgTemplate ui-block-b panelButton">Right</button></td>
+							<td><button id="breakAway" class="msgTemplate ui-block-c panelButton">Break </button></td>
 						</tr>
 						<tr>
-							<td><button id="timeGap"   class="msgTemplate ui-block-a ">Time gap</button></td>
-							<td><button id="safety"    class="msgTemplate ui-block-b ">Safety</button></td>
-							<td><button id="received"  class="msgTemplate ui-block-c ">Received</button></td>
+							<td><button id="timeGap"   class="msgTemplate ui-block-a panelButton">Time gap</button></td>
+							<td><button id="safety"    class="msgTemplate ui-block-b panelButton">Safety</button></td>
+							<td><button id="received"  class="msgTemplate ui-block-c panelButton">Received</button></td>
 						</tr>	
 					</table>																																	
 				</div>
 				<div class="ui-grid-a ui-responsive sendReset">
-					<button id="msgClearBtn" class="ui-block-a">Reset</button>
-					<button id="sendMsg"     class="ui-block-b">Send</button>					
+					<button id="msgClearBtn" class="ui-block-a panelButton">Reset</button>
+					<button id="sendMsg"     class="ui-block-b panelButton">Send</button>					
 				</div>
 			<div>Notes</div>				
 				<textarea id="notesTxt"></textarea>
 			<div class="ui-grid-a ui-responsive">
-				<button id="notesClearBtn"  class="ui-block-a">Reset</button>
-				<button id="saveNote"       class="ui-block-b">Save</button>				
+				<button id="notesClearBtn"  class="ui-block-a panelButton">Reset</button>
+				<button id="saveNote"       class="ui-block-b panelButton">Save</button>				
 			</div>		
 			
 		</div>
 		</div>
-
-
-
-		
 
 	</div>
 </body>

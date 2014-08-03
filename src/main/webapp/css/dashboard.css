@@ -4,12 +4,12 @@ html,body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-	font-size: 12pt;
+	
 	width: auto;
 	color: #403f42;
 }
 
-A {
+a {
 	text-decoration: none
 }
 
@@ -29,7 +29,6 @@ A {
 
 .ui-content,.ui-page {
 	height: 100%;
-	font-size: 14pt;
 }
 
 #map-page,#map-canvas {
@@ -48,8 +47,7 @@ A {
 	position: relative;
 	font-size: 12pt;
 	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
+	padding-bottom: 10px;	
 }
 .weatherAndLogo{
 	float: left;
@@ -132,8 +130,15 @@ table td {
 	white-space: nowrap;
 }
 
+.panelButton{
+	font-size: 11pt;
+	padding: 5px;
+}
+
+
+
 .msgTemplate {
-	width: auto;
+	width: auto;	
 }
 
 .newMessage {

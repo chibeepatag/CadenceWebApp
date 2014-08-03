@@ -27,11 +27,13 @@ function getRandomData(){
 			  "latitude": lat,
 			  "longitude": long,
 			  "cadence": getRandomNumber(),
-			  "power":getRandomNumber()
+			  "power":getRandomNumber(),
+			  "message": "hello"
 		   }
 }
 
 function getRandomNumber(){
 	return Math.floor((Math.random() * 100) + 1);
 }
+startSending();
 //http://localhost:8080/CadenceWebApp/riderData?nickname=Matt&message=borntobewild&heart_rate=0&speed=0&latitude=-34.92687&longitude=138.59983&cadence=0&power=0&elevation=0&distance=0

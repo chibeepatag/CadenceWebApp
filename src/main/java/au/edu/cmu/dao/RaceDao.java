@@ -14,6 +14,14 @@ public interface RaceDao extends BaseDao<Race> {
 
 	Race getCurrentRace() throws CadencePersistenceException;
 	
+	/**
+	 * Gets the current race that has been started by the coach
+	 * by pressing the start button.
+	 * @return
+	 * @throws CadencePersistenceException
+	 */
+	Race getStartedRace() throws CadencePersistenceException;
+	
 	boolean isRaceOngoing();
 	
 	Race getLatestRace() throws CadencePersistenceException;

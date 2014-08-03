@@ -17,11 +17,15 @@ import au.edu.cmu.model.Statistic;
  */
 public interface DashboardService {
 
+	List<Statistic> createStatisticTable(Race currentRace) throws CadencePersistenceException;
+	
 	List<Statistic> buildStatisticTable(Race currentRace) throws CadencePersistenceException;
 	
 	Statistic getLatestStatistic(Rider rider);
 	
 	Race getCurrentRace();
+	
+	Race startRace() throws Exception;
 	
 	Race endRace(Race currentRace);
 	

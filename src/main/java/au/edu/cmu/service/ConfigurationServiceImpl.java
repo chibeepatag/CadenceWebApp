@@ -87,7 +87,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		}
 		Race race = new Race();
 		race.setRace_name(raceName);
-		race.setRace_start(Calendar.getInstance().getTime());
+		race.setRace_start(null);
 		race.setRiders(riders);
 		race.setIsOngoing(true);		
 		UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

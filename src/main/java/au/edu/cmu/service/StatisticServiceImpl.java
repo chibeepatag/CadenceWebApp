@@ -5,6 +5,8 @@ package au.edu.cmu.service;
 
 import java.util.Map;
 
+import javax.persistence.NoResultException;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import au.edu.cmu.dao.RaceDao;
 import au.edu.cmu.dao.RiderDao;
 import au.edu.cmu.dao.StatisticsDao;
+import au.edu.cmu.exceptions.NoStartedRaceException;
 import au.edu.cmu.exceptions.RiderNotInRaceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
@@ -37,8 +40,8 @@ public class StatisticServiceImpl implements StatisticService{
 	
 	public static Race currentRace;
 	@Override
-	public Rider saveStatistic(Statistic statistic, String nickname) throws RiderNotInRaceException{
-		Race race = getCurrentRace();		
+	public Rider saveStatistic(Statistic statistic, String nickname) throws RiderNotInRaceException, NoStartedRaceException{
+		Race race = getStartedRace();		
 		Map<String, Rider> riders = race.getRiders();		
 		Rider rider = riders.get(nickname);		
 		if(null == rider){
@@ -46,14 +49,22 @@ public class StatisticServiceImpl implements StatisticService{
 			throw new RiderNotInRaceException(nickname);
 		}
 		statistic.setRider(rider);
-		statisticsDao.create(statistic);
+		if(null != race.getRace_start()){
+			statisticsDao.create(statistic);			
+		}else{
+			throw new NoStartedRaceException();
+		}
 		return rider;
 	}
 	
 	@Override
-	public Race getCurrentRace(){
+	public Race getStartedRace(){
 		if(null == currentRace){
-			currentRace = raceDao.getCurrentRace();			
+			try{
+				currentRace = raceDao.getStartedRace();							
+			}catch (NoResultException nre){
+				currentRace = null;
+			}
 		}
 		return currentRace;
 	}
