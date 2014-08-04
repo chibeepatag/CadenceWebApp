@@ -147,14 +147,14 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 
 	@Override
-	public void saveMessage(String msgContent, List<Long> recipientIds) {
+	public void saveMessage(Race currentRace, String msgContent, List<Long> recipientIds) {
 		Message message = new Message();
 		message.setMessage(msgContent);
 		User coach = getCoach();
 		message.setCoach(coach);
 		message.setMessage_ts(Calendar.getInstance().getTime());
-		Race race = raceDao.getLatestRace();
-		message.setRace(race);
+		
+		message.setRace(currentRace);
 
 		List<MessageRecipient> riderRecipients = new ArrayList<MessageRecipient>();
 		for (Long id : recipientIds) {
@@ -172,12 +172,12 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 
 	@Override
-	public void saveNote(String noteTxt) {
+	public void saveNote(Race currentRace, String noteTxt) {
 		Note note = new Note();
 		note.setNote(noteTxt);
 		note.setCoach(getCoach());
 		note.setMessage_ts(Calendar.getInstance().getTime());
-		note.setRace(raceDao.getLatestRace());
+		note.setRace(currentRace);
 		noteDao.create(note);
 	}
 
@@ -193,7 +193,7 @@ public class DashboardServiceImpl implements DashboardService {
 	@Override
 	public OutputStream createLogFile(Race currentRace, OutputStream out) {
 		List<Log> logContent = getLogContent(currentRace);
-		out = createLogPdf(logContent, out);
+		out = createLogPdf(currentRace, logContent, out);
 		return out;
 	}
 
@@ -208,14 +208,18 @@ public class DashboardServiceImpl implements DashboardService {
 		return logs;
 	}
 
-	OutputStream createLogPdf(List<Log> logContent, OutputStream outputStream) {
+	OutputStream createLogPdf(Race currentRace, List<Log> logContent, OutputStream outputStream) {
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		try {
 			PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 			document.open();
-			if(!logContent.isEmpty()){				
+			if(!logContent.isEmpty()){
+				Paragraph raceTitle = new Paragraph();
+				raceTitle.add("Event name: ");
+				raceTitle.add(currentRace.getRace_name());
+				document.add(raceTitle);
 				for (Log log : logContent) {
-					Paragraph paragraph = new Paragraph();
+					Paragraph paragraph = new Paragraph();					
 					if (log instanceof Note) {
 						paragraph.add("Note: ");
 						paragraph.add(log.getMessage_ts().toString());

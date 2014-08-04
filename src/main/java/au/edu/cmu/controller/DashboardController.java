@@ -99,14 +99,14 @@ public class DashboardController {
 	
 	@RequestMapping(value="/admin/saveMsg", method=RequestMethod.POST)
 	@ResponseBody
-	public void saveMessage(@RequestParam("message")String message, @RequestParam("recipientIds")List<Long> ids){					
-		dashboardService.saveMessage(message, ids);	
+	public void saveMessage(@ModelAttribute("currentRace") Race currentRace, @RequestParam("message")String message, @RequestParam("recipientIds")List<Long> ids){					
+		dashboardService.saveMessage(currentRace, message, ids);	
 	}
 	
 	@RequestMapping(value="/admin/saveNote", method=RequestMethod.POST)
 	@ResponseBody
-	public void saveNote(@RequestParam("note")String note){
-		dashboardService.saveNote(note);
+	public void saveNote(@ModelAttribute("currentRace") Race currentRace, @RequestParam("note")String note){
+		dashboardService.saveNote(currentRace, note);
 	}
 	
 	@RequestMapping(value="/shared/downloadLogs", method=RequestMethod.GET)

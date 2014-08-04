@@ -6,6 +6,8 @@ package au.edu.cmu.service;
 import java.io.OutputStream;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import au.edu.cmu.exceptions.CadencePersistenceException;
 import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
@@ -34,10 +36,10 @@ public interface DashboardService {
 	 * Sets the race to be the latest race 
 	 * so that users can send messages even
 	 * if the race has ended.
-	 * @param msgContent - the message
+	 * @ModelAttribute("currentRace") Race currentRace
 	 * @param recipientIds - the ids of the recipients
 	 */
-	void saveMessage(String msgContent, List<Long> recipientIds);
+	void saveMessage(Race currentRace, String msgContent, List<Long> recipientIds);
 	
 	/**
 	 * Saves the note to the database.
@@ -45,7 +47,7 @@ public interface DashboardService {
 	 * so notes can still be made after ending the race.
 	 * @param noteTxt
 	 */
-	void saveNote(String noteTxt);
+	void saveNote(Race currentRace, String noteTxt);
 	
 	OutputStream createLogFile(Race currentRace, OutputStream out);
 }
