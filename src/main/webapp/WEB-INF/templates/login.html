@@ -36,7 +36,7 @@
 		<div data-role="header" data-theme="a">
 			<h1>Race Management System</h1>
 		</div>
-		<p th:if="${loginError}" class="error">Wrong user or password</p>
+		<p th:if="${loginError}" class="error">Wrong username or password</p>
 		<form th:action="@{/j_spring_security_check}" method="post">
 			<div data-role="fieldcontain">
 				<label for="j_username">Username:</label> 
