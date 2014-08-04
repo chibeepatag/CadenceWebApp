@@ -185,7 +185,8 @@ function endRace(){
 		success: function(data){
 			clearInterval(interval);
 			$("#raceDetails").html(data);
-			$("#endRace").addClass("ui-disabled");
+			$("#endRace").addClass("ui-disabled");			
+			var win = window.open('downloadLogs', '_blank');							
 		}
 	});	
 }

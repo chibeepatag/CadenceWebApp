@@ -83,7 +83,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		Map<String, Rider> riders = new HashMap<String, Rider>();
 		for(Long id : ids){
 			Rider rider = riderDao.findById(id);
-			riders.put(rider.getJersey_no(), rider);
+			riders.put(rider.getNickname(), rider);
 		}
 		Race race = new Race();
 		race.setRace_name(raceName);
