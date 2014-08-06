@@ -55,7 +55,7 @@ function addRider(){
 		$(".errorPopup").text("New Rider Missing Information");
 			$("#errorButton").click()}; 		
 
-	$("#resetNewRider").click();
+	$("#reset").click();
 
 
 }
@@ -86,7 +86,7 @@ function appendNewRider(data){
 	$(lastRowClone).find(".riderPhone").text(data.phone);
 	$(lastRowClone).find(".riderJersey").text(data.jersey_no);
 	$(lastRowClone).find(".rider_id").text(data.rider_id);
-	$(".riderTable").append(lastRowClone);
+	$("#riderOptions").append(lastRowClone);
 	$(lastRowClone).removeClass("selectedRow");
 	$(lastRowClone).click(selectRow);
 	$(lastRowClone).dblclick(selectEditRider);
@@ -134,8 +134,8 @@ function createRace(){
 	var raceName = $("#raceName").val();
 		
 	if(raceName){
-		var riderIds = $(".selectedRow").find(".rider_id");
-		var riderJerseys = $(".selectedRow").find(".riderJersey");
+		var riderIds = $(".raceTeam").find(".rider_id");
+		var riderJerseys = $(".raceTeam").find(".riderJersey");
 		
 		
 		var sameJersey= false;

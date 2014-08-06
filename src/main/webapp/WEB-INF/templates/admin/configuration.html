@@ -47,7 +47,7 @@
 			<span>Riders</span>	
 			<span class="instruction">Double click on row to edit.</span>		
 			<form id="deleteRiderForm" th:unless="${#lists.isEmpty(riders)}">
-				<table class="riderTable border">
+				<table class="riderTable border" id="riderOptions">
 					<thead>
 						<tr>
 							<th>First Name</th>
