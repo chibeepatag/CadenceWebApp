@@ -82,16 +82,20 @@ public class ConfigurationController {
 				return "redirect:../shared/dashboard";
 			}
 
-			List<Rider> allRiders = configService.getAllRiders();
-			model.addAttribute("riders", allRiders);
-			return "admin/configuration";		
+			return buildConfigPage(model);		
 	}
 	
 	@RequestMapping(value = "/admin/reconfigure", method = RequestMethod.GET)
 	public String reconfiguration(Model model) {			
-			List<Rider> allRiders = configService.getAllRiders();
-			model.addAttribute("riders", allRiders);
-			return "admin/configuration";
+			return buildConfigPage(model);
+	}
+	
+	private String buildConfigPage(Model model) {
+		List<Rider> allRiders = configService.getAllRiders();
+		model.addAttribute("riders", allRiders);
+		List<Rider> latestTeam = configService.getLastestTeam();
+		model.addAttribute("latestTeam", latestTeam);
+		return "admin/configuration";
 	}
 	
 	@ModelAttribute("rider")

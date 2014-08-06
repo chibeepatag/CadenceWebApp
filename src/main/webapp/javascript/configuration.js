@@ -5,11 +5,14 @@ $(document).ready(function(){
 });
 
 function attachEventHandlers(){
+	$("#reset").click(reset);
 	$(".riderRow").click(selectRow);
 	$(".riderRow").dblclick(selectEditRider);
 	$("#addRider").click(addRider);
 	$("#deleteRiders").click(deleteRiders);
 	$("#createRace").click(createRace);
+	$("#deselectRider").click(deselectRider);
+	$("#selectRider").click(selectRider);
 }
 
 function selectRow(){
@@ -70,7 +73,9 @@ function selectEditRider(){
 	$("#nicknameInput").val(nickname);
 	$("#phoneInput").val(phone);
 	$("#jerseyNoInput").val(jersey);
-	$("#riderIdInput").val(rider_id);	
+	$("#riderIdInput").val(rider_id);
+	
+	$("#addEditRider").click();
 }
 
 function appendNewRider(data){	
@@ -121,8 +126,8 @@ function cantDelete(jqXHR, textStatus, errorThrown){
 	}
 }
 
-function removeRidersFromTable(){
-	console.log("deleted");
+function reset(){
+	$("#newRiderForm input").val("");
 }
 
 function createRace(){
@@ -183,4 +188,42 @@ function displayNewRace(data){
 function failedToCreateRace(jqXHR, textStatus, errorThrown){
 	$("raceCreated").html(textStatus + " " + errorThrown);
 	$("#raceCreated").removeClass("hiddenField");
+}
+
+function deselectRider(){
+	$(".raceTeam.selectedRow").remove();
+}
+
+function selectRider(){
+	var rows = $(".riderOption.selectedRow");
+	
+	var idsArray = $(".teamTable").find(".rider_id").map(
+			function(id){
+			return $(this).text();
+			}
+			).get();
+		
+	clonedRows = $(rows).clone();
+
+	$(clonedRows).each(function(row){
+
+		var riderId = $(this).find(".rider_id").text();
+		
+		if(idsArray.indexOf(riderId) <0){
+			
+			$(this).click(selectRow);
+			$(this).addClass("raceTeam");
+			$(this).removeClass("selectedRow");
+			$(this).removeClass("riderOption");
+			$(".teamTable").append(this);
+		}else{
+			console.log($(this).find(".riderNickname").text()+ " is already part of the team");
+		}
+		
+	});	
+	
+	$(rows).each(function(){
+		$(this).removeClass("selectedRow");
+	});
+	
 }

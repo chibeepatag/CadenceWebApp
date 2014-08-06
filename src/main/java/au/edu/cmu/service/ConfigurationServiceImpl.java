@@ -3,7 +3,9 @@
  */
 package au.edu.cmu.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +120,13 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	@Override
 	public List<Rider> getAllRiders() {
 		return riderDao.findAll();		
+	}
+	
+	@Override
+	public List<Rider> getLastestTeam() {		
+		Map<String, Rider> riders = raceDao.getLatestRace().getRiders();
+		List<Rider> latestTeam = new ArrayList<Rider>(riders.values());
+		return latestTeam;
 	}
 
 }
