@@ -26,6 +26,8 @@ public interface ConfigurationService {
 	boolean isThereAnOngoingRace();
 	
 	public List<Rider> getAllRiders();
+	
+	List<Rider> getLastestTeam();
 }
 
 

@@ -34,10 +34,7 @@ a {
 #map-page,#map-canvas {
 	width: 98%;
 	height: 300px;
-	padding: 0;
-	border: 5px solid;
-	border-radius: 10px;
-	border-color: #990000;
+	padding: 0;	
 	font-size: 12pt;
 	position: relative;
 	top: -10px;
@@ -55,9 +52,7 @@ a {
 }
 
 .weather {
-	position: relative;
-	border: 5px solid #990000;
-	border-radius: 10px;	
+	position: relative;	
 }
 
 .msgAndNotes {
@@ -78,13 +73,6 @@ table {
 
 }
 
-th {
-	background-color: #990000;
-	padding: 5px;
-	font-weight: normal;
-	color: white;
-}
-
 table td {
 	width: auto;
 	padding-top: 2px;
@@ -99,13 +87,8 @@ table td {
 
 .statisticTable {	
 	float: right;
-	margin-right: 10px;
-	
-	display: table;
-	border-width: medium;
-	border: 5px solid;
-	border-radius: 10px;
-	border-color: #990000;
+	margin-right: 10px;	
+	display: table;	
 	text-align: center;
 	font-size: 12pt;
 	color: black;
@@ -163,6 +146,7 @@ table td {
 
 .sendReset {
 	margin-top: 5px;
+	text-align: center;
 }
 
 .logo {
@@ -172,4 +156,24 @@ table td {
 
 .footer {
 	height: 30px;
+}
+
+.loginGrp{
+	width: 100%;
+}
+
+.configLogsGrp{
+	width: 100%;
+}
+
+.user{
+	padding-right: 42px;	
+}
+
+.logs{	
+	padding-right: 30px;
+}
+
+.startEnd{
+	width: 160px;
 }

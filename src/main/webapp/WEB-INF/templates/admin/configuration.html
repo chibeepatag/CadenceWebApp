@@ -42,15 +42,12 @@
 			<h1>Race Configuration</h1>			
 			<a th:href="@{/j_spring_security_logout}" data-icon="power" class="ui-btn-right">Logout</a>		
 		</div>
-		<div id="raceNameDiv">
-			<h2>Race Name:</h2>
-			<input type="text" name="raceName" id="raceName" />
-		</div>
-		<div th:unless="${#lists.isEmpty(riders)}" id="ridersDiv">
-			<h2>Select Riders</h2>
-			
-			<form id="deleteRiderForm">
-				<table class="riderTable">
+		<div data-role="content" class="ui-content">
+		<div id="ridersDiv">
+			<span class="tableTitle">Riders</span>	
+			<span class="instruction">Double click on row to edit.</span>		
+			<form id="deleteRiderForm" th:unless="${#lists.isEmpty(riders)}">
+				<table class="riderTable border" id="riderOptions">
 					<thead>
 						<tr>
 							<th>First Name</th>
@@ -61,7 +58,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="rider: ${riders}" class="riderRow">
+						<tr th:each="rider: ${riders}" class="riderRow riderOption">
 							<td th:text="${rider.first_Name}" class="riderFirstName"></td>
 							<td th:text="${rider.last_name}" class="riderLastName"></td>
 							<td th:text="${rider.nickname}" class="riderNickname"></td>
@@ -73,12 +70,49 @@
 					</tbody>
 				</table>
 			</form>
-			<span>Double click on row to edit.</span>
-			<button id="deleteRiders">Delete Riders</button>
-			<button id="createRace">Create Race</button>
+			
+			<div data-role="controlgroup" data-type="horizontal" class="addEditDeletePanel">
+				<a href="#" id="deleteRiders"                                                                             class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete">Delete</a>				
+				<a href="#newRiderDiv" id="addEditRider" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check">Add</a>								
+			</div>
+			
 		</div>
-
-		<div id="newRiderDiv">
+		<div class="selectorDiv">
+			<button id="selectRider" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-notext">Right</button>
+			<button id="deselectRider" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Left</button>			
+		</div>
+		<div id="raceConfig">
+			<span class="tableTitle">Team</span>						
+			<table class="riderTable border teamTable">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Nickname</th>
+							<th>Mobile Number</th>
+							<th>Jersey Number</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="rider: ${latestTeam}" class="riderRow raceTeam">
+							<td th:text="${rider.first_Name}" class="riderFirstName"></td>
+							<td th:text="${rider.last_name}" class="riderLastName"></td>
+							<td th:text="${rider.nickname}" class="riderNickname"></td>
+							<td th:text="${rider.phone}" class="riderPhone"></td>
+							<td th:text="${rider.jersey_no}" class="riderJersey"></td>
+							<td class="hiddenField"><span class="rider_id"
+								th:text="${rider.rider_id}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			<div class="ui-field-contain">
+			    <label for="raceName" class="labelRaceName">Race Name:</label>
+    			<input type="text" name="raceName" id="raceName" value=""/>
+			</div>
+			<button id="createRace">Create Race</button>	
+		</div>
+			
+		<div id="newRiderDiv" data-role="popup" data-theme="a" class="ui-corner-all">
 			<h2>Add New Rider</h2>
 			<form th:action="@{/addRider}" th:object="${rider}" method="post"
 				id="newRiderForm">
@@ -107,10 +141,9 @@
 						<td class="newRiderTab"><input type="text" th:field="*{jersey_no}"
 							id="jerseyNoInput" /></td>
 					</tr>
-					<tr>
-						<td class="newRiderTab"><input type="reset" value="Reset"/></td>
-						<td class="newRiderTab"><button type="button" id="addRider">Add/Edit
-								Rider</button></td>
+					<tr>			
+						<td><button type="button" id="reset" class="addEditFormBtn">Reset</button></td>			
+						<td class="newRiderTab"><button type="button" id="addRider" class="addEditFormBtn">Add/Edit</button></td>
 					</tr>
 				</table>
 				<div class="hiddenField">
@@ -142,6 +175,7 @@
 			<a href="#" data-rel="back"
 				class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 			<div class="errorPopup"></div>
+		</div>
 		</div>
 	</div>
 </body>
