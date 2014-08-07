@@ -146,6 +146,7 @@ table td {
 
 .sendReset {
 	margin-top: 5px;
+	text-align: center;
 }
 
 .logo {
@@ -155,4 +156,24 @@ table td {
 
 .footer {
 	height: 30px;
+}
+
+.loginGrp{
+	width: 100%;
+}
+
+.configLogsGrp{
+	width: 100%;
+}
+
+.user{
+	padding-right: 42px;	
+}
+
+.logs{	
+	padding-right: 30px;
+}
+
+.startEnd{
+	width: 160px;
 }

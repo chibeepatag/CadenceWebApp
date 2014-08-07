@@ -44,7 +44,7 @@
 		</div>
 		<div data-role="content" class="ui-content">
 		<div id="ridersDiv">
-			<span>Riders</span>	
+			<span class="tableTitle">Riders</span>	
 			<span class="instruction">Double click on row to edit.</span>		
 			<form id="deleteRiderForm" th:unless="${#lists.isEmpty(riders)}">
 				<table class="riderTable border" id="riderOptions">
@@ -71,18 +71,18 @@
 				</table>
 			</form>
 			
-			<div class="ui-grid-a">
-				<button id="deleteRiders" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-delete ui-block-b addEditDeletBtns">Delete</button>				
-				<a href="#newRiderDiv" id="addEditRider" data-rel="popup" data-position-to="window" data-transition="pop"><button class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-check  ui-block-a addEditDeletBtns">Add</button></a>								
+			<div data-role="controlgroup" data-type="horizontal" class="addEditDeletePanel">
+				<a href="#" id="deleteRiders"                                                                             class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete">Delete</a>				
+				<a href="#newRiderDiv" id="addEditRider" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check">Add</a>								
 			</div>
 			
 		</div>
 		<div class="selectorDiv">
-			<button id="deselectRider" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Left</button>
 			<button id="selectRider" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-notext">Right</button>
+			<button id="deselectRider" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Left</button>			
 		</div>
 		<div id="raceConfig">
-			<span>Team</span>						
+			<span class="tableTitle">Team</span>						
 			<table class="riderTable border teamTable">
 					<thead>
 						<tr>
@@ -106,7 +106,7 @@
 					</tbody>
 				</table>
 			<div class="ui-field-contain">
-			    <label for="raceName">Race Name:</label>
+			    <label for="raceName" class="labelRaceName">Race Name:</label>
     			<input type="text" name="raceName" id="raceName" value=""/>
 			</div>
 			<button id="createRace">Create Race</button>	

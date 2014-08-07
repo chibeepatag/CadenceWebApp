@@ -42,9 +42,28 @@ table td{
 }
 
 .addEditDeletePanel{
-	
+	text-align: center;
 }
 
-.addEditDeletBtns{
-	height: 40px;
+.tableTitle{
+	color: #802A2A;
+	padding-left: 5px;
+	font-size: 18pt;
+}
+
+.instruction{
+	font-size: 10pt;
+	padding-top: 12px;
+	color: #660000;
+	float: right;
+}
+
+.labelRaceName{
+	color: #802A2A;
+	font-weight: bold;
+	font-size: 13pt;
+}
+
+h1{
+	color: #330000;
 }

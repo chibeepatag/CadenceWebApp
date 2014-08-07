@@ -90,20 +90,21 @@
 		</div><!--close main dashboard  -->
 		
 		<div class="msgAndNotes">
-			<div class="ui-grid-a">
-				<button class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user panelButton" sec:authentication="name">User</button>			
-				<a th:href="@{/j_spring_security_logout}" class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power panelButton">Logout</a>				                                                   			
-			</div>
-			<div class="ui-grid-a">				
-				<a id="configBtn" th:href="@{/admin/reconfigure}" class="ui-block-a ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear panelButton">Config</a>					           							
-				<a href="downloadLogs" target="_blank" id="downloadMsgNotes" class="ui-block-b ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d panelButton">Logs
-				</a>
-				<a id="startRace" href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check panelButton">Start</a>
-				<a id="endRace" href="#endRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-grid-solo ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-minus panelButton hiddenField">End</a>							
+			
+			<div data-role="controlgroup" data-type="horizontal" class="loginGrp">
+    			<a href="#"                               class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-user user" sec:authentication="name" >User</a>
+    			<a th:href="@{/j_spring_security_logout}" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-power">Logout</a>    			
 			</div>
 			
-												
-				
+			
+			<div data-role="controlgroup" data-type="horizontal" class="configLogsGrp">
+    			<a id="configBtn" th:href="@{/admin/reconfigure}"            class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-gear" >Config</a>
+    			<a href="downloadLogs" target="_blank" id="downloadMsgNotes" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d logs">Logs</a>    			
+			</div>
+			
+			<a id="startRace" href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check startEnd" >Start</a>
+    		<a id="endRace"   href="#endRaceDiv"   data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-minus hiddenField startEnd">End</a>	    			
+					
 			<div id="raceDetails">
 				<span id="raceStartTime" class="hiddenField" th:text="${currentRace.race_start}"></span>
 				<span id="raceDuration" class="hiddenField">
@@ -114,30 +115,29 @@
 			</div>
 			<div>Message</div>								
 				<textarea id="messageTxt"></textarea>																								
-				<div class="msgTemplateGroup">											
-					<table>
-						<tr>
-							<td><button id="left"      class="msgTemplate ui-block-a panelButton">Left</button></td>
-							<td><button id="right"     class="msgTemplate ui-block-b panelButton">Right</button></td>
-							<td><button id="breakAway" class="msgTemplate ui-block-c panelButton">Break </button></td>
-						</tr>
-						<tr>
-							<td><button id="timeGap"   class="msgTemplate ui-block-a panelButton">Time gap</button></td>
-							<td><button id="safety"    class="msgTemplate ui-block-b panelButton">Safety</button></td>
-							<td><button id="received"  class="msgTemplate ui-block-c panelButton">Received</button></td>
-						</tr>	
-					</table>																																	
+				<div class="msgTemplateGroup">		
+					<div data-role="controlgroup" data-type="horizontal">
+    					<a href="#" id="left"      class="msgTemplate ui-btn ui-corner-all">Left&nbsp;&nbsp;</a>
+    					<a href="#" id="safety"   class="msgTemplate ui-btn ui-corner-all">Safety</a>
+    					<a href="#" id="received" class="msgTemplate ui-btn ui-corner-all">Received</a>
+    					   			
+					</div>
+					<div data-role="controlgroup" data-type="horizontal">
+    					<a href="#" id="right"     class="msgTemplate ui-btn ui-corner-all">Right</a>
+    					<a href="#" id="breakAway" class="msgTemplate ui-btn ui-corner-all">Break</a>
+    					<a href="#" id="timeGap"  class="msgTemplate ui-btn ui-corner-all">Time Gap</a>
+    				</div>																																													
 				</div>
-				<div class="ui-grid-a ui-responsive sendReset">
-					<button id="msgClearBtn" class="ui-block-a panelButton msgNote">Reset</button>
-					<button id="sendMsg"     class="ui-block-b panelButton msgNote">Send</button>					
+				<div data-role="controlgroup" data-type="horizontal" class="sendReset">
+					<a href="#" id="msgClearBtn" class="ui-btn ui-corner-all msgNote">Reset</a>
+					<a href="#" id="sendMsg"     class="ui-btn ui-corner-all msgNote">Send</a>															
 				</div>
 			<div>Notes</div>				
 				<textarea id="notesTxt"></textarea>
-			<div class="ui-grid-a ui-responsive">
-				<button id="notesClearBtn"  class="ui-block-a panelButton msgNote">Reset</button>
-				<button id="saveNote"       class="ui-block-b panelButton msgNote">Save</button>				
-			</div>		
+			<div data-role="controlgroup" data-type="horizontal" class="sendReset">
+				<a href="#" id="notesClearBtn" class="ui-btn ui-corner-all msgNote">Reset</a>
+				<a href="#" id="saveNote" class="ui-btn ui-corner-all msgNote">Save</a>							
+			</div>								
 			
 		</div>
 		</div>
