@@ -33,7 +33,6 @@ function addRider(){
 	var phone = $("#phoneInput").val();
 	var jersey = $("#jerseyNoInput").val();
 	
-	
 	if(riderId > 0){		
 		$.ajax({
 			url: "editRider",
@@ -79,7 +78,7 @@ function selectEditRider(){
 }
 
 function appendNewRider(data){	
-	var lastRowClone = $(".riderTable").find("tr:last" ).clone();
+	var lastRowClone = $("#riderOptions").find("tr:last" ).clone();
 	$(lastRowClone).find(".riderFirstName").text(data.first_Name);
 	$(lastRowClone).find(".riderLastName").text(data.last_name);
 	$(lastRowClone).find(".riderNickname").text(data.nickname);
