@@ -51,10 +51,11 @@ public class DataReceiverController {
 		Statistic statistic = new Statistic(heart_rate, speed, latitude, longitude, distance, cadence, power, stat_ts);				
 		logStatisticReceived(nickname, statistic);
 		
-		if(null != message && message.length() > 0){
+		
 			try {
-				messageService.saveMessageFromRider(nickname, message);
-				
+				if(null != message && message.length() > 0){
+					messageService.saveMessageFromRider(nickname, message);
+				}
 				Rider rider = statisticService.saveStatistic(statistic, nickname);
 				Message messageForRider = messageService.getMessageForRider(nickname);
 				
@@ -71,7 +72,7 @@ public class DataReceiverController {
 			}catch (CadencePersistenceException cpe){
 				return MESSAGE_FAIL;
 			}			
-		}		
+			
 		
 		return MESSAGE_SUCCESS;
 	}
