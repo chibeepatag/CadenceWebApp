@@ -195,3 +195,9 @@ table td {
 	width: 80px;
 	font-size: 12pt;
 }
+
+#endRace, #startRace{
+	position: relative;
+	left: 10%;
+	
+}
