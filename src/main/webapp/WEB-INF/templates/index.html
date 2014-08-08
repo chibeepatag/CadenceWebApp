@@ -20,6 +20,8 @@
 	href="css/jquery.mobile.theme-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="css/themes/themeRoller.min.css" />
+	<link rel="stylesheet" type="text/css"
+	href="css/index.css" />
 <script type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 $(document).bind("mobileinit", function () {
@@ -29,9 +31,41 @@ $(document).bind("mobileinit", function () {
 <script type="text/javascript" src="javascript/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
-	
-	<a th:href="@{/admin/configuration}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear">Coaches</button></a>
-    <a th:href="@{/shared/dashboard}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user">Spectators</button></a>
+	<div data-role="header" data-theme="a">
+			<h1>Race Management System</h1>
+		</div>
+		<br/>
+		
+		<div class="aboutDiv" align="left" style="width: 70%">
+		
+		<h3> &nbsp;About us...</h3>
+      <div class="ui-body">
+          <p style="line-height:2" >Project Cadence is a software component designed to assist coaches, sponsors etc. during 
 
+cycle races to analyze the live tracking information and make decisions. This software 
+
+solution will provide the ability to evaluate the team’s statistics live on a dashboard, 
+
+understand positions, and make better decisions. It will enable the coaches to stay up-to-
+date with all the problems during the race. This will reduce the time for information relay 
+
+between the riders and the coach. The strategy can be re-evaluated quickly and decisions 
+
+to save the game can be made. The real time flow of data from the mobile application to 
+
+the web dashboard will provide information on cyclist’s position throughout the race. The 
+
+communication channel will enable timely exchange of messages especially in races where 
+
+voice communication is not allowed. The single and multi-messaging capability will prove 
+
+beneficial for sending specific messages to team member(s).</p>
+      </div>
+      <div align="right" style="width: 30%" class="users">
+	<a th:href="@{/admin/configuration}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear" style="width: 200px;">Coaches</button></a>
+    <a th:href="@{/shared/dashboard}"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user" style="width: 200px;">Spectators</button></a>
+</div>
+		</div>
+		
 </body>
 </html>
