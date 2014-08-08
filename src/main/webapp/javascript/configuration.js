@@ -55,7 +55,7 @@ function addRider(){
 			$("#errorButton").click()}; 		
 
 	$("#reset").click();
-
+	$("#riderIdInput").val("0");
 
 }
 
