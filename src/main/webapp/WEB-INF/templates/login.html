@@ -36,17 +36,19 @@
 		<div data-role="header" data-theme="a">
 			<h1>Race Management System</h1>
 		</div>
+		<br/><br/>
 		<p th:if="${loginError}" class="error">Wrong username or password</p>
 		<form th:action="@{/j_spring_security_check}" method="post">
-			<div data-role="fieldcontain">
-				<label for="j_username">Username:</label> 
+			<div data-role="fieldcontain" align="center">
+				<label id = "userLabel" for="j_username" style="width: 100px;">Username:</label> 
 				<input type="text" id="j_username" name="j_username" />
 			</div>
-			<div data-role="fieldcontain">
-				<label for="j_password">Password:</label>
+			<div data-role="fieldcontain" align="center">
+				<label id = "passLabel" for="j_password" style="width: 100px;">Password:</label>
 				<input type="password" id="j_password" name="j_password" /> <br /> 
 			</div>
-			<input type="submit" value="Login" />
+			<br/>
+			<input type="submit" value="Login"/>
 		</form>
 
 	</div>
