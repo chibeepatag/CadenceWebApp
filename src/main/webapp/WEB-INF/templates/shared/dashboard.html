@@ -91,18 +91,18 @@
 		
 		<div class="msgAndNotes">
 			
-			<div data-role="controlgroup" data-type="horizontal" class="loginGrp">
+			<div data-role="controlgroup" data-type="horizontal" class="loginGrp" align="center">
     			<a href="#"                               class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-user user" sec:authentication="name" >User</a>
     			<a th:href="@{/j_spring_security_logout}" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-power">Logout</a>    			
 			</div>
 			
 			
-			<div data-role="controlgroup" data-type="horizontal" class="configLogsGrp">
+			<div data-role="controlgroup" data-type="horizontal" class="configLogsGrp" align="center">
     			<a id="configBtn" th:href="@{/admin/reconfigure}"            class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-gear" >Config</a>
     			<a href="downloadLogs" target="_blank" id="downloadMsgNotes" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d logs">Logs</a>    			
 			</div>
 			
-			<a id="startRace" href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check startEnd" >Start</a>
+			<a id="startRace" href="#startRaceDiv" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check startEnd">Start</a>
     		<a id="endRace"   href="#endRaceDiv"   data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-minus hiddenField startEnd">End</a>	    			
 					
 			<div id="raceDetails">
@@ -115,7 +115,7 @@
 			</div>
 			<div>Message</div>								
 				<textarea id="messageTxt"></textarea>																								
-				<div class="msgTemplateGroup">		
+				<div class="msgTemplateGroup" align="center">		
 					<div data-role="controlgroup" data-type="horizontal">
     					<a href="#" id="left"      class="msgTemplate ui-btn ui-corner-all">Left&nbsp;&nbsp;</a>
     					<a href="#" id="safety"   class="msgTemplate ui-btn ui-corner-all">Safety</a>
