@@ -4,3 +4,20 @@
 .error{
 	color: red;
 }
+
+
+div.ui-input-text { width: 250px !important }
+
+.ui-btn{
+	width:220px;
+}
+
+form {
+    width: 20%;
+    margin: 0 auto;
+}
+
+.ui-page {
+	min-width: 100% !important;
+	font-family: Palatino, Georgia, serif;
+}

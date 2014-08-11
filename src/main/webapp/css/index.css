@@ -1,0 +1,29 @@
+@CHARSET "ISO-8859-1";
+
+.ui-btn{
+	
+	height: 100px;
+}
+
+.aboutDiv{
+	
+}
+
+.users{
+	position: relative;
+top: -280px;
+left: 100%;
+}
+
+h3{
+	border-bottom: 1px solid #CCCCCC;
+}
+
+body{
+	font-family: Palatino, Georgia, serif;
+}
+
+p{
+	text-align:justify;
+text-justify:inter-word;
+}

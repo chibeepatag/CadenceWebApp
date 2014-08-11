@@ -7,6 +7,7 @@ html,body {
 	
 	width: auto;
 	color: #403f42;
+	font-family: Palatino, Georgia, serif;
 }
 
 a {
@@ -25,6 +26,7 @@ a {
 
 .ui-page {
 	min-width: 100% !important;
+	font-family: Palatino, Georgia, serif;
 }
 
 .ui-content,.ui-page {
@@ -93,6 +95,7 @@ table td {
 	font-size: 12pt;
 	color: black;
 	background: white;
+	max-width: 60%;
 }
 
 .endAndNotes {
@@ -116,6 +119,7 @@ table td {
 .panelButton{
 	font-size: 11pt;
 	padding: 5px;
+	font-family: Palatino, Georgia, serif;
 }
 
 
@@ -137,7 +141,8 @@ table td {
 }
 
 .msgTemplateGroup {
-	width: 100%
+	width: 100%;
+	
 }
 
 .msgTemplate {
@@ -180,4 +185,19 @@ table td {
 
 .startEnd{
 	width: 160px;
+}
+
+.ui-btn{
+	font-family: Palatino, Georgia, serif;
+	font-size: 10pt; 
+}
+#msgClearBtn, #sendMsg, #notesClearBtn, #saveNote{
+	width: 80px;
+	font-size: 12pt;
+}
+
+#endRace, #startRace{
+	position: relative;
+	left: 10%;
+	
 }
