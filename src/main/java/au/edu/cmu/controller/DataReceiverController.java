@@ -36,7 +36,7 @@ public class DataReceiverController {
 	
 	public static final String NO_STARTED_RACE = "No started race.";
 	
-	public static final String MESSAGE_FAIL = "500";
+	public static final String MESSAGE_FAIL = "You are not part of the race.";
 	
 	@Autowired
 	StatisticService statisticService;

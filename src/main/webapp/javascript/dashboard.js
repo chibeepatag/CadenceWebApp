@@ -184,7 +184,7 @@ function endRace(){
 		accepts: "html",
 		success: function(data){
 			clearInterval(interval);
-			$("#raceDetails").html(data);
+			$("#raceStartTime").html(data);
 			$("#endRace").addClass("ui-disabled");			
 			var win = window.open('downloadLogs', '_blank');							
 		}
