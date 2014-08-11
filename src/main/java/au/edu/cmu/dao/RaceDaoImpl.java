@@ -152,9 +152,9 @@ public class RaceDaoImpl implements RaceDao {
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<Race> cq = cb.createQuery(Race.class);
 		Root<Race> raceRoot = cq.from(Race.class);
-
+		Predicate notNullStart = cb.isNotNull(raceRoot.get(Race_.race_start));
 		Order startTimeOrder = cb.desc(raceRoot.get(Race_.race_start));
-		cq.select(raceRoot).orderBy(startTimeOrder);
+		cq.select(raceRoot).where(notNullStart).orderBy(startTimeOrder);
 
 		TypedQuery<Race> raceQuery = this.entityManager.createQuery(cq)
 				.setMaxResults(1);
