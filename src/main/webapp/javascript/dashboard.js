@@ -81,7 +81,7 @@ $(document).ready(function(){
 		$("#startRace").addClass("hiddenField");
 		$("#endRace").removeClass("hiddenField");
 		
-		//$("#raceDuration").removeClass("hiddenField");
+		$("#raceDuration").removeClass("hiddenField");
 	}else{
 		$("#endRace").addClass("hiddenField");
 		$("#startRace").removeClass("hiddenField");
@@ -184,7 +184,7 @@ function endRace(){
 		accepts: "html",
 		success: function(data){
 			clearInterval(interval);
-			$("#raceDetails").html(data);
+			$("#raceStartTime").html(data);
 			$("#endRace").addClass("ui-disabled");			
 			var win = window.open('downloadLogs', '_blank');							
 		}
@@ -265,7 +265,7 @@ function startRace(){
 			console.log('Start: ' + data.race_start);
 			startTime = new Date(data.race_start);
 			$("#raceStartTime").text(startTime);			
-			//$("#raceDuration").removeClass("hiddenField");
+			$("#raceDuration").removeClass("hiddenField");
 			$("#configBtn").addClass("ui-disabled");
 		}
 	});
