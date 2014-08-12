@@ -1,13 +1,57 @@
 var lat = -34.92725;
 var long = 138.59999;
 function startSending(){
-	setInterval(sendData,5000);	
+	setInterval(sendData,1000);	
 }
 
 function sendData(){
 	$.ajax({
 		url: "http://localhost:8080/CadenceWebApp/riderData",
-		data: getRandomData(),
+		data: getRandomData("Matt"),
+		type: "GET",
+		accepts: "JSON",
+		dataType: "json",
+		success: function(data){
+			$(".statisticTable").html(data);					
+		}
+	});
+	
+	$.ajax({
+		url: "http://localhost:8080/CadenceWebApp/riderData",
+		data: getRandomData("Nelson"),
+		type: "GET",
+		accepts: "JSON",
+		dataType: "json",
+		success: function(data){
+			$(".statisticTable").html(data);					
+		}
+	});
+	
+	$.ajax({
+		url: "http://localhost:8080/CadenceWebApp/riderData",
+		data: getRandomData("Rob"),
+		type: "GET",
+		accepts: "JSON",
+		dataType: "json",
+		success: function(data){
+			$(".statisticTable").html(data);					
+		}
+	});
+	
+	$.ajax({
+		url: "http://localhost:8080/CadenceWebApp/riderData",
+		data: getRandomData("Irish"),
+		type: "GET",
+		accepts: "JSON",
+		dataType: "json",
+		success: function(data){
+			$(".statisticTable").html(data);					
+		}
+	});
+	
+	$.ajax({
+		url: "http://localhost:8080/CadenceWebApp/riderData",
+		data: getRandomData("German"),
 		type: "GET",
 		accepts: "JSON",
 		dataType: "json",
@@ -17,10 +61,10 @@ function sendData(){
 	});
 }
 
-function getRandomData(){
+function getRandomData(nickname){
 	lat = lat + .00001;
 	long = long + .00001;
-	return { "nickname" : "Matt", 
+	return { "nickname" : nickname, 
 	         "heart_rate": getRandomNumber(),
 		      "speed": getRandomNumber(),
 		      "distance" :getRandomNumber(),
