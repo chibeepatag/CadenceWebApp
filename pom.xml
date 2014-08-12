@@ -139,6 +139,12 @@
 			<artifactId>hibernate-jpamodelgen</artifactId>
 			<version>4.3.5.Final</version>
 		</dependency>
+		<!-- Connection Pool -->
+		<dependency>
+    		<groupId>org.apache.tomcat</groupId>
+    		<artifactId>tomcat-dbcp</artifactId>
+    		<version>7.0.52</version>
+		</dependency>
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>

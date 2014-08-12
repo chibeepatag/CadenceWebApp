@@ -109,7 +109,7 @@ $(document).ready(function(){
 	}
 	
 	if(startTime){
-		interval = setInterval(refreshDashboard,5000);		
+		interval = setInterval(refreshDashboard,1000);		
 	}
 	
 
@@ -261,7 +261,7 @@ function startRace(){
 		url: "../admin/startRace",
 		type: "GET",
 		success: function(data){
-			interval = setInterval(refreshDashboard,5000);
+			interval = setInterval(refreshDashboard,1000);
 			console.log('Start: ' + data.race_start);
 			startTime = new Date(data.race_start);
 			$("#raceStartTime").text(startTime);			
