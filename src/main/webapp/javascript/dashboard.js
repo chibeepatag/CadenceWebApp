@@ -171,10 +171,12 @@ function updateStatistics(data){
 
 function updateRaceDuration(){	
 	var now = new Date();
-	var duration = new Date(now - startTime);	
+	var millis = now - startTime;
+	var diffHours = parseInt(millis / 1000 / 60 / 60); // diff in hours
+	var diffMinutes = parseInt(millis / 1000 / 60) - diffHours*60; //remainder in minutes
 	
-	$("#durationHour").text(duration.getHours() - 12);
-	$("#durationMin").text(duration.getMinutes());
+	$("#durationHour").text(diffHours);
+	$("#durationMin").text(diffMinutes);
 }
 
 function endRace(){
