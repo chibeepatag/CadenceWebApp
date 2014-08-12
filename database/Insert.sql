@@ -13,7 +13,7 @@ INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY
 INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY_NO, PHONE) VALUES ('9', 'Jesse', 'Sergent', 'Jesse', '77', '+7653356215695');
 INSERT INTO "CADENCE"."RIDER" (RIDER_ID, FIRST_NAME, LAST_NAME, NICKNAME, JERSEY_NO, PHONE) VALUES ('10', 'Ivan', 'Rovny', 'Ivan', '76', '+653335865513');
 
-insert into race (Race_ID, Race_Name, Race_Start, Race_End, ISONGOING, Coach_ID) values (1, 'Tour Down Under', null, null, 'N', 1);
+insert into race (Race_ID, Race_Name, Race_Start, Race_End, ISONGOING, Coach_ID) values (1, 'Tour Down Under', TO_DATE('2014-06-12 12:05:19', 'YYYY-MM-DD HH24:MI:SS'), null, 'N', 1);
 insert into race_team values (1, 1, 1 );
 insert into race_team values (1, 2, 2 );
 insert into race_team values (1, 3, 3 );
