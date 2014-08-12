@@ -76,7 +76,7 @@ public class ConfigurationController {
 	
 	@RequestMapping(value = "/admin/configuration", method = RequestMethod.GET)
 	public String configuration(Model model) {
-
+			logger.info("Configuration page");
 			boolean isRaceOngoing = configService.isThereAnOngoingRace();
 			if (isRaceOngoing) {
 				return "redirect:../shared/dashboard";
