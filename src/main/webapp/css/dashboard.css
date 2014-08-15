@@ -192,7 +192,7 @@ table td {
 	font-size: 10pt; 
 }
 #msgClearBtn, #sendMsg, #notesClearBtn, #saveNote{
-	width: 80px;
+	
 	font-size: 12pt;
 }
 
@@ -201,3 +201,4 @@ table td {
 	left: 10%;
 	
 }
+
