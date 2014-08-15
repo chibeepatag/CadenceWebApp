@@ -109,6 +109,11 @@ public class DashboardController {
 		dashboardService.saveNote(currentRace, note);
 	}
 	
+	/**
+	 * This is the method that accepts log requests.
+	 * @param currentRace
+	 * @param response
+	 */
 	@RequestMapping(value="/shared/downloadLogs", method=RequestMethod.GET)
 	public void downloadLogs(@ModelAttribute("currentRace") Race currentRace, HttpServletResponse response){
 		try {
