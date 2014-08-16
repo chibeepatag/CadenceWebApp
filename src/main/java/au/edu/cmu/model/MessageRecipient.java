@@ -3,17 +3,16 @@
  */
 package au.edu.cmu.model;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
 /**
+ * Entity representing the recipient of the
+ * message from the coach. The id is a composite 
+ * id of the rider recipient and the message id.
  * @author ChibeePatag
  *
  */

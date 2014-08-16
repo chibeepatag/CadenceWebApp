@@ -3,8 +3,6 @@
  */
 package au.edu.cmu.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
+ * Entity representing a note made 
+ * by the coach on the dashboard.
  * @author ChibeePatag
  *
  */
