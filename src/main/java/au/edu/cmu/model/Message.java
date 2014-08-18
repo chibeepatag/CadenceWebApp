@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Type;
 
 /**
+ * Entity that represents messages sent to riders
  * @author ChibeePatag
  * 
  */

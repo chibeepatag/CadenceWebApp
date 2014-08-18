@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
+ * Entity representing the participant of the race.
  * @author Celine Patag
  *
  */

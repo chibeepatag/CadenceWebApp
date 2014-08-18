@@ -7,6 +7,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
+/**
+ * Composite id of a message
+ * @author ChibeePatag
+ *
+ */
 @Embeddable
 public class MessageRecipientId implements Serializable{
 	

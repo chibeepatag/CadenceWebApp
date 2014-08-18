@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 
 /**
+ * 
+ * Entity representing the user of the dashboard.
  * @author Celine Patag
  * 
  */

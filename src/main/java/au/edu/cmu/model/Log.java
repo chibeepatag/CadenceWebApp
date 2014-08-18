@@ -8,11 +8,17 @@ import java.util.Date;
 import javax.persistence.MappedSuperclass;
 
 /**
+ * A non entity superclass where forms of Notes and Messages
+ * should extend.
  * @author ChibeePatag
  * 
  */
 @MappedSuperclass
 public abstract class Log implements Comparable<Log> {
+	
+	/**
+	 * The time the log is created.
+	 */
 	Date message_ts;
 
 	public Date getMessage_ts() {

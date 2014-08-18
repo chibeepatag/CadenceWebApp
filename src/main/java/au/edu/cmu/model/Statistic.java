@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Entity representing statistics sent by
+ * the mobile app to the dashboard.
  * @author ChibeePatag
  *
  */
