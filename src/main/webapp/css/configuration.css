@@ -1,7 +1,12 @@
-.ui-header{
-	font-size:16pt;
+.ui-page{
+	font-family: Palatino, Georgia, serif;
+}
 
-	}
+.ui-btn{
+	font-family: Palatino, Georgia, serif;
+}
+
+
 
 .riderTable{
 	display: table;
@@ -66,4 +71,8 @@ table td{
 
 h1{
 	color: #330000;
+}
+
+#raceName{
+		font-family: Palatino, Georgia, serif;
 }

@@ -202,3 +202,7 @@ table td {
 	
 }
 
+#messageTxt, #notesTxt{
+	font-family: Palatino, Georgia, serif;
+}
+
