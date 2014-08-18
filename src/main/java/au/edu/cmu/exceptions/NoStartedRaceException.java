@@ -4,6 +4,7 @@
 package au.edu.cmu.exceptions;
 
 /**
+ * Exception thrown if there is no race started.
  * @author ChibeePatag
  * 
  */

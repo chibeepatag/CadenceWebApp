@@ -3,12 +3,11 @@
  */
 package au.edu.cmu.dao;
 
-import java.util.Date;
-
 import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 
 /**
+ * DAO layer for rider statistics
  * @author ChibeePatag
  *
  */

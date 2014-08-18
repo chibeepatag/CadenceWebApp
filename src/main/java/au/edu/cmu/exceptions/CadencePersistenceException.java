@@ -6,6 +6,7 @@ package au.edu.cmu.exceptions;
 import javax.persistence.PersistenceException;
 
 /**
+ * Wrapper class for persistence exceptions
  * @author ChibeePatag
  *
  */

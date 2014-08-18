@@ -4,6 +4,8 @@
 package au.edu.cmu.exceptions;
 
 /**
+ * Exception thrown if a rider that is not part of the race
+ * sends statistics
  * @author ChibeePatag
  *
  */

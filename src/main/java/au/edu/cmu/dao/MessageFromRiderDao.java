@@ -10,6 +10,7 @@ import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
 /**
+ * DAO for MessagesFromRider entity
  * @author ChibeePatag
  *
  */

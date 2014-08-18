@@ -9,6 +9,7 @@ import au.edu.cmu.model.User;
 import au.edu.cmu.model.Rider;
 
 /**
+ * Service layer for login
  * @author ChibeePatag
  *
  */

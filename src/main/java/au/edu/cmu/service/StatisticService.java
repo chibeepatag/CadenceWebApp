@@ -10,6 +10,7 @@ import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 
 /**
+ * Service layer for statistics from the rider
  * @author ChibeePatag
  *
  */

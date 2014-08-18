@@ -44,6 +44,19 @@ public class DataReceiverController {
 	@Autowired
 	MessageService messageService;
 	
+	/**
+	 * Controller method that receives statistics from the rider
+	 * @param nickname - Name of the rider
+	 * @param heart_rate - Heart rate of the rider
+	 * @param speed - Speed of the rider
+	 * @param latitude - Latitude position of the rider
+	 * @param longitude -Longitude position of the rider
+	 * @param distance - Distance travelled by the rider
+	 * @param cadence - Cadence of the rider in revolutions per minute
+	 * @param power - Power exerted by the rider
+	 * @param message - Message sent by the rider to the coach
+	 * @return
+	 */
 	@RequestMapping(value="/riderData", method=RequestMethod.GET)
 	@ResponseBody
 	public String receiveData(String nickname, int heart_rate, double speed, double latitude, double longitude, double distance, double cadence, double power, String message){

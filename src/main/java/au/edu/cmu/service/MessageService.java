@@ -10,6 +10,7 @@ import au.edu.cmu.model.Race;
 import au.edu.cmu.model.Rider;
 
 /**
+ * Service layer messages
  * @author ChibeePatag
  *
  */

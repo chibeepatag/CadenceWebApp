@@ -6,6 +6,7 @@ package au.edu.cmu.dao;
 import java.util.List;
 
 /**
+ * Base interface for all data access classes
  * @author ChibeePatag
  *
  */

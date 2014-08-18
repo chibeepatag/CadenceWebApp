@@ -14,6 +14,7 @@ import au.edu.cmu.model.Rider;
 import au.edu.cmu.model.Statistic;
 
 /**
+ * Service layer for the Dashboard page
  * @author ChibeePatag
  *
  */

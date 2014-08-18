@@ -4,6 +4,7 @@
 package au.edu.cmu.exceptions;
 
 /**
+ * Exception thrown if a new race is created while a race is on going.
  * @author ChibeePatag
  *
  */

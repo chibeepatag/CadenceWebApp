@@ -29,6 +29,7 @@ import au.edu.cmu.service.MessageService;
 import au.edu.cmu.service.StatisticServiceImpl;
 
 /**
+ * Controller class for the dashboard
  * @author ChibeePatag
  *
  */
@@ -43,6 +44,11 @@ public class DashboardController {
 	@Autowired
 	MessageService messageService;
 	
+	/**
+	 * Controller method that opens the dashboard.
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/shared/dashboard", method=RequestMethod.GET)
 	public String goToDashboard(Model model){
 		try{
@@ -57,6 +63,12 @@ public class DashboardController {
 		}		
 	}
 	
+	/**
+	 * Controller method that starts the race.
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/admin/startRace", method=RequestMethod.GET)
 	@ResponseBody
 	public Race startRace(Model model){
@@ -71,6 +83,12 @@ public class DashboardController {
 		
 	}
 	
+	/**
+	 * Controller method that refreshes the statistics 
+	 * table in the dashboard.
+	 * @param currentRace
+	 * @return
+	 */
 	@RequestMapping(value="/shared/refreshStat", method=RequestMethod.GET)
 	@ResponseBody
 	public List<RefreshStatResponse> refreshDashboard(@ModelAttribute("currentRace") Race currentRace){
@@ -89,6 +107,12 @@ public class DashboardController {
 		return responseList;
 	}
 	
+	/**
+	 * Controller method that ends a race.
+	 * @param model
+	 * @param currentRace
+	 * @return
+	 */
 	@RequestMapping(value="/admin/endRace", method=RequestMethod.GET)
 	public String endRace(Model model, @ModelAttribute("currentRace") Race currentRace){
 		Race raceEnded = dashboardService.endRace(currentRace);
@@ -97,12 +121,23 @@ public class DashboardController {
 		return "shared/endedRace";
 	}
 	
+	/**
+	 * Controller method that saves messages sent to riders.
+	 * @param currentRace
+	 * @param message
+	 * @param ids
+	 */
 	@RequestMapping(value="/admin/saveMsg", method=RequestMethod.POST)
 	@ResponseBody
 	public void saveMessage(@ModelAttribute("currentRace") Race currentRace, @RequestParam("message")String message, @RequestParam("recipientIds")List<Long> ids){					
 		dashboardService.saveMessage(currentRace, message, ids);	
 	}
 	
+	/**
+	 * Controller method that saves notes entered by the coach
+	 * @param currentRace
+	 * @param note
+	 */
 	@RequestMapping(value="/admin/saveNote", method=RequestMethod.POST)
 	@ResponseBody
 	public void saveNote(@ModelAttribute("currentRace") Race currentRace, @RequestParam("note")String note){
